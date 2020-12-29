@@ -1,0 +1,27 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Distribution / packaging
+*.pyc
+*.egg-info/
+*.egg
+eggs/
+
+
+# Apple OSX
+.DS_Store
+
+# Jupyter and iPython notebook checkpoints
+*.ipynb_checkpoints
+
+# ./idea
+.idea/
+/.idea/misc.xml
+/futils.iml
+/modules.xml
+/inspectionProfiles/profiles_settings.xml
+/vcs.xml
