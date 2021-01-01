@@ -39,7 +39,13 @@ class dlist:
             prev_rec: 'dlist.Record',
             succ_rec: 'dlist.Record',
     ) -> 'dlist.Record':
-        """helper method that inserts a payload between two successive nodes"""
+        """helper method that inserts a payload between two successive nodes
+
+        :param payload:
+        :param prev_rec: the previous Record
+        :param succ_rec: the successor Record
+        :return: the newly inserted Record
+        """
         assert prev_rec.suiv is succ_rec, \
             'prev_rec and succ_rec are not consecutive: prev_rec.suiv is not succ_rec'
         assert succ_rec.prev is prev_rec, \
