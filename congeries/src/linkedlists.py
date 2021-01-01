@@ -33,6 +33,21 @@ class dlist:
         self._trailer.prev = self._header
         self._size = 0
 
+    def _insert_between(
+            self,
+            payload,
+            prev_rec: 'dlist.Record',
+            succ_rec: 'dlist.Record',
+    ) -> 'dlist.Record':
+        """helper method that inserts a payload between two successive nodes"""
+        assert prev_rec.suiv is succ_rec, \
+            'prev_rec and succ_rec are not consecutive: prev_rec.suiv is not succ_rec'
+        assert succ_rec.prev is prev_rec, \
+            'prev_rec and succ_rec are not consecutive: succ_rec.prev is not prev_rec'
+        new_record = self.Record(payload=payload, prev=prev_rec, suiv=succ_rec)
+        new_record.prev, new_record.suiv = prev_rec, succ_rec
+        self._size += 1
+
     def __len__(self):
         """returns the size of the llist"""
         return self._size
