@@ -17,6 +17,12 @@ class dlist:
     """a Doubly Linked List representation
     """
 
+    def __init__(self, it=None) -> None:
+        self.head: 'dlist.Record' = self.Record(None, None, None)
+        if it is not None:
+            # add the sequence of values to the list
+            pass
+
     class Record:
         """
         represents a node that carries a payload (data), and links
