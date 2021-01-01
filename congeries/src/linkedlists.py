@@ -10,7 +10,7 @@ clist a circular (doubly) linked list
 
 """
 
-from typing import Any, Iterable
+from typing import Any, Iterator, Iterable
 
 
 class dlist:
@@ -87,6 +87,24 @@ class dlist:
     def __bool__(self):
         """mimics the standard python behavior for empty and non empty containers"""
         return bool(len(self))
+
+    def __iter__(self) -> Iterator:
+        """return a new iterator object that iterates over all the objects
+        in the container
+        """
+        current = self._header
+        while (current:=current.suiv) is not self._trailer:
+            yield current
+        return StopIteration
+
+    def __reversed__(self) -> Iterator:
+        """return a new iterator object that iterates over all the objects
+        in the container in reverse order
+        """
+        current = self._trailer
+        while (current:=current.prev) is not self._header:
+            yield current
+        return StopIteration
 
     class Record:
         """
