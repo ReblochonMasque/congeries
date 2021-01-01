@@ -37,6 +37,10 @@ class dlist:
         """returns the size of the llist"""
         return self._size
 
+    def __bool__(self):
+        """mimics the standard python behavior for empty and non empty containers"""
+        return bool(len(self))
+
     class Record:
         """
         represents a node that carries a payload (data), and links
