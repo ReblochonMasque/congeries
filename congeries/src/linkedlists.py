@@ -33,6 +33,10 @@ class dlist:
         self._trailer.prev = self._header
         self._size = 0
 
+    def __len__(self):
+        """returns the size of the llist"""
+        return self._size
+
     class Record:
         """
         represents a node that carries a payload (data), and links
