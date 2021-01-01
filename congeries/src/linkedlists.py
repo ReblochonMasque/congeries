@@ -10,7 +10,7 @@ clist a circular (doubly) linked list
 
 """
 
-from typing import Iterable
+from typing import Any, Iterable
 
 
 class dlist:
@@ -53,6 +53,27 @@ class dlist:
         new_record = self.Record(payload=payload, prev=prev_rec, suiv=succ_rec)
         new_record.prev, new_record.suiv = prev_rec, succ_rec
         self._size += 1
+
+    def _delete_record(
+            self,
+            record: 'dlist.Record',
+    ) -> Any:
+        """Delete a non sentinel record from the list and return its payload
+
+        :param record: the dlist.Record to be deleted
+        :return: payload
+        """
+        predecessor, successor = record.prev, record.suiv
+        predecessor.suiv, successor.prev = successor, predecessor
+        self._size -= 1
+        payload = record.payload
+        record, record.prev, record.suiv, record.payload = None, None, None, None
+        return payload
+
+
+
+
+
 
     def __len__(self):
         """returns the size of the llist"""
