@@ -15,18 +15,31 @@ from typing import Iterable
 
 class dlist:
     """a Doubly Linked List representation
+
+    a linked list in which each node keeps an explicit reference to the node
+    before it and a reference to the node after it.
+
+    allows O(1) insertions and deletions at arbitrary positions
     """
 
-    def __init__(self, it=None) -> None:
-        self.head: 'dlist.Record' = self.Record(None, None, None)
-        if it is not None:
-            # add the sequence of values to the list
-            pass
+    def __init__(self) -> None:
+        """
+        # implementation detail: uses a header and trailer sentinel node (Record)
+        # use from_iterable to init a dlist from an iterable
+        """
+        self._header: 'dlist.Record' = self.Record(None, None, None)
+        self._trailer: 'dlist.Record' = self.Record(None, None, None)
+        self._header.suiv = self._trailer
+        self._trailer.prev = self._header
+        self._size = 0
 
     class Record:
         """
         represents a node that carries a payload (data), and links
         to the previous and next records in the line
+
+        prev is a reference to the previous node
+        suiv is a reference to the next node (from suivant in French)
         """
         def __init__(
                 self,
