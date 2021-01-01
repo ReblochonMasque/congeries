@@ -106,6 +106,13 @@ class dlist:
             yield current
         return StopIteration
 
+    def __str__(self):
+        ret = [f'{self.__class__.__qualname__}(  ']
+        for record in self:
+            ret.append(f'{record.payload}, ')
+        ret[-1] = ret[-1][:-2]
+        return ' <-> '.join(ret)
+
     class Record:
         """
         represents a node that carries a payload (data), and links
