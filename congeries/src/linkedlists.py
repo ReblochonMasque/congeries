@@ -51,8 +51,9 @@ class dlist:
         assert succ_rec.prev is prev_rec, \
             'prev_rec and succ_rec are not consecutive: succ_rec.prev is not prev_rec'
         new_record = self.Record(payload=payload, prev=prev_rec, suiv=succ_rec)
-        new_record.prev, new_record.suiv = prev_rec, succ_rec
+        prev_rec.suiv, succ_rec.prev = new_record, new_record
         self._size += 1
+        return new_record
 
     def _delete_record(
             self,
@@ -107,11 +108,11 @@ class dlist:
         return StopIteration
 
     def __str__(self):
-        ret = [f'{self.__class__.__qualname__}(  ']
+        pre, suf = [f'{self.__class__.__qualname__}('], [')']
+        res = []
         for record in self:
-            ret.append(f'{record.payload}, ')
-        ret[-1] = ret[-1][:-2]
-        return ' <-> '.join(ret)
+            res.append(f'{record.payload}')
+        return ''.join(pre + [' <-> '.join(res)] + suf)
 
     class Record:
         """
@@ -134,7 +135,24 @@ class dlist:
         def __str__(self, it: Iterable = None) -> None:
             return str(self.payload)
 
+    @classmethod
+    def from_iterable(cls, it) -> 'dlist':
+        """creates, populates and return a dlist/cls object
+
+        :param it: an iterable
+        :return: an object of class cls, subclass of dlist populated with the items
+        of the iteranble passed as a parameter
+        """
+        new_seq: cls = cls()
+        current = new_seq._header
+        for item in it:
+            # print(f'{repr(current)}, {current}')
+            current = new_seq._insert_between(item, current, new_seq._trailer)
+        return new_seq
+
 
 if __name__ == '__main__':
 
-    pass
+    print(dl:=dlist.from_iterable([1, 2, 3]))
+    print(ld:=dlist.from_iterable(reversed(dl)))
+    print(len(dl), len(ld))
