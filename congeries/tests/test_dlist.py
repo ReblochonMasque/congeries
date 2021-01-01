@@ -61,6 +61,13 @@ class Test_dlist(unittest.TestCase):
         expected = 'dlist(3 <-> 2 <-> 1 <-> 0)'
         self.assertEqual(actual.getvalue(), expected)
 
+    def test_equality(self):
+        dl1 = dlist.from_iterable(range(4))
+        dl2 = dlist.from_iterable([0, 1, 2, 3])
+        self.assertTrue(dl1 == dl2)
+        # self.assertEqual(dl1, dl2)
+        # self.assertEqual(dl2, dl1)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -20,6 +20,7 @@ class Deque(dlist):
         :param payload: a value
         :return: None
         """
+        self._insert_between(payload, self._trailer.prev, self._trailer)
 
 
 

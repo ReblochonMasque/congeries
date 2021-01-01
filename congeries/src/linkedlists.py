@@ -91,27 +91,37 @@ class dlist:
 
     def __iter__(self) -> Iterator:
         """return a new iterator object that iterates over all the objects
-        in the container
+        in the container to yield each payload
         """
         current = self._header
         while (current:=current.suiv) is not self._trailer:
-            yield current
+            yield current.payload
         return StopIteration
 
     def __reversed__(self) -> Iterator:
         """return a new iterator object that iterates over all the objects
-        in the container in reverse order
+        in the container in reverse order to yield each payload
         """
         current = self._trailer
         while (current:=current.prev) is not self._header:
-            yield current
+            yield current.payload
         return StopIteration
+
+    def __eq__(self, other):
+        if self.__class__.__qualname__ != other.__class__.__qualname__:
+            return False
+        if len(self) != len(other):
+            return False
+        for payload_in_self, payload_in_other in zip(self, other):
+            if payload_in_self != payload_in_other:
+                return False
+        return True
 
     def __str__(self):
         pre, suf = [f'{self.__class__.__qualname__}('], [')']
         res = []
-        for record in self:
-            res.append(f'{record.payload}')
+        for payload in self:
+            res.append(f'{payload}')
         return ''.join(pre + [' <-> '.join(res)] + suf)
 
     class Record:
