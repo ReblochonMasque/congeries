@@ -1,9 +1,10 @@
 import futils
+from congeries.src.deque import Deque
 from congeries.src.linkedlists import dlist
-
 
 __all__ = [
     'dlist',
+    'Deque',
 ]
 
 def hello():
