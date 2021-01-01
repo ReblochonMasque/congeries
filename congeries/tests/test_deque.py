@@ -42,6 +42,52 @@ class Test_Deque(unittest.TestCase):
         actual = d
         self.assertEqual(actual, expected)
 
+    def test_pop_from_empty(self):
+        d = Deque()
+        with self.assertRaises(IndexError):
+            d.pop()
+
+    def test_pop_from_near_empty(self):
+        expected = 0
+        d = Deque().from_iterable([0])
+        self.assertEqual(len(d), 1)
+        actual = d.pop()
+        self.assertEqual(actual, expected)
+        self.assertEqual(len(d), 0)
+
+    def test_pop_from_many(self):
+        expected = 0
+        d = Deque().from_iterable([0, 1, 2, 3])
+        size, ndx = 4, 3
+        self.assertEqual(len(d), size)
+        while d:
+            self.assertEqual(d.pop(), ndx)
+            size, ndx = size - 1, ndx - 1
+            self.assertEqual(len(d), size)
+
+    def test_pop_left_from_empty(self):
+        d = Deque()
+        with self.assertRaises(IndexError):
+            d.pop_left()
+
+    def test_pop_left_from_near_empty(self):
+        expected = 0
+        d = Deque().from_iterable([0])
+        self.assertEqual(len(d), 1)
+        actual = d.pop_left()
+        self.assertEqual(actual, expected)
+        self.assertEqual(len(d), 0)
+
+    def test_pop_left_from_many(self):
+        expected = 0
+        d = Deque().from_iterable([0, 1, 2, 3])
+        size, ndx = 4, 0
+        self.assertEqual(len(d), size)
+        while d:
+            self.assertEqual(d.pop_left(), ndx)
+            size, ndx = size - 1, ndx + 1
+            self.assertEqual(len(d), size)
+
 
 if __name__ == '__main__':
     unittest.main()
