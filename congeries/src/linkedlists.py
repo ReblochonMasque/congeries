@@ -67,13 +67,18 @@ class dlist:
         predecessor.suiv, successor.prev = successor, predecessor
         self._size -= 1
         payload = record.payload
-        record, record.prev, record.suiv, record.payload = None, None, None, None
+        self._deprecate_record(record)
         return payload
 
+    def _deprecate_record(self, record: 'dlist.Record') -> None:
+        """avoid loitering by overwriting all references attached to the record,
+        and the record itself
 
-
-
-
+        :param record: the dlist.Record to be deleted
+        :return: None
+        """
+        record.prev, record.suiv, record.payload = None, None, None
+        record = None
 
     def __len__(self):
         """returns the size of the llist"""
