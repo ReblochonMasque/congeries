@@ -26,6 +26,22 @@ class Test_Deque(unittest.TestCase):
         actual = d
         self.assertEqual(actual, expected)
 
+    def test_append_left_1(self):
+        expected = Deque.from_iterable([3, 2, 1])
+        d = Deque()
+        d.append_left(1)
+        d.append_left(2)
+        d.append_left(3)
+        actual = d
+        self.assertEqual(actual, expected)
+
+    def test_append_left_2(self):
+        expected = Deque.from_iterable([0])
+        d = Deque()
+        d.append_left(0)
+        actual = d
+        self.assertEqual(actual, expected)
+
 
 if __name__ == '__main__':
     unittest.main()

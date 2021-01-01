@@ -22,5 +22,13 @@ class Deque(dlist):
         """
         self._insert_between(payload, self._trailer.prev, self._trailer)
 
+    def append_left(self, payload) -> None:
+        """adds a record to the right tail end of the deque
+
+        :param payload: a value
+        :return: None
+        """
+        self._insert_between(payload, self._header, self._header.suiv)
+
 
 
