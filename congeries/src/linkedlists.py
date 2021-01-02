@@ -249,21 +249,20 @@ class clist(DLLBase):
         if not self:
             return StopIteration
         current = self.cursor
-        print(len(self), current)
         yield current.payload
         while (current:=current.suiv) is not self.cursor:
             yield current.payload
         return StopIteration
 
     def __str__(self):
-        pre, suf = [f'{self.__class__.__qualname__}(<-'], ['->)']
+        pre, suf = [f'{self.__class__.__qualname__}('], [')']
         res = []
         for idx, payload in enumerate(self):
             if idx == 0:
                 res.append(f'({payload})')
                 continue
             res.append(f'{payload}')
-        return ''.join(pre + [' '.join(res)] + suf)
+        return ''.join(pre + [', '.join(res)] + suf)
 
     @classmethod
     def from_iterable(cls, it) -> 'clist':
@@ -276,7 +275,8 @@ class clist(DLLBase):
         new_seq: cls = cls()
         for item in it:
             new_seq.insert_at_cursor(item)
-        new_seq.cursor = new_seq.cursor.suiv   # reset cursor to first item inserted
+        if len(new_seq) > 0:
+            new_seq.cursor = new_seq.cursor.suiv   # reset cursor to first item inserted
         return new_seq
 
 
@@ -286,11 +286,14 @@ if __name__ == '__main__':
     # print(ld:=dlist.from_iterable(reversed(dl)))
     # print(len(dl), len(ld))
 
-    print(cl:=clist.from_iterable([1, 2, 3, 4]))
-    print(f'popped: {cl.pop_at()}, {cl}')
-    print(f'popped: {cl.pop_at()}, {cl}')
-    print(f'popped: {cl.pop_at()}, {cl}')
-    print(f'popped: {cl.pop_at()}, {cl}')
+    # print(cl:=clist.from_iterable([1, 2, 3, 4]))
+    # print(f'popped: {cl.pop_at()}, {cl}')
+    # print(f'popped: {cl.pop_at()}, {cl}')
+    # print(f'popped: {cl.pop_at()}, {cl}')
+    # print(f'popped: {cl.pop_at()}, {cl}')
+    # print(cl)
+
+    cl = clist.from_iterable(range(1, 4))
     print(cl)
 
 
