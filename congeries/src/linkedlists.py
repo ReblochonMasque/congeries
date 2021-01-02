@@ -18,22 +18,22 @@ class DLLBase(metaclass=ABCMeta):
     def __init__(self) -> None:
         self._size = 0
 
-    def __len__(self):
+    def __len__(self) -> int:
         """returns the size of the llist"""
         return self._size
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
         """mimics the standard python behavior for empty and non empty containers"""
         return bool(len(self))
 
     @abstractmethod
-    def __iter__(self):
+    def __iter__(self) -> Iterator:
         """return a new iterator object that iterates over all the objects
         in the container to yield each payload
         """
         raise NotImplemented
 
-    def __eq__(self, other):
+    def __eq__(self, other: 'DLLBase') -> bool:
         if self.__class__.__qualname__ != other.__class__.__qualname__:
             return False
         if len(self) != len(other):
@@ -45,7 +45,7 @@ class DLLBase(metaclass=ABCMeta):
 
     @classmethod
     @abstractmethod
-    def from_iterable(cls, it) -> 'dlist':
+    def from_iterable(cls, it) -> 'DLLBase':
         """creates, populates and return a dlist/cls object
 
         :param it: an iterable
@@ -84,7 +84,7 @@ class DLLBase(metaclass=ABCMeta):
             """
             self.prev, self.suiv, self.payload = None, None, None
 
-        def __str__(self, it: Iterable = None) -> None:
+        def __str__(self, it: Iterable = None) -> str:
             return str(self.payload)
 
 
@@ -110,13 +110,13 @@ class dlist(DLLBase):
 
     def _insert_between(
             self,
-            payload,
+            payload: Any,
             prev_rec: 'dlist.Record',
             succ_rec: 'dlist.Record',
     ) -> 'dlist.Record':
         """helper method that inserts a payload between two successive nodes
 
-        :param payload:
+        :param payload: the value to store in the list
         :param prev_rec: the previous Record
         :param succ_rec: the successor Record
         :return: the newly inserted Record
@@ -172,7 +172,7 @@ class dlist(DLLBase):
         return ''.join(pre + [' <-> '.join(res)] + suf)
 
     @classmethod
-    def from_iterable(cls, it) -> 'dlist':
+    def from_iterable(cls, it: Iterable) -> 'dlist':
         """creates, populates and return a dlist/cls object
 
         :param it: an iterable
@@ -201,14 +201,14 @@ class clist(DLLBase):
         # use from_iterable to init a dlist from an iterable
         """
         super().__init__()
-        self.cursor: 'clist.Record' = None
+        self.cursor: 'clist.Record' or None = None
 
-    def insert_at_cursor(self, payload) -> 'clist.Record':
+    def insert_at_cursor(self, payload: Any) -> 'clist.Record':
         """
         inserts payload at position after cursor, assigns the new node to cursor,
         and returns it
 
-        :param payload: the payload
+        :param payload: the value to store in the list
         :return: the new cursor at the newly inserted position
         """
         new_record = self.Record(payload=payload, prev=None, suiv=None)
@@ -223,7 +223,7 @@ class clist(DLLBase):
         self._size += 1
         return self.cursor
 
-    def pop_at(self) -> 'dlist.Record':
+    def pop_at(self) -> 'clist.Record':
         """returns the payload of the cursor node,
         deletes the cursor node
         assigns the previous node as the new cursor
@@ -255,7 +255,7 @@ class clist(DLLBase):
             yield current.payload
         return StopIteration
 
-    def __str__(self):
+    def __str__(self) -> str:
         pre, suf = [f'{self.__class__.__qualname__}('], [')']
         res = []
         for idx, payload in enumerate(self):
@@ -266,7 +266,7 @@ class clist(DLLBase):
         return ''.join(pre + [', '.join(res)] + suf)
 
     @classmethod
-    def from_iterable(cls, it) -> 'clist':
+    def from_iterable(cls, it: Iterable) -> 'clist':
         """creates, populates and return a dlist/cls object
 
         :param it: an iterable
