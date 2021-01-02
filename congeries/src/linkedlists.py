@@ -9,14 +9,72 @@ clist a circular (doubly) linked list
     create: clist() or clist(iterable)
 
 """
-
+from abc import ABCMeta, abstractmethod
 from typing import Any, Iterator, Iterable
 
 
-# todo: extract abstract base class superclass
+class DLLBase(metaclass=ABCMeta):
+    def __init__(self) -> None:
+        self._size = 0
+
+    def __len__(self):
+        """returns the size of the llist"""
+        return self._size
+
+    def __bool__(self):
+        """mimics the standard python behavior for empty and non empty containers"""
+        return bool(len(self))
+
+    @abstractmethod
+    def __iter__(self):
+        """return a new iterator object that iterates over all the objects
+        in the container to yield each payload
+        """
+        raise NotImplemented
+
+    @classmethod
+    @abstractmethod
+    def from_iterable(cls, it) -> 'dlist':
+        """creates, populates and return a dlist/cls object
+
+        :param it: an iterable
+        :return: an object of class cls, subclass of dlist populated with the items
+        of the iteranble passed as a parameter
+        """
+        raise NotImplemented
+
+    class Record:
+        """
+        represents a node that carries a payload (data), and links
+        to the previous and next records in the line
+
+        prev is a reference to the previous node
+        suiv is a reference to the next node (from suivant in French)
+        """
+        def __init__(
+                self,
+                payload: Any = None,
+                prev: 'DLLBase.Record' = None,
+                suiv: 'DLLBase.Record' = None,
+        ) -> None:
+            self.payload = payload
+            self.prev = prev
+            self.suiv = suiv
+
+        def deprecate(self) -> None:
+            """avoid loitering by overwriting all references attached to the record,
+            and the record itself
+
+            :param record: the DLL_Base.Record to be deleted
+            :return: None
+            """
+            self.prev, self.suiv, self.payload = None, None, None
+
+        def __str__(self, it: Iterable = None) -> None:
+            return str(self.payload)
 
 
-class dlist:
+class dlist(DLLBase):
     """a Doubly Linked List representation
 
     a linked list in which each node keeps an explicit reference to the node
@@ -30,11 +88,11 @@ class dlist:
         # implementation detail: uses a header and trailer sentinel node (Record)
         # use from_iterable to init a dlist from an iterable
         """
+        super().__init__()
         self._header: 'dlist.Record' = self.Record(None, None, None)
         self._trailer: 'dlist.Record' = self.Record(None, None, None)
         self._header.suiv = self._trailer
         self._trailer.prev = self._header
-        self._size = 0
 
     def _insert_between(
             self,
@@ -71,26 +129,8 @@ class dlist:
         predecessor.suiv, successor.prev = successor, predecessor
         self._size -= 1
         payload = record.payload
-        self._deprecate_record(record)
+        record.deprecate()
         return payload
-
-    def _deprecate_record(self, record: 'dlist.Record') -> None:
-        """avoid loitering by overwriting all references attached to the record,
-        and the record itself
-
-        :param record: the dlist.Record to be deleted
-        :return: None
-        """
-        record.prev, record.suiv, record.payload = None, None, None
-        record = None
-
-    def __len__(self):
-        """returns the size of the llist"""
-        return self._size
-
-    def __bool__(self):
-        """mimics the standard python behavior for empty and non empty containers"""
-        return bool(len(self))
 
     def __iter__(self) -> Iterator:
         """return a new iterator object that iterates over all the objects
@@ -127,27 +167,6 @@ class dlist:
             res.append(f'{payload}')
         return ''.join(pre + [' <-> '.join(res)] + suf)
 
-    class Record:
-        """
-        represents a node that carries a payload (data), and links
-        to the previous and next records in the line
-
-        prev is a reference to the previous node
-        suiv is a reference to the next node (from suivant in French)
-        """
-        def __init__(
-                self,
-                payload=None,
-                prev: 'dlist.Record' = None,
-                suiv: 'dlist.Record' = None,
-        ) -> None:
-            self.payload = payload
-            self.prev = prev
-            self.suiv = suiv
-
-        def __str__(self, it: Iterable = None) -> None:
-            return str(self.payload)
-
     @classmethod
     def from_iterable(cls, it) -> 'dlist':
         """creates, populates and return a dlist/cls object
@@ -164,7 +183,7 @@ class dlist:
         return new_seq
 
 
-class clist:
+class clist(DLLBase):
     """a Circular Doubly Linked List representation
 
     a linked list in which each node keeps an explicit reference to the node
@@ -177,8 +196,8 @@ class clist:
         """
         # use from_iterable to init a dlist from an iterable
         """
+        super().__init__()
         self.cursor: 'clist.Record' = None
-        self._size = 0
 
     def insert_at_cursor(self, payload) -> 'clist.Record':
         """
@@ -208,7 +227,7 @@ class clist:
         """
         if len(self) == 0:
             raise IndexError('popping from an empty clist')
-        discard, ret_payload = self.cursor, self.cursor.payload
+        old_cursor, ret_payload = self.cursor, self.cursor.payload
         if len(self) > 1:
             print(f'in pop_at: {self.cursor.prev}, {self.cursor}, {self.cursor.suiv}')
             pred = self.cursor.prev
@@ -216,27 +235,9 @@ class clist:
             pred.suiv = succ
             succ.prev = pred
             self.cursor = succ
-        self._deprecate_record(discard)
+        old_cursor.deprecate()
         self._size -= 1
         return ret_payload
-
-    def _deprecate_record(self, record: 'dlist.Record') -> None:
-        """avoid loitering by overwriting all references attached to the record,
-        and the record itself
-
-        :param record: the dlist.Record to be deleted
-        :return: None
-        """
-        record.prev, record.suiv, record.payload = None, None, None
-        record = None
-
-    def __len__(self):
-        """returns the size of the llist"""
-        return self._size
-
-    def __bool__(self):
-        """mimics the standard python behavior for empty and non empty containers"""
-        return bool(len(self))
 
     def __iter__(self) -> Iterator:
         """return a new iterator object that iterates over all the objects
@@ -260,27 +261,6 @@ class clist:
                 continue
             res.append(f'{payload}')
         return ''.join(pre + [' '.join(res)] + suf)
-
-    class Record:
-        """
-        represents a node that carries a payload (data), and links
-        to the previous and next records in the line
-
-        prev is a reference to the previous node
-        suiv is a reference to the next node (from suivant in French)
-        """
-        def __init__(
-                self,
-                payload=None,
-                prev: 'clist.Record' = None,
-                suiv: 'clist.Record' = None,
-        ) -> None:
-            self.payload = payload
-            self.prev = prev
-            self.suiv = suiv
-
-        def __str__(self, it: Iterable = None) -> None:
-            return str(self.payload)
 
     @classmethod
     def from_iterable(cls, it) -> 'clist':
