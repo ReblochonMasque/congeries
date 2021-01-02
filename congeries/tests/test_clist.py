@@ -53,13 +53,15 @@ class Test_clist(unittest.TestCase):
         expected = 'clist((1), 2, 3)'
         self.assertEqual(actual.getvalue(), expected)
 
-    # def test_equality(self):
-    #     cl1 = clist.from_iterable(range(4))
-    #     cl2 = clist.from_iterable([0, 1, 2, 3])
-    #     print(cl1, cl2)
-    #     self.assertTrue(cl1 == cl2)
-    #     # self.assertEqual(dl1, dl2)
-    #     # self.assertEqual(dl2, dl1)
+    def test_equality(self):
+        cl1 = clist.from_iterable(range(4))
+        cl2 = clist.from_iterable([0, 1, 2, 3])
+        self.assertTrue(cl1 == cl2)
+
+    def test_equality_empty(self):
+        cl1 = clist()
+        cl2 = clist()
+        self.assertTrue(cl1 == cl2)
 
 
 if __name__ == '__main__':

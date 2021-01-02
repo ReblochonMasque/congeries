@@ -9,6 +9,7 @@ clist a circular (doubly) linked list
     create: clist() or clist(iterable)
 
 """
+
 from abc import ABCMeta, abstractmethod
 from typing import Any, Iterator, Iterable
 
@@ -31,6 +32,16 @@ class DLLBase(metaclass=ABCMeta):
         in the container to yield each payload
         """
         raise NotImplemented
+
+    def __eq__(self, other):
+        if self.__class__.__qualname__ != other.__class__.__qualname__:
+            return False
+        if len(self) != len(other):
+            return False
+        for payload_in_self, payload_in_other in zip(self, other):
+            if payload_in_self != payload_in_other:
+                return False
+        return True
 
     @classmethod
     @abstractmethod
@@ -152,16 +163,6 @@ class dlist(DLLBase):
         while (current:=current.prev) is not self._header:
             yield current.payload
         return StopIteration
-
-    def __eq__(self, other):
-        if self.__class__.__qualname__ != other.__class__.__qualname__:
-            return False
-        if len(self) != len(other):
-            return False
-        for payload_in_self, payload_in_other in zip(self, other):
-            if payload_in_self != payload_in_other:
-                return False
-        return True
 
     def __str__(self):
         pre, suf = [f'{self.__class__.__qualname__}('], [')']

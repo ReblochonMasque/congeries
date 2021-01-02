@@ -65,8 +65,11 @@ class Test_dlist(unittest.TestCase):
         dl1 = dlist.from_iterable(range(4))
         dl2 = dlist.from_iterable([0, 1, 2, 3])
         self.assertTrue(dl1 == dl2)
-        # self.assertEqual(dl1, dl2)
-        # self.assertEqual(dl2, dl1)
+
+    def test_equality_empty(self):
+        dl1 = dlist()
+        dl2 = dlist()
+        self.assertTrue(dl1 == dl2)
 
 
 if __name__ == '__main__':
