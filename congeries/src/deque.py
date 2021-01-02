@@ -54,56 +54,25 @@ class Deque(dlist):
         When the deque is not empty, rotating one step to the right is equivalent to
         d.appendleft(d.pop()), and rotating one step to the left is equivalent to
         d.append(d.popleft())
-        :param steps: the number of rotations to do
-        :return: None
-        """
-        a, p = self.append_left, self.pop
-        if steps < 0:
-            a, p = self.append, self.pop_left
 
-        zum[0] += abs(steps)
+        optimized to rotate in the shortest way (left or right) to destination
+        (saves a factor 8 for Deque of size 15 an up)
 
-        for _ in range(abs(steps)):
-            a(p())
-
-    def rotated(self, steps=1) -> None:
-        """rotates the deque by n elements to the right; if n is <0 rotate to the left
-
-        When the deque is not empty, rotating one step to the right is equivalent to
-        d.appendleft(d.pop()), and rotating one step to the left is equivalent to
-        d.append(d.popleft())
         :param steps: the number of rotations to do
         :return: None
         """
         if steps == 0:
             return
-
+        a, p = self.append_left, self.pop
         s = steps % self._size
         if s > self._size // 2:
             s = s - self._size
-        print(steps, s)
-        a, p = self.append_left, self.pop
-        if s < 0:
-            a, p = self.append, self.pop_left
-        zum[0] += abs(s)
+            if s < 0:
+                a, p = self.append, self.pop_left
         for _ in range(abs(s)):
             a(p())
 
 
 if __name__ == '__main__':
 
-    zum = [0]
-
-    d = Deque().from_iterable(range(15))
-    print(d)
-    for r in range(60):
-        d = Deque().from_iterable(range(15))
-        d.rotate(-r)
-        print(r, d)
-
-    for r in range(60):
-        d = Deque().from_iterable(range(15))
-        d.rotate(r)
-        print(r, d)
-
-    print(f'zum: {zum}')
+    pass
