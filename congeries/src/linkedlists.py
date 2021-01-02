@@ -50,6 +50,9 @@ class DLLBase(metaclass=ABCMeta):
 
         prev is a reference to the previous node
         suiv is a reference to the next node (from suivant in French)
+
+        # todo: use dataclass (w totalordering?)
+
         """
         def __init__(
                 self,
