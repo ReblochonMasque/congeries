@@ -88,6 +88,48 @@ class Test_Deque(unittest.TestCase):
             size, ndx = size - 1, ndx + 1
             self.assertEqual(len(d), size)
 
+    def test_rotate_1(self):
+        expected = Deque().from_iterable([4, 0, 1, 2, 3])
+        actual = Deque().from_iterable(range(5))
+        actual.rotate()   # test default parameter
+        self.assertEqual(expected, actual)
+
+    def test_rotate_2(self):
+        expected = Deque().from_iterable([4, 0, 1, 2, 3])
+        actual = Deque().from_iterable(range(5))
+        actual.rotate(1)
+        self.assertEqual(expected, actual)
+
+    def test_rotate_minus_1(self):
+        expected = Deque().from_iterable([1, 2, 3, 4, 0])
+        actual = Deque().from_iterable(range(5))
+        actual.rotate(-1)
+        self.assertEqual(expected, actual)
+
+    def test_rotate_len(self):
+        expected = Deque().from_iterable([0, 1, 2, 3, 4])
+        actual = Deque().from_iterable(range(5))
+        actual.rotate(len(actual))
+        self.assertEqual(expected, actual)
+
+    def test_rotate_minus_len(self):
+        expected = Deque().from_iterable([0, 1, 2, 3, 4])
+        actual = Deque().from_iterable(range(5))
+        actual.rotate(-len(actual))
+        self.assertEqual(expected, actual)
+
+    def test_rotate_3(self):
+        expected = Deque().from_iterable([2, 3, 4, 0, 1])
+        actual = Deque().from_iterable(range(5))
+        actual.rotate(3)
+        self.assertEqual(expected, actual)
+
+    def test_rotate_minus_minus_3(self):
+        expected = Deque().from_iterable([3, 4, 0, 1, 2])
+        actual = Deque().from_iterable(range(5))
+        actual.rotate(-3)
+        self.assertEqual(expected, actual)
+
 
 if __name__ == '__main__':
     unittest.main()
