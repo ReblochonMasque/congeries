@@ -234,6 +234,26 @@ class clist(DLLBase):
         self._size -= 1
         return ret_payload
 
+    def rotate(self, steps=1):
+        """rotates steps numbers of steps to the right if steps > 0 and to the left if steps is < 0
+
+        equivalent to move the cursor steps numbers of steps to the left if steps > 0,
+        or steps numbers of steps to the right if steps < 0
+
+        optimized to rotate in the shortest way (left or right) to destination
+        """
+        if steps != 0:
+            s = steps % len(self)
+            if s > self._size // 2:
+                s = s - self._size
+            if s > 0:
+                for _ in range(s):
+                    self.cursor = self.cursor.prev
+            elif s < 0:
+                for _ in range(abs(s)):
+                    self.cursor = self.cursor.suiv
+        return self.cursor
+
     def __iter__(self) -> Iterator:
         """return a new iterator object that iterates over all the objects
         in the container to yield each payload
@@ -285,9 +305,23 @@ if __name__ == '__main__':
     # print(f'popped: {cl.pop_at()}, {cl}')
     # print(cl)
 
-    cl = clist.from_iterable(range(1, 4))
-    print(cl)
+    cl = clist.from_iterable(range(5))
+    numrot = 0
+    print(numrot, cl)
 
+    for _ in range(len(cl)):
+        cl.rotate()
+        numrot = (numrot + 1) % len(cl)
+        print(numrot, cl)
+
+    print()
+    cl = clist.from_iterable(range(5))
+    numrot = 0
+    print(numrot, cl)
+    for _ in range(len(cl)):
+        cl.rotate(-1)
+        numrot = (numrot - 1) % len(cl)
+        print(numrot, cl)
 
 
 

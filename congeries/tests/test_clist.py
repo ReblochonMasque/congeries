@@ -63,6 +63,48 @@ class Test_clist(unittest.TestCase):
         cl2 = clist()
         self.assertTrue(cl1 == cl2)
 
+    def test_rotate_1(self):
+        expected = clist().from_iterable([4, 0, 1, 2, 3])
+        actual = clist().from_iterable(range(5))
+        actual.rotate()  # test default parameter
+        self.assertEqual(expected, actual)
+
+    def test_rotate_2(self):
+        expected = clist().from_iterable([4, 0, 1, 2, 3])
+        actual = clist().from_iterable(range(5))
+        actual.rotate(1)
+        self.assertEqual(expected, actual)
+
+    def test_rotate_minus_1(self):
+        expected = clist().from_iterable([1, 2, 3, 4, 0])
+        actual = clist().from_iterable(range(5))
+        actual.rotate(-1)
+        self.assertEqual(expected, actual)
+
+    def test_rotate_len(self):
+        expected = clist().from_iterable([0, 1, 2, 3, 4])
+        actual = clist().from_iterable(range(5))
+        actual.rotate(len(actual))
+        self.assertEqual(expected, actual)
+
+    def test_rotate_minus_len(self):
+        expected = clist().from_iterable([0, 1, 2, 3, 4])
+        actual = clist().from_iterable(range(5))
+        actual.rotate(-len(actual))
+        self.assertEqual(expected, actual)
+
+    def test_rotate_3(self):
+        expected = clist().from_iterable([2, 3, 4, 0, 1])
+        actual = clist().from_iterable(range(5))
+        actual.rotate(3)
+        self.assertEqual(expected, actual)
+
+    def test_rotate_minus_minus_3(self):
+        expected = clist().from_iterable([3, 4, 0, 1, 2])
+        actual = clist().from_iterable(range(5))
+        actual.rotate(-3)
+        self.assertEqual(expected, actual)
+
 
 if __name__ == '__main__':
     unittest.main()
