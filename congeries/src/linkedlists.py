@@ -11,6 +11,7 @@ clist a circular (doubly) linked list
 """
 
 from abc import ABCMeta, abstractmethod
+from dataclasses import dataclass
 from typing import Any, Iterator, Iterable
 
 
@@ -54,6 +55,7 @@ class DLLBase(metaclass=ABCMeta):
         """
         raise NotImplemented
 
+    @dataclass
     class Record:
         """
         represents a node that carries a payload (data), and links
@@ -61,25 +63,14 @@ class DLLBase(metaclass=ABCMeta):
 
         prev is a reference to the previous node
         suiv is a reference to the next node (from suivant in French)
-
-        # todo: use dataclass (w totalordering?)
-
         """
-        def __init__(
-                self,
-                payload: Any = None,
-                prev: 'DLLBase.Record' = None,
-                suiv: 'DLLBase.Record' = None,
-        ) -> None:
-            self.payload = payload
-            self.prev = prev
-            self.suiv = suiv
+        payload: Any = None
+        prev: 'DLLBase.Record' or None = None
+        suiv: 'DLLBase.Record' or None = None
 
         def deprecate(self) -> None:
-            """avoid loitering by overwriting all references attached to the record,
-            and the record itself
+            """avoid loitering by overwriting all references attached to the record.
 
-            :param record: the DLL_Base.Record to be deleted
             :return: None
             """
             self.prev, self.suiv, self.payload = None, None, None
