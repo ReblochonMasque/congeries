@@ -105,6 +105,51 @@ class Test_clist(unittest.TestCase):
         actual.rotate(-3)
         self.assertEqual(expected, actual)
 
+    def test_rotate_insert_rotate_back_1(self):
+        expected = clist().from_iterable([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        actual = clist().from_iterable([1, 2, 3, 4, 5, 6, 8, 9])
+        actual.rotate(-5)
+        actual.insert_at_cursor(7)
+        actual.rotate(6)
+        self.assertEqual(expected, actual)
+
+    def test_rotate_insert_rotate_back_2(self):
+        expected = clist().from_iterable([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        actual = clist().from_iterable([1, 2, 3, 4, 5, 6, 7, 8])
+        actual.rotate(-7)
+        actual.insert_at_cursor(9)
+        actual.rotate(8)
+        self.assertEqual(expected, actual)
+
+    def test_rotate_insert_rotate_back_3(self):
+        expected = clist().from_iterable([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        actual = clist().from_iterable([1, 2, 3, 4, 5, 6, 7, 9])
+        actual.rotate(-6)
+        actual.insert_at_cursor(8)
+        actual.rotate(7)
+        self.assertEqual(expected, actual)
+
+    def test_pop_and_insert_0(self):
+        expected = clist().from_iterable([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        actual = clist().from_iterable([1, 2, 3, 4, 5, 7, 6, 8, 9])
+        actual.rotate(-6)
+        popped = actual.pop_at()
+        actual.rotate(2)
+        actual.insert_at_cursor(popped)
+        actual.rotate(5)
+        self.assertEqual(expected, actual)
+
+    def test_pop_and_insert_1(self):
+        expected = clist().from_iterable([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        actual = clist().from_iterable([9, 2, 3, 4, 5, 6, 7, 8, 1])
+        actual.rotate(-8)
+        popped = actual.pop_at()
+        actual.insert_at_cursor(popped)
+        self.assertEqual(expected, actual)
+
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
