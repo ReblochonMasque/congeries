@@ -73,10 +73,17 @@ class DLLBase(metaclass=ABCMeta):
 
             :return: None
             """
-            self.prev, self.suiv, self.payload = None, None, None
+            self.prev, self.suiv = None, None
+            # self.payload = None
 
         def __str__(self, it: Iterable = None) -> str:
             return str(self.payload)
+
+        def __repr__(self):
+            p = self.prev.payload if self.prev is not None else None
+            pl = self.payload
+            s = self.suiv.payload if self.suiv is not None else None
+            return f'{p}-({pl})-{s}'
 
 
 class dlist(DLLBase):
@@ -224,7 +231,6 @@ class clist(DLLBase):
             raise IndexError('popping from an empty clist')
         old_cursor, ret_payload = self.cursor, self.cursor.payload
         if len(self) > 1:
-            print(f'in pop_at: {self.cursor.prev}, {self.cursor}, {self.cursor.suiv}')
             pred = self.cursor.prev
             succ = self.cursor.suiv
             pred.suiv = succ
