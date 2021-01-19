@@ -5,7 +5,7 @@ from congeries.src import DoublyLinkedList
 from contextlib import redirect_stdout
 
 
-class Test_dlist(unittest.TestCase):
+class Test_DoublyLinkedList(unittest.TestCase):
 
     def test_type(self):
         self.assertIsInstance(DoublyLinkedList(), DoublyLinkedList)

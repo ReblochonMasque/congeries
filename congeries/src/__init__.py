@@ -1,13 +1,15 @@
 import futils
 from congeries.src.deque import Deque
-from congeries.src.linkedlists import DoublyLinkedList
+from congeries.src.doublylinkedlists import DoublyLinkedList
 from congeries.src.circularlist import CircularList
+
 
 __all__ = [
     'CircularList',
     'Deque',
     'DoublyLinkedList',
 ]
+
 
 def hello():
     print('hello congeries')

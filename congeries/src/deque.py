@@ -3,7 +3,7 @@ Deque data structures
 
 """
 
-from congeries.src.linkedlists import DoublyLinkedList
+from congeries.src.doublylinkedlists import DoublyLinkedList
 from typing import Any
 
 
