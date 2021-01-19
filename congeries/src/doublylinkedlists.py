@@ -5,7 +5,7 @@ DoublyLinkedList a doubly linked list
 
 """
 
-from congeries.src.linkedlists import DLLBase
+from congeries.src.linkedlistsbases import DLLBase
 from typing import Any, Iterator, Iterable
 
 
