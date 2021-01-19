@@ -20,7 +20,7 @@ class CircularList(DLLBase):
 
     def __init__(self) -> None:
         """
-        # use from_iterable to init a dlist from an iterable
+        # use from_iterable to init a CircularList from an iterable
         """
         super().__init__()
         self.cursor: 'CircularList.Record' or None = None
@@ -108,10 +108,10 @@ class CircularList(DLLBase):
 
     @classmethod
     def from_iterable(cls, it: Iterable) -> 'CircularList':
-        """creates, populates and return a dlist/cls object
+        """creates, populates and return a CircularList/cls object
 
         :param it: an iterable
-        :return: an object of class cls, subclass of dlist populated with the items
+        :return: an object of class cls, subclass of CircularList populated with the items
         of the iteranble passed as a parameter
         """
         new_seq: cls = cls()
