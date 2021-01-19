@@ -5,8 +5,8 @@ slist a singly linked list
     create: slist() or slist(iterable)
 dlist a doubly linked list
     create: dlist() or dlist(iterable)
-clist a circular (doubly) linked list
-    create: clist() or clist(iterable)
+CircularList a circular (doubly) linked list
+    create: CircularList() or CircularList(iterable)
 
 """
 
@@ -185,7 +185,7 @@ class dlist(DLLBase):
         return new_seq
 
 
-class clist(DLLBase):
+class CircularList(DLLBase):
     """a Circular Doubly Linked List representation
 
     a linked list in which each node keeps an explicit reference to the node
@@ -199,9 +199,9 @@ class clist(DLLBase):
         # use from_iterable to init a dlist from an iterable
         """
         super().__init__()
-        self.cursor: 'clist.Record' or None = None
+        self.cursor: 'CircularList.Record' or None = None
 
-    def insert_at_cursor(self, payload: Any) -> 'clist.Record':
+    def insert_at_cursor(self, payload: Any) -> 'CircularList.Record':
         """
         inserts payload at position after cursor, assigns the new node to cursor,
         and returns it
@@ -221,14 +221,14 @@ class clist(DLLBase):
         self._size += 1
         return self.cursor
 
-    def pop_at(self) -> 'clist.Record':
+    def pop_at(self) -> 'CircularList.Record':
         """returns the payload of the cursor node,
         deletes the cursor node
         assigns the previous node as the new cursor
         Deletes the cursor node
         """
         if len(self) == 0:
-            raise IndexError('popping from an empty clist')
+            raise IndexError('popping from an empty CircularList')
         old_cursor, ret_payload = self.cursor, self.cursor.payload
         if len(self) > 1:
             pred = self.cursor.prev
@@ -283,7 +283,7 @@ class clist(DLLBase):
         return ''.join(pre + [', '.join(res)] + suf)
 
     @classmethod
-    def from_iterable(cls, it: Iterable) -> 'clist':
+    def from_iterable(cls, it: Iterable) -> 'CircularList':
         """creates, populates and return a dlist/cls object
 
         :param it: an iterable
@@ -304,14 +304,14 @@ if __name__ == '__main__':
     # print(ld:=dlist.from_iterable(reversed(dl)))
     # print(len(dl), len(ld))
 
-    # print(cl:=clist.from_iterable([1, 2, 3, 4]))
+    # print(cl:=CircularList.from_iterable([1, 2, 3, 4]))
     # print(f'popped: {cl.pop_at()}, {cl}')
     # print(f'popped: {cl.pop_at()}, {cl}')
     # print(f'popped: {cl.pop_at()}, {cl}')
     # print(f'popped: {cl.pop_at()}, {cl}')
     # print(cl)
 
-    cl = clist.from_iterable(range(5))
+    cl = CircularList.from_iterable(range(5))
     numrot = 0
     print(numrot, cl)
 
@@ -321,7 +321,7 @@ if __name__ == '__main__':
         print(numrot, cl)
 
     print()
-    cl = clist.from_iterable(range(5))
+    cl = CircularList.from_iterable(range(5))
     numrot = 0
     print(numrot, cl)
     for _ in range(len(cl)):

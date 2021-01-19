@@ -2,7 +2,7 @@ from .src import *
 
 
 __all__ = [
-    'clist',
+    'CircularList',
     'Deque',
     'dlist',
 ]
