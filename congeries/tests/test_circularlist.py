@@ -5,7 +5,7 @@ from congeries.src import CircularList
 from contextlib import redirect_stdout
 
 
-class Test_clist(unittest.TestCase):
+class Test_CircularList(unittest.TestCase):
 
     def test_type(self):
         self.assertIsInstance(CircularList(), CircularList)
@@ -146,9 +146,6 @@ class Test_clist(unittest.TestCase):
         popped = actual.pop_at()
         actual.insert_at_cursor(popped)
         self.assertEqual(expected, actual)
-
-
-
 
 
 if __name__ == '__main__':
