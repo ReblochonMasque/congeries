@@ -49,7 +49,7 @@ class DLLBase(metaclass=ABCMeta):
 
         :param it: an iterable
         :return: an object of class cls, subclass of dlist populated with the items
-        of the iteranble passed as a parameter
+        of the iterable passed as a parameter
         """
         raise NotImplemented
 
@@ -146,8 +146,8 @@ class dlist(DLLBase):
         """return a new iterator object that iterates over all the objects
         in the container to yield each payload
         """
-        current = self._header
-        while (current:=current.suiv) is not self._trailer:
+        current: 'dlist.Record' = self._header
+        while (current := current.suiv) is not self._trailer:
             yield current.payload
         return StopIteration
 
@@ -155,8 +155,8 @@ class dlist(DLLBase):
         """return a new iterator object that iterates over all the objects
         in the container in reverse order to yield each payload
         """
-        current = self._trailer
-        while (current:=current.prev) is not self._header:
+        current: 'dlist.Record' = self._trailer
+        while (current := current.prev) is not self._header:
             yield current.payload
         return StopIteration
 
@@ -173,7 +173,7 @@ class dlist(DLLBase):
 
         :param it: an iterable
         :return: an object of class cls, subclass of dlist populated with the items
-        of the iteranble passed as a parameter
+        of the iterable passed as a parameter
         """
         new_seq: cls = cls()
         current = new_seq._header
@@ -185,6 +185,6 @@ class dlist(DLLBase):
 
 if __name__ == '__main__':
 
-    print(dl:=dlist.from_iterable([1, 2, 3]))
-    print(ld:=dlist.from_iterable(reversed(dl)))
+    print(dl := dlist.from_iterable([1, 2, 3]))
+    print(ld := dlist.from_iterable(reversed(dl)))
     print(len(dl), len(ld))
