@@ -3,12 +3,12 @@ Deque data structures
 
 """
 
-from congeries.src.linkedlists import dlist
+from congeries.src.linkedlists import DoublyLinkedList
 from typing import Any
 
 
-class Deque(dlist):
-    """represents a deque data structure, with an underlying dlist
+class Deque(DoublyLinkedList):
+    """represents a deque data structure, with an underlying DoublyLinkedList
 
     Left = _header
     Right = _trailer

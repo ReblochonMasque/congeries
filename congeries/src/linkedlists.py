@@ -3,8 +3,8 @@ a module with singly and doubly linked lists
 
 slist a singly linked list
     create: slist() or slist(iterable)
-dlist a doubly linked list
-    create: dlist() or dlist(iterable)
+DoublyLinkedList a doubly linked list
+    create: DoublyLinkedList() or DoublyLinkedList(iterable)
 
 """
 
@@ -45,10 +45,10 @@ class DLLBase(metaclass=ABCMeta):
     @classmethod
     @abstractmethod
     def from_iterable(cls, it) -> 'DLLBase':
-        """creates, populates and return a dlist/cls object
+        """creates, populates and return a DoublyLinkedList/cls object
 
         :param it: an iterable
-        :return: an object of class cls, subclass of dlist populated with the items
+        :return: an object of class cls, subclass of DoublyLinkedList populated with the items
         of the iterable passed as a parameter
         """
         raise NotImplemented
@@ -84,7 +84,7 @@ class DLLBase(metaclass=ABCMeta):
             return f'{p}-({pl})-{s}'
 
 
-class dlist(DLLBase):
+class DoublyLinkedList(DLLBase):
     """a Doubly Linked List representation
 
     a linked list in which each node keeps an explicit reference to the node
@@ -96,20 +96,20 @@ class dlist(DLLBase):
     def __init__(self) -> None:
         """
         # implementation detail: uses a header and trailer sentinel node (Record)
-        # use from_iterable to init a dlist from an iterable
+        # use from_iterable to init a DoublyLinkedList from an iterable
         """
         super().__init__()
-        self._header: 'dlist.Record' = self.Record(None, None, None)
-        self._trailer: 'dlist.Record' = self.Record(None, None, None)
+        self._header: 'DoublyLinkedList.Record' = self.Record(None, None, None)
+        self._trailer: 'DoublyLinkedList.Record' = self.Record(None, None, None)
         self._header.suiv = self._trailer
         self._trailer.prev = self._header
 
     def _insert_between(
             self,
             payload: Any,
-            prev_rec: 'dlist.Record',
-            succ_rec: 'dlist.Record',
-    ) -> 'dlist.Record':
+            prev_rec: 'DoublyLinkedList.Record',
+            succ_rec: 'DoublyLinkedList.Record',
+    ) -> 'DoublyLinkedList.Record':
         """helper method that inserts a payload between two successive nodes
 
         :param payload: the value to store in the list
@@ -128,11 +128,11 @@ class dlist(DLLBase):
 
     def _delete_record(
             self,
-            record: 'dlist.Record',
+            record: 'DoublyLinkedList.Record',
     ) -> Any:
         """Delete a non sentinel record from the list and return its payload
 
-        :param record: the dlist.Record to be deleted
+        :param record: the DoublyLinkedList.Record to be deleted
         :return: payload
         """
         predecessor, successor = record.prev, record.suiv
@@ -146,7 +146,7 @@ class dlist(DLLBase):
         """return a new iterator object that iterates over all the objects
         in the container to yield each payload
         """
-        current: 'dlist.Record' = self._header
+        current: 'DoublyLinkedList.Record' = self._header
         while (current := current.suiv) is not self._trailer:
             yield current.payload
         return StopIteration
@@ -155,7 +155,7 @@ class dlist(DLLBase):
         """return a new iterator object that iterates over all the objects
         in the container in reverse order to yield each payload
         """
-        current: 'dlist.Record' = self._trailer
+        current: 'DoublyLinkedList.Record' = self._trailer
         while (current := current.prev) is not self._header:
             yield current.payload
         return StopIteration
@@ -168,11 +168,11 @@ class dlist(DLLBase):
         return ''.join(pre + [' <-> '.join(res)] + suf)
 
     @classmethod
-    def from_iterable(cls, it: Iterable) -> 'dlist':
-        """creates, populates and return a dlist/cls object
+    def from_iterable(cls, it: Iterable) -> 'DoublyLinkedList':
+        """creates, populates and return a DoublyLinkedList/cls object
 
         :param it: an iterable
-        :return: an object of class cls, subclass of dlist populated with the items
+        :return: an object of class cls, subclass of DoublyLinkedList populated with the items
         of the iterable passed as a parameter
         """
         new_seq: cls = cls()
@@ -185,6 +185,6 @@ class dlist(DLLBase):
 
 if __name__ == '__main__':
 
-    print(dl := dlist.from_iterable([1, 2, 3]))
-    print(ld := dlist.from_iterable(reversed(dl)))
+    print(dl := DoublyLinkedList.from_iterable([1, 2, 3]))
+    print(ld := DoublyLinkedList.from_iterable(reversed(dl)))
     print(len(dl), len(ld))
