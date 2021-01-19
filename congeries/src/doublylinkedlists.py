@@ -1,5 +1,7 @@
 """
 
+DoublyLinkedList a doubly linked list
+    create: DoublyLinkedList() or DoublyLinkedList(iterable)
 
 """
 

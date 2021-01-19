@@ -3,8 +3,6 @@ a module with singly and doubly linked lists
 
 slist a singly linked list
     create: slist() or slist(iterable)
-DoublyLinkedList a doubly linked list
-    create: DoublyLinkedList() or DoublyLinkedList(iterable)
 
 """
 
