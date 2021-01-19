@@ -1,6 +1,7 @@
 import futils
 from congeries.src.deque import Deque
-from congeries.src.linkedlists import CircularList, dlist
+from congeries.src.linkedlists import dlist
+from congeries.src.circularlist import CircularList
 
 __all__ = [
     'CircularList',
