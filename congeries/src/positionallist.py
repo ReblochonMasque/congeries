@@ -62,6 +62,16 @@ class PositionalList(DoublyLinkedList):
             """
             return not (self == other)
 
+    def _validate(self, pos: 'PositionalList.Position') -> 'PositionalList.Record':
+        """Verifies that pos is a valid PositionalList.Position.
+
+        Must belong to this container, and not be deprecated
+        :param pos: PositionalList.Position belonging to this container
+        :return: the PositionalList.Record attached to pos if pos is valid
+                 otherwise, raise an appropriate Error
+        """
+
+
 
 if __name__ == '__main__':
     pass
