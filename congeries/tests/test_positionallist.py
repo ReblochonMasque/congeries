@@ -200,6 +200,36 @@ class TestPositionalList(unittest.TestCase):
         actual_before_forty_two = pl.before(forty_two)
         self.assertEqual(expected_before_forty_two, actual_before_forty_two)
 
+    def test_add_after_b_in_abc(self):
+        pl = PositionalList()
+        a = pl.add_last('a')
+        b = pl.add_last('b')
+        c = pl.add_last('c')
+        forty_two = pl.add_after(b, 42)
+        expected_after_forty_two = c
+        actual_after_forty_two = pl.after(forty_two)
+        self.assertEqual(expected_after_forty_two, actual_after_forty_two)
+
+    def test_add_after_c_in_abc(self):
+        pl = PositionalList()
+        a = pl.add_last('a')
+        b = pl.add_last('b')
+        c = pl.add_last('c')
+        forty_two = pl.add_after(c, 42)
+        actual_after_forty_two = pl.after(forty_two)
+        self.assertIsNone(actual_after_forty_two)
+
+    def test_add_after_a_in_abc(self):
+        pl = PositionalList()
+        a = pl.add_last('a')
+        b = pl.add_last('b')
+        c = pl.add_last('c')
+        forty_one = pl.add_after(a, 41)
+        forty_two = pl.add_after(forty_one, 42)
+        expected_after_forty_one = forty_two
+        actual_after_forty_one = pl.after(forty_one)
+        self.assertEqual(expected_after_forty_one, actual_after_forty_one)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -150,7 +150,7 @@ class PositionalList(DoublyLinkedList):
 
     def add_before(self, pos: 'PositionalList.Position', elt: Any) -> 'PositionalList.Position':
         """
-        Insert elt at the before the element at position pos, and returns a Position
+        Insert elt at the Position before the element at position pos, and returns a Position
         :param elt: Any
         :return: PositionalList.Position
         """
@@ -165,6 +165,24 @@ class PositionalList(DoublyLinkedList):
         """
         pos_record = self._validate(pos)
         return self._make_position(pos_record.prev)
+
+    def add_after(self, pos: 'PositionalList.Position', elt: Any) -> 'PositionalList.Position':
+        """
+        Insert elt at the Position after the element at position pos, and returns a Position
+        :param elt: Any
+        :return: PositionalList.Position
+        """
+        pos_record = self._validate(pos)
+        return self._insert_between(elt, pos_record, pos_record.suiv)
+
+    def after(self, pos: 'PositionalList.Position') -> 'PositionalList.Position':
+        """
+        return the Position after pos or None if pos is last
+        :param pos: a PositionalList.Position
+        :return: the PositionalList.Position after pos
+        """
+        pos_record = self._validate(pos)
+        return self._make_position(pos_record.suiv)
 
 
 if __name__ == '__main__':
