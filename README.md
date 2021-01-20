@@ -8,3 +8,4 @@ from _Latin_; from _congerere: to pile up_; from _gerere: to carry_.
 - LinkedList  
 - DoublyLinkedList  
 - CircularList  
+- PositionalList
