@@ -9,6 +9,8 @@ from congeries.src.doublylinkedlists import DoublyLinkedList
 
 class PositionalList(DoublyLinkedList):
     """
+    A sequential container of elements allowing positional access
+
     implementation of a PositionalList class using a doubly linked list that
     satisﬁes the requirement that each method of the positional list ADT runs
     in worst-case O(1) time when implemented with a doubly linked list.
