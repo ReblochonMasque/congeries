@@ -3,7 +3,7 @@ general abstraction of a sequence of elements with the ability
 to identify the location of an element
 """
 
-from typing import Iterator
+from typing import Any, Iterator
 from congeries.src.doublylinkedlists import DoublyLinkedList
 
 
@@ -32,10 +32,10 @@ class PositionalList(DoublyLinkedList):
         """
 
         def __init__(self, container, record) -> None:
-            self._container = container
-            self._record = record
+            self._container: 'PositionalList' = container
+            self._record: 'PositionalList.Record' = record
 
-        def payload(self):
+        def payload(self) -> Any:
             """ getter for record.payload
 
             :return: the payload item stored in record
