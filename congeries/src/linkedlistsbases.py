@@ -70,7 +70,7 @@ class DLLBase(metaclass=ABCMeta):
             :return: None
             """
             self.prev, self.suiv = None, None
-            # self.payload = None
+            self.payload = None
 
         def __str__(self, it: Iterable = None) -> str:
             return str(self.payload)
