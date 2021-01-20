@@ -78,6 +78,13 @@ class PositionalList(DoublyLinkedList):
             raise ValueError('pos is no longer valid')
         return pos.record
 
+    def _make_position(self, record: 'PositionalList.Record') -> 'PositionalList.Position':
+        """Utility method return a Position instance for a given record, or None if sentinel
+
+        :param record: a Record
+        :return: Position for a given record, or None if record is sentinel
+        """
+
 
 if __name__ == '__main__':
     pass
