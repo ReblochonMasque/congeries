@@ -84,6 +84,10 @@ class PositionalList(DoublyLinkedList):
         :param record: a Record
         :return: Position for a given record, or None if record is sentinel
         """
+        if record is self._header or record is self.trailer:
+            return None
+        else:
+            return self.Position(self, record)
 
 
 if __name__ == '__main__':
