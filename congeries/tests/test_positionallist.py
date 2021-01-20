@@ -260,6 +260,50 @@ class TestPositionalList(unittest.TestCase):
         self.assertEqual(pl, expected)
         self.assertEqual(db, 'a')
 
+    def test_replace_middle_1(self):
+        expected = PositionalList.from_iterable('aBcd')
+        pl = PositionalList()
+        a = pl.add_first('a')
+        b = pl.add_after(a, 'b')
+        c = pl.add_last('c')
+        d = pl.add_after(c, 'd')
+        ret = pl.replace(b, 'B')
+        self.assertEqual(ret, 'b')
+        self.assertEqual(pl, expected)
+
+    def test_replace_middle_2(self):
+        expected = PositionalList.from_iterable('abCd')
+        pl = PositionalList()
+        a = pl.add_first('a')
+        b = pl.add_after(a, 'b')
+        c = pl.add_last('c')
+        d = pl.add_after(c, 'd')
+        ret = pl.replace(c, 'C')
+        self.assertEqual(ret, 'c')
+        self.assertEqual(pl, expected)
+
+    def test_replace_last(self):
+        expected = PositionalList.from_iterable('abcD')
+        pl = PositionalList()
+        a = pl.add_first('a')
+        b = pl.add_after(a, 'b')
+        c = pl.add_last('c')
+        d = pl.add_after(c, 'd')
+        ret = pl.replace(d, 'D')
+        self.assertEqual(ret, 'd')
+        self.assertEqual(pl, expected)
+
+    def test_replace_first(self):
+        expected = PositionalList.from_iterable('Abcd')
+        pl = PositionalList()
+        a = pl.add_first('a')
+        b = pl.add_after(a, 'b')
+        c = pl.add_last('c')
+        d = pl.add_after(c, 'd')
+        ret = pl.replace(a, 'A')
+        self.assertEqual(ret, 'a')
+        self.assertEqual(pl, expected)
+
 
 if __name__ == '__main__':
     unittest.main()

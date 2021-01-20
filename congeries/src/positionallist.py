@@ -193,6 +193,20 @@ class PositionalList(DoublyLinkedList):
         pos_record = self._validate(pos)
         return self._delete_record(pos_record)
 
+    def replace(self, pos: 'PositionalList.Position', elt: Any) -> Any:
+        """
+        Replace the element at Position pos with elt
+
+        Return the element formerly at Position pos
+        :param pos: a PositionalList.Position
+        :param elt: a value payload
+        :return: the value payload formerly stored at Position pos
+        """
+        pos_record = self._validate(pos)
+        old_value = pos_record.payload
+        pos_record.payload = elt
+        return old_value
+
 
 if __name__ == '__main__':
     pl = PositionalList()
