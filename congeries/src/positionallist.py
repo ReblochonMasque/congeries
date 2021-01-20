@@ -4,10 +4,10 @@ to identify the location of an element
 """
 
 from typing import Iterator
-from congeries.src.linkedlistsbases import DLLBase
+from congeries.src.doublylinkedlists import DoublyLinkedList
 
 
-class PositionalList(DLLBase):
+class PositionalList(DoublyLinkedList):
     """
     implementation of a PositionalList class using a doubly linked list that
     satisﬁes the requirement that each method of the positional list ADT runs
