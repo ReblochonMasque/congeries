@@ -170,6 +170,36 @@ class TestPositionalList(unittest.TestCase):
         self.assertEqual(pl.first().payload(), it[0])
         self.assertEqual(pl.last().payload(), it[-1])
 
+    def test_add_before_b_in_abc(self):
+        pl = PositionalList()
+        a = pl.add_last('a')
+        b = pl.add_last('b')
+        c = pl.add_last('c')
+        forty_two = pl.add_before(b, 42)
+        expected_before_forty_two = a
+        actual_before_forty_two = pl.before(forty_two)
+        self.assertEqual(expected_before_forty_two, actual_before_forty_two)
+
+    def test_add_before_a_in_abc(self):
+        pl = PositionalList()
+        a = pl.add_last('a')
+        b = pl.add_last('b')
+        c = pl.add_last('c')
+        forty_two = pl.add_before(a, 42)
+        actual_before_forty_two = pl.before(forty_two)
+        self.assertIsNone(actual_before_forty_two)
+
+    def test_add_before_c_in_abc(self):
+        pl = PositionalList()
+        a = pl.add_last('a')
+        b = pl.add_last('b')
+        c = pl.add_last('c')
+        forty_two = pl.add_before(c, 42)
+        forty_one = pl.add_before(forty_two, 41)
+        expected_before_forty_two = forty_one
+        actual_before_forty_two = pl.before(forty_two)
+        self.assertEqual(expected_before_forty_two, actual_before_forty_two)
+
 
 if __name__ == '__main__':
     unittest.main()

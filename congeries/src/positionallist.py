@@ -148,6 +148,24 @@ class PositionalList(DoublyLinkedList):
         """
         return self._make_position(self._trailer.prev)
 
+    def add_before(self, pos: 'PositionalList.Position', elt: Any) -> 'PositionalList.Position':
+        """
+        Insert elt at the before the element at position pos, and returns a Position
+        :param elt: Any
+        :return: PositionalList.Position
+        """
+        pos_record = self._validate(pos)
+        return self._insert_between(elt, pos_record.prev, pos_record)
+
+    def before(self, pos: 'PositionalList.Position') -> 'PositionalList.Position':
+        """
+        return the Position before pos or None if pos is first
+        :param pos: a PositionalList.Position
+        :return: the PositionalList.Position before pos
+        """
+        pos_record = self._validate(pos)
+        return self._make_position(pos_record.prev)
+
 
 if __name__ == '__main__':
     pl = PositionalList.from_iterable('abc')
