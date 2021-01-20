@@ -184,7 +184,24 @@ class PositionalList(DoublyLinkedList):
         pos_record = self._validate(pos)
         return self._make_position(pos_record.suiv)
 
+    def delete(self, pos) -> 'PositionalList.Record':
+        """remove and return the pelement at position pos
+
+        :param pos: a Position
+        :return: The Record payload associated with pos
+        """
+        pos_record = self._validate(pos)
+        return self._delete_record(pos_record)
+
 
 if __name__ == '__main__':
-    pl = PositionalList.from_iterable('abc')
+    pl = PositionalList()
+    a = pl.add_first('a')
+    b = pl.add_after(a, 'b')
+    c = pl.add_last('c')
     print(pl)
+    pl.delete(b)
+    print(pl)
+    pl.delete(a)
+    pl.delete(c)
+    print(f'-> {pl}')

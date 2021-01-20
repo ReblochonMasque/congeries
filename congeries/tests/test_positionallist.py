@@ -230,6 +230,36 @@ class TestPositionalList(unittest.TestCase):
         actual_after_forty_one = pl.after(forty_one)
         self.assertEqual(expected_after_forty_one, actual_after_forty_one)
 
+    def test_delete_middle(self):
+        expected = PositionalList.from_iterable('ac')
+        pl = PositionalList()
+        a = pl.add_first('a')
+        b = pl.add_after(a, 'b')
+        c = pl.add_last('c')
+        db = pl.delete(b)
+        self.assertEqual(pl, expected)
+        self.assertEqual(db, 'b')
+
+    def test_delete_last(self):
+        expected = PositionalList.from_iterable('ab')
+        pl = PositionalList()
+        a = pl.add_first('a')
+        b = pl.add_after(a, 'b')
+        c = pl.add_last('c')
+        db = pl.delete(c)
+        self.assertEqual(pl, expected)
+        self.assertEqual(db, 'c')
+
+    def test_delete_first(self):
+        expected = PositionalList.from_iterable('bc')
+        pl = PositionalList()
+        a = pl.add_first('a')
+        b = pl.add_after(a, 'b')
+        c = pl.add_last('c')
+        db = pl.delete(a)
+        self.assertEqual(pl, expected)
+        self.assertEqual(db, 'a')
+
 
 if __name__ == '__main__':
     unittest.main()
