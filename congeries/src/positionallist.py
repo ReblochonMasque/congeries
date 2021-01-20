@@ -123,6 +123,22 @@ class PositionalList(DoublyLinkedList):
         """
         return self._make_position(self._header.suiv)
 
+    def add_last(self, elt: Any) -> 'PositionalList.Position':
+        """
+        Insert elt at the back of the list, and returns a Position
+        :param elt: Any
+        :return: PositionalList.Position
+        """
+        return self._insert_between(elt, self._trailer.prev, self._trailer)
+
+    def last(self) -> 'PositionalList.Position':
+        """
+        returns the last Position in the list, or None if list is empty
+
+        :return: the last Position in the list, or None if list is empty
+        """
+        return self._make_position(self._trailer.prev)
+
 
 if __name__ == '__main__':
     pass
