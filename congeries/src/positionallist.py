@@ -63,14 +63,20 @@ class PositionalList(DoublyLinkedList):
             return not (self == other)
 
     def _validate(self, pos: 'PositionalList.Position') -> 'PositionalList.Record':
-        """Verifies that pos is a valid PositionalList.Position.
+        """Utility method that verifies that pos is a valid PositionalList.Position.
 
         Must belong to this container, and not be deprecated
         :param pos: PositionalList.Position belonging to this container
         :return: the PositionalList.Record attached to pos if pos is valid
                  otherwise, raise an appropriate Error
         """
-
+        if not isinstance(pos, self.Position):
+            raise TypeError('pos must be a proper PositionalList.Position type')
+        if pos._container is not self:
+            raise ValueError('pos does not belong to this container')
+        if pos._record.suiv is None:    # convention for deprecated Record since we use sentinel Record
+            raise ValueError('pos is no longer valid')
+        return pos._record
 
 
 if __name__ == '__main__':
