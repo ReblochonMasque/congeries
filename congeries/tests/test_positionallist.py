@@ -304,6 +304,22 @@ class TestPositionalList(unittest.TestCase):
         self.assertEqual(ret, 'a')
         self.assertEqual(pl, expected)
 
+    def test_equal(self):
+        pl1 = PositionalList.from_iterable('abc')
+        pl2 = PositionalList()
+        a = pl2.add_first('a')
+        b = pl2.add_after(a, 'b')
+        c = pl2.add_last('c')
+        self.assertEqual(pl1, pl2)
+
+    def test_not_equal(self):
+        pl1 = PositionalList.from_iterable('cba')
+        pl2 = PositionalList()
+        a = pl2.add_first('a')
+        b = pl2.add_after(a, 'b')
+        c = pl2.add_last('c')
+        self.assertNotEqual(pl1, pl2)
+
 
 if __name__ == '__main__':
     unittest.main()
