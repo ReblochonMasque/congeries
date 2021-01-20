@@ -115,6 +115,14 @@ class PositionalList(DoublyLinkedList):
         """
         return self._insert_between(elt, self._header, self._header.suiv)
 
+    def first(self) -> 'PositionalList.Position':
+        """
+        returns the first Position in the list, or None if list is empty
+
+        :return: the first Position in the list, or None if list is empty
+        """
+        return self._make_position(self._header.suiv)
+
 
 if __name__ == '__main__':
     pass

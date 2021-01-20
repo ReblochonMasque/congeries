@@ -26,6 +26,45 @@ class TestPositionalList(unittest.TestCase):
         pl.add_first('a')
         self.assertEqual(len(pl), 3)
 
+    def test_first_0(self):
+        """get first elt from empty list -> None"""
+        pl = PositionalList()
+        actual = pl.first()
+        self.assertIsNone(actual)
+
+    def test_first_1(self):
+        """get first elt from empty list -> None"""
+        expected = "a"
+        pl = PositionalList()
+        pl.add_first('a')
+        res = pl.first()
+        self.assertIsInstance(res, PositionalList.Position)
+        actual = res.payload()
+        self.assertEqual(actual, expected)
+
+    def test_first_2(self):
+        expected = "a"
+        pl = PositionalList()
+        pl.add_first('c')
+        pl.add_first('b')
+        pl.add_first('a')
+        res = pl.first()
+        self.assertIsInstance(res, PositionalList.Position)
+        actual = res.payload()
+        self.assertEqual(actual, expected)
+
+    def test_first_3(self):
+        expected = "c"
+        pl = PositionalList()
+        pl.add_first('c')
+        pl.add_first('b')
+        pl.add_first('c')
+        res = pl.first()
+        self.assertIsInstance(res, PositionalList.Position)
+        actual = res.payload()
+        self.assertEqual(actual, expected)
+
+
 
 if __name__ == '__main__':
     unittest.main()
