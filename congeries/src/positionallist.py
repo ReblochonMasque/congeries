@@ -32,15 +32,15 @@ class PositionalList(DoublyLinkedList):
         """
 
         def __init__(self, container, record) -> None:
-            self._container: 'PositionalList' = container
-            self._record: 'PositionalList.Record' = record
+            self.container: 'PositionalList' = container
+            self.record: 'PositionalList.Record' = record
 
         def payload(self) -> Any:
             """ getter for record.payload
 
             :return: the payload item stored in record
             """
-            return self._record.payload
+            return self.record.payload
 
         def __eq__(self, other: 'PositionalList.Position') -> bool:
             """compares for equality as in representing the same location
@@ -50,7 +50,7 @@ class PositionalList(DoublyLinkedList):
             :other: a PositionalList.Position object
             :return: True if self represents the same record as other
             """
-            return type(other) is type(self) and other._record is self._record
+            return type(other) is type(self) and other.record is self.record
 
         def __ne__(self, other) -> bool:
             """compares for inequality as in not representing the same location
@@ -72,11 +72,11 @@ class PositionalList(DoublyLinkedList):
         """
         if not isinstance(pos, self.Position):
             raise TypeError('pos must be a proper PositionalList.Position type')
-        if pos._container is not self:
+        if pos.container is not self:
             raise ValueError('pos does not belong to this container')
-        if pos._record.suiv is None:    # convention for deprecated Record since we use sentinel Record
+        if pos.record.suiv is None:    # convention for deprecated Record since we use sentinel Record
             raise ValueError('pos is no longer valid')
-        return pos._record
+        return pos.record
 
 
 if __name__ == '__main__':
