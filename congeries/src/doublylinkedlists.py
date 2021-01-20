@@ -103,7 +103,6 @@ class DoublyLinkedList(DLLBase):
         new_seq: cls = cls()
         current = new_seq._header
         for item in it:
-            # print(f'{repr(current)}, {current}')
             current = new_seq._insert_between(item, current, new_seq._trailer)
         return new_seq
 
