@@ -86,7 +86,7 @@ class PositionalList(DoublyLinkedList):
         :param record: a Record
         :return: Position for a given record, or None if record is sentinel
         """
-        if record is self._header or record is self.trailer:
+        if record is self._header or record is self._trailer:
             return None
         else:
             return self.Position(self, record)
@@ -106,6 +106,14 @@ class PositionalList(DoublyLinkedList):
         :return: a PositionalList.Position carrying the corresponding Record
         """
         return self._make_position(super()._insert_between(payload, prev_rec, succ_rec))
+
+    def add_first(self, elt: Any) -> 'PositionalList.Position':
+        """
+        Insert elt at the front of the list, and returns a Position
+        :param elt: Any
+        :return: PositionalList.Position
+        """
+        return self._insert_between(elt, self._header, self._header.suiv)
 
 
 if __name__ == '__main__':
