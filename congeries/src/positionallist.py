@@ -63,7 +63,8 @@ class PositionalList(DoublyLinkedList):
             return not (self == other)
 
     def _validate(self, pos: 'PositionalList.Position') -> 'PositionalList.Record':
-        """Utility method that verifies that pos is a valid PositionalList.Position.
+        """
+        Utility method that verifies that pos is a valid PositionalList.Position.
 
         Must belong to this container, and not be deprecated
         :param pos: PositionalList.Position belonging to this container
@@ -79,7 +80,8 @@ class PositionalList(DoublyLinkedList):
         return pos.record
 
     def _make_position(self, record: 'PositionalList.Record') -> 'PositionalList.Position':
-        """Utility method return a Position instance for a given record, or None if sentinel
+        """
+        Utility method return a Position instance for a given record, or None if sentinel
 
         :param record: a Record
         :return: Position for a given record, or None if record is sentinel
@@ -88,6 +90,22 @@ class PositionalList(DoublyLinkedList):
             return None
         else:
             return self.Position(self, record)
+
+    def _insert_between(
+            self,
+            payload: Any,
+            prev_rec: 'PositionalList.Record',
+            succ_rec: 'PositionalList.Record',
+    ) -> 'PositionalList.Position':
+        """
+        Utility method; override inherited version to return a Position i/o a Record
+
+        :param payload: Any object or value
+        :param prev_rec: PositionalList.Record
+        :param succ_rec: PositionalList.Record
+        :return: a PositionalList.Position carrying the corresponding Record
+        """
+        return self._make_position(super()._insert_between(payload, prev_rec, succ_rec))
 
 
 if __name__ == '__main__':
