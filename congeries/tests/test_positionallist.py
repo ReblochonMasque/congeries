@@ -143,6 +143,33 @@ class TestPositionalList(unittest.TestCase):
 
         self.assertEqual(len(pl), 6)
 
+    def test_from_iterable_instance(self):
+        it = 'abc'
+        pl = PositionalList.from_iterable(it)
+        self.assertIsInstance(pl, PositionalList)
+
+    def test_from_iterable_len_0(self):
+        it = ''
+        pl = PositionalList.from_iterable(it)
+        self.assertEqual(len(pl), len(it))
+
+    def test_from_iterable_len_1(self):
+        it = 'abc'
+        pl = PositionalList.from_iterable(it)
+        self.assertEqual(len(pl), len(it))
+
+    def test_from_iterable_first_last(self):
+        it = 'abc'
+        pl = PositionalList.from_iterable(it)
+        self.assertEqual(pl.first().payload(), it[0])
+        self.assertEqual(pl.last().payload(), it[-1])
+
+    def test_from_iterable_first_last_list(self):
+        it = list(range(10))
+        pl = PositionalList.from_iterable(it)
+        self.assertEqual(pl.first().payload(), it[0])
+        self.assertEqual(pl.last().payload(), it[-1])
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -19,12 +19,21 @@ class PositionalList(DoublyLinkedList):
     The primary responsibility of PositionalList is to provide a public interface
     in accordance with the positional list ADT
     """
-    def __iter__(self) -> Iterator:
-        pass
+    # def __iter__(self) -> Iterator:
+    #     pass
 
     @classmethod
     def from_iterable(cls, it) -> 'PositionalList':
-        pass
+        """creates, populates and return a DoublyLinkedList/cls object
+
+        :param it: an iterable
+        :return: an object of class cls, populated with the items
+                 of the iterable passed as a parameter
+        """
+        new_seq: cls = cls()
+        for item in it:
+            cursor = new_seq.add_last(item)
+        return new_seq
 
     class Position:
         """
@@ -141,4 +150,5 @@ class PositionalList(DoublyLinkedList):
 
 
 if __name__ == '__main__':
-    pass
+    pl = PositionalList.from_iterable('abc')
+    print(pl)
