@@ -22,6 +22,12 @@ class TestPositionalListSort(unittest.TestCase):
         pl.sort()
         self.assertEqual(pl, expected)
 
+    def test_sort_all_same(self):
+        expected = PositionalList.from_iterable([42] * 10)
+        pl = PositionalList.from_iterable([42] * 10)
+        pl.sort()
+        self.assertEqual(pl, expected)
+
     # def test_sort_sorted(self):
     #     expected = PositionalList.from_iterable(list(range(10, -1, -1)))
     #     pl = PositionalList.from_iterable(list(range(10)))
