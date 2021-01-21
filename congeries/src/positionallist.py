@@ -207,16 +207,13 @@ class PositionalList(DoublyLinkedList):
         pos_record.payload = elt
         return old_value
 
+    def sort(self) -> None:
+        """sorts the PositionalList in non-decreasing order
 
-def sort(pl: PositionalList) -> PositionalList:
-    """sorts and return the PositionalList passed
-
-    elements must be comparable
-    elements of the PositionalList are sorted in nondecreasing order
-    :param pl: a PositionalList
-    :return: the sorted PositionalList in nondecreasing order
-    """
-    return pl
+        elements must be comparable
+        elements of the PositionalList are sorted in nondecreasing order
+        :return: None
+        """
 
 
 if __name__ == '__main__':
