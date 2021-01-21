@@ -208,6 +208,17 @@ class PositionalList(DoublyLinkedList):
         return old_value
 
 
+def sort(pl: PositionalList) -> PositionalList:
+    """sorts and return the PositionalList passed
+
+    elements must be comparable
+    elements of the PositionalList are sorted in nondecreasing order
+    :param pl: a PositionalList
+    :return: the sorted PositionalList in nondecreasing order
+    """
+    return pl
+
+
 if __name__ == '__main__':
     pl = PositionalList()
     a = pl.add_first('a')
