@@ -22,9 +22,21 @@ class TestPositionalListSort(unittest.TestCase):
         pl.sort()
         self.assertEqual(pl, expected)
 
+    def test_sort_sorted_neg(self):
+        expected = PositionalList.from_iterable([-3, -2, -1, 0, 1, 2, 3])
+        pl = PositionalList.from_iterable([0, -3, 1, 2, -2, -1, 3])
+        pl.sort()
+        self.assertEqual(pl, expected)
+
     def test_sort_all_same(self):
         expected = PositionalList.from_iterable([42] * 10)
         pl = PositionalList.from_iterable([42] * 10)
+        pl.sort()
+        self.assertEqual(pl, expected)
+
+    def test_sort_all_same_neg(self):
+        expected = PositionalList.from_iterable([-42] * 10)
+        pl = PositionalList.from_iterable([-42] * 10)
         pl.sort()
         self.assertEqual(pl, expected)
 
@@ -56,8 +68,12 @@ class TestPositionalListSort(unittest.TestCase):
         expected = PositionalList.from_iterable([0, 0, 0, 0, 0, 1, 1, 1, 1, 1])
         pl = PositionalList.from_iterable([1, 1, 1, 1, 1, 0, 0, 0, 0, 0])
         pl.sort()
-        print(expected)
-        print(pl)
+        self.assertEqual(pl, expected)
+
+    def test_sort_scrambled_non_uniques_3(self):
+        expected = PositionalList.from_iterable([-1, -1, -1, -1, -1, 0, 0, 0, 0, 0])
+        pl = PositionalList.from_iterable([0, 0, 0, 0, 0, -1, -1, -1, -1, -1])
+        pl.sort()
         self.assertEqual(pl, expected)
 
 

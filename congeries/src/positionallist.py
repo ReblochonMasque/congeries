@@ -230,7 +230,6 @@ class PositionalList(DoublyLinkedList):
                     self.add_before(walk, value)
 
 
-
 if __name__ == '__main__':
     pl = PositionalList()
     a = pl.add_first('a')
