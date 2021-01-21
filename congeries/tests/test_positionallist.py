@@ -376,6 +376,38 @@ class TestPositionalList(unittest.TestCase):
         c = pl2.add_last('c')
         self.assertNotEqual(pl1, pl2)
 
+    def test_add_first_after_before_len(self):
+        pl = PositionalList()
+        a = pl.add_first('a')
+        self.assertEqual(len(pl), 1)
+
+        b = pl.add_after(a, 'b')
+        self.assertEqual(len(pl), 2)
+
+        c = pl.add_last('c')
+        self.assertEqual(len(pl), 3)
+
+        d = pl.add_after(c, 'd')
+        self.assertEqual(len(pl), 4)
+
+    def test_delete_len(self):
+        pl = PositionalList()
+        a = pl.add_first('a')
+        b = pl.add_after(a, 'b')
+        c = pl.add_last('c')
+        d = pl.add_after(c, 'd')
+        self.assertEqual(len(pl), 4)
+        pl.delete(a)
+        self.assertEqual(len(pl), 3)
+        pl.delete(pl.first())
+        self.assertEqual(len(pl), 2)
+        pl.delete(pl.last())
+        self.assertEqual(len(pl), 1)
+        self.assertTrue(pl)
+        pl.delete(c)
+        self.assertEqual(len(pl), 0)
+        self.assertFalse(pl)
+
 
 if __name__ == '__main__':
     unittest.main()
