@@ -3,6 +3,33 @@ import unittest
 from congeries.src import PositionalList
 
 
+class TestPositionalListSort(unittest.TestCase):
+
+    def test_type(self):
+        pl = PositionalList()
+        pl.sort()
+        self.assertIsInstance(pl, PositionalList)
+
+    def test_sort_empty(self):
+        expected = PositionalList()
+        pl = PositionalList()
+        pl.sort()
+        self.assertEqual(pl, expected)
+
+    def test_sort_sorted(self):
+        expected = PositionalList.from_iterable(list(range(10)))
+        pl = PositionalList.from_iterable(list(range(10)))
+        pl.sort()
+        self.assertEqual(pl, expected)
+
+    # def test_sort_sorted(self):
+    #     expected = PositionalList.from_iterable(list(range(10, -1, -1)))
+    #     pl = PositionalList.from_iterable(list(range(10)))
+    #     pl.sort()
+    #     self.assertEqual(pl, expected)
+
+
+
 class TestPositionalList(unittest.TestCase):
 
     def test_type(self):
