@@ -210,10 +210,25 @@ class PositionalList(DoublyLinkedList):
     def sort(self) -> None:
         """sorts the PositionalList in non-decreasing order
 
+        implements insertion sort
         elements must be comparable
         elements of the PositionalList are sorted in nondecreasing order
         :return: None
         """
+        if len(self) > 1:
+            marker = self.first()
+            while marker != self.last():
+                pivot = self.after(marker)
+                value = pivot.payload()
+                if value > marker.payload():
+                    marker = pivot
+                else:
+                    walk = marker
+                    while walk != self.first() and self.before(walk).payload() > value:
+                        walk = self.before(walk)
+                    self.delete(pivot)
+                    self.add_before(walk, value)
+
 
 
 if __name__ == '__main__':

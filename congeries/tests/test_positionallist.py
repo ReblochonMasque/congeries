@@ -29,33 +29,35 @@ class TestPositionalListSort(unittest.TestCase):
         self.assertEqual(pl, expected)
 
     def test_sort_reversed(self):
-        expected = PositionalList.from_iterable(list(range(10, -1, -1)))
-        pl = PositionalList.from_iterable(list(range(10)))
+        expected = PositionalList.from_iterable(list(range(11)))
+        pl = PositionalList.from_iterable(list(range(10, -1, -1)))
         pl.sort()
         self.assertEqual(pl, expected)
 
     def test_sort_scrambled_uniques(self):
-        expected = PositionalList.from_iterable([4, 3, 8, 0, 1, 9, 7, 2, 6, 5])
-        pl = PositionalList.from_iterable(list(range(10)))
+        expected = PositionalList.from_iterable(list(range(10)))
+        pl = PositionalList.from_iterable([4, 3, 8, 0, 1, 9, 7, 2, 6, 5])
         pl.sort()
         self.assertEqual(pl, expected)
 
     def test_sort_scrambled_non_uniques_0(self):
-        expected = PositionalList.from_iterable([2, 3, 1, 0, 4] + [0, 4, 3, 1, 2])
-        pl = PositionalList.from_iterable([0, 0, 1, 1, 2, 2, 3, 3, 4, 4])
+        expected = PositionalList.from_iterable([0, 0, 1, 1, 2, 2, 3, 3, 4, 4])
+        pl = PositionalList.from_iterable([2, 3, 1, 0, 4] + [0, 4, 3, 1, 2])
         pl.sort()
         self.assertEqual(pl, expected)
 
     def test_sort_scrambled_non_uniques_1(self):
-        expected = PositionalList.from_iterable([2, 0, 3, 4, 1, 3, 0, 1, 4, 2])
-        pl = PositionalList.from_iterable([0, 0, 1, 1, 2, 2, 3, 3, 4, 4])
+        expected = PositionalList.from_iterable([0, 0, 1, 1, 2, 2, 3, 3, 4, 4])
+        pl = PositionalList.from_iterable([2, 0, 3, 4, 1, 3, 0, 1, 4, 2])
         pl.sort()
         self.assertEqual(pl, expected)
 
     def test_sort_scrambled_non_uniques_2(self):
-        expected = PositionalList.from_iterable([1, 1, 1, 1, 1, 0, 0, 0, 0, 0])
-        pl = PositionalList.from_iterable([0, 0, 0, 0, 0, 1, 1, 1, 1, 1])
+        expected = PositionalList.from_iterable([0, 0, 0, 0, 0, 1, 1, 1, 1, 1])
+        pl = PositionalList.from_iterable([1, 1, 1, 1, 1, 0, 0, 0, 0, 0])
         pl.sort()
+        print(expected)
+        print(pl)
         self.assertEqual(pl, expected)
 
 
