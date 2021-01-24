@@ -17,8 +17,10 @@ https://stackoverflow.com/questions/26189090/how-to-detect-if-any-element-in-a-d
 
 """
 
+from collections.abc import MutableMapping
 
-class FileDict:
+
+class FileDict(MutableMapping):
     pass
 
 
