@@ -6,7 +6,9 @@ import unittest
 
 
 class Test_FileDict(unittest.TestCase):
-    pass
+
+    def test_type(self):
+        self.assertIsInstance(FileDict(), FileDict)
 
 
 if __name__ == '__main__':
