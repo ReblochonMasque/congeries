@@ -1,7 +1,7 @@
 # import io
 import unittest
 
-# from congeries.src import FileDict
+from congeries.src import FileDict
 # from contextlib import redirect_stdout
 
 
