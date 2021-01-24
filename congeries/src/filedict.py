@@ -21,7 +21,16 @@ from collections.abc import MutableMapping
 
 
 class FileDict(MutableMapping):
-    pass
+    """File based dictionary
+
+    A dictionary-like object based on the file system rather than
+    in-memory hash tables. It is persistent and shareable between
+    processes.
+
+    MutableMapping.__abstractmethods__:
+    '__iter__, '__delitem__', '__setitem__', '__getitem__', '__len__'
+
+    """
 
 
 if __name__ == '__main__':
