@@ -30,6 +30,10 @@ class FileDict(MutableMapping):
     MutableMapping.__abstractmethods__:
     '__iter__, '__delitem__', '__setitem__', '__getitem__', '__len__'
 
+    filenames = keys
+    content of file = values
+    Mapping[filename -> content]
+
     """
 
 
