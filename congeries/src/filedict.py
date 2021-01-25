@@ -45,6 +45,23 @@ class FileDict(MutableMapping):
             os.mkdir(dirname)
         self.update(pairs, **kwargs)
 
+    def __getitem__(self, key: str):
+        pass
+
+    def __setitem__(self, key: str, value):
+        pass
+
+    def __delitem__(self, key: str):
+        pass
+
+    def __iter__(self):
+        pass
+
+    def __len__(self):
+        pass
+
+
+
 
 if __name__ == '__main__':
     pass
