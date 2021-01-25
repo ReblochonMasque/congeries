@@ -8,7 +8,7 @@ from congeries.src import FileDict
 class TestFileDict(unittest.TestCase):
 
     def test_type(self):
-        self.assertIsInstance(FileDict(), FileDict)
+        self.assertIsInstance(FileDict('temptestfiledict'), FileDict)
 
 
 if __name__ == '__main__':
