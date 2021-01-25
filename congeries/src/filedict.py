@@ -17,7 +17,10 @@ https://stackoverflow.com/questions/26189090/how-to-detect-if-any-element-in-a-d
 
 """
 
+import os
+
 from collections.abc import MutableMapping
+from contextlib import suppress
 
 
 class FileDict(MutableMapping):
@@ -35,6 +38,12 @@ class FileDict(MutableMapping):
     Mapping[filename -> content]
 
     """
+
+    def __init__(self, dirname: str, pairs=(), **kwargs) -> None:
+        self.dirname = dirname
+        with suppress(FileExistsError):
+            os.mkdir(dirname)
+        self.update(pairs, **kwargs)
 
 
 if __name__ == '__main__':
