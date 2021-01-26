@@ -235,6 +235,24 @@ class TestFileDict(unittest.TestCase):
             with self.assertRaises(KeyError):
                 del fd['abc']
 
+    def test_iter_empty(self):
+        with tempfile.TemporaryDirectory() as tmpdirtest:
+            fd = FileDict(tmpdirtest)
+            it = iter(fd)
+            with self.assertRaises(StopIteration):
+                next(it)
+
+    def test_iter_3(self):
+        with tempfile.TemporaryDirectory() as tmpdirtest:
+            fd = FileDict(tmpdirtest)
+            data = [('a', 'key is a'), ('b', 'key is b'), ('c', 'key is c'), ('wwwf', 'that hurts')]
+            for k, v in data:
+                fd[k] = v
+
+            for (k, v), (dk, dv) in zip(sorted(fd.items()), sorted(data)):
+                self.assertEqual(k, dk)
+                self.assertEqual(v, dv)
+
 
 class TestFileDictManual(unittest.TestCase):
     """
