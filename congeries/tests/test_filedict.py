@@ -1,10 +1,8 @@
-# import io
 import os
 import tempfile
 import unittest
 
 from congeries.src import FileDict
-# from contextlib import redirect_stdout
 
 
 class TestFileDict(unittest.TestCase):
@@ -37,7 +35,6 @@ class TestFileDict(unittest.TestCase):
             with tempfile.NamedTemporaryFile(
                 mode='w+t',
                 buffering=-1,
-                # prefix='.',
                 encoding=None,
                 dir=tmpdirtest,
                 delete=False,
@@ -91,7 +88,6 @@ class TestFileDict(unittest.TestCase):
             with tempfile.NamedTemporaryFile(
                     mode='w+t',
                     buffering=-1,
-                    prefix='.',
                     encoding=None,
                     dir=tmpdirtest,
                     delete=False,
@@ -116,7 +112,6 @@ class TestFileDict(unittest.TestCase):
             with tempfile.NamedTemporaryFile(
                     mode='w+t',
                     buffering=-1,
-                    # prefix='.',
                     encoding=None,
                     dir=tmpdirtest,
                     delete=False,
@@ -126,7 +121,6 @@ class TestFileDict(unittest.TestCase):
             with tempfile.NamedTemporaryFile(
                     mode='w+t',
                     buffering=-1,
-                    # prefix='.',
                     encoding=None,
                     dir=tmpdirtest,
                     delete=False,
@@ -181,7 +175,6 @@ class TestFileDict(unittest.TestCase):
             with tempfile.NamedTemporaryFile(
                     mode='w+t',
                     buffering=-1,
-                    prefix='.',
                     encoding=None,
                     dir=tmpdirtest,
                     delete=False,
@@ -213,7 +206,6 @@ class TestFileDict(unittest.TestCase):
             with tempfile.NamedTemporaryFile(
                     mode='w+t',
                     buffering=-1,
-                    prefix='.',
                     encoding=None,
                     dir=tmpdirtest,
                     delete=False,
@@ -223,7 +215,6 @@ class TestFileDict(unittest.TestCase):
             with tempfile.NamedTemporaryFile(
                     mode='w+t',
                     buffering=-1,
-                    prefix='.',
                     encoding=None,
                     dir=tmpdirtest,
                     delete=False,
