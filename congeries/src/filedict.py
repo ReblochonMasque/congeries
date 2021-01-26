@@ -72,6 +72,9 @@ class FileDict(MutableMapping):
     def __len__(self):
         return len(os.listdir(self.dirname))
 
+    def __repr__(self) -> str:
+        return f'{self.__class__.__name__}{tuple(self.items())}'
+
 
 if __name__ == '__main__':
 
