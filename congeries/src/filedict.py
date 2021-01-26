@@ -67,7 +67,7 @@ class FileDict(MutableMapping):
             raise KeyError(key) from None
 
     def __iter__(self):
-        pass
+        return iter(os.listdir(self.dirname))
 
     def __len__(self):
         return len(os.listdir(self.dirname))
