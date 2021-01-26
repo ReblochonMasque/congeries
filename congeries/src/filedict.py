@@ -56,8 +56,10 @@ class FileDict(MutableMapping):
         except FileNotFoundError:
             raise KeyError(key) from None
 
-    def __setitem__(self, key: str, value):
-        pass
+    def __setitem__(self, key, value) -> None:
+        fullname = self._get_fullname(key)
+        with open(fullname, 'w') as f:   # overwrites value like in a regular dict
+            f.write(value)
 
     def __delitem__(self, key: str):
         pass

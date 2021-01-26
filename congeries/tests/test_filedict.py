@@ -50,6 +50,16 @@ class TestFileDict(unittest.TestCase):
             expected = 'bob was here'
             self.assertEqual(expected, actual)
 
+    def test_setitem_0(self):
+        with tempfile.TemporaryDirectory() as tmpdirtest:
+            fd = FileDict(tmpdirtest)
+            key, value = 'abc', 'this is a new file'
+            fd[key] = value
+            self.assertTrue(os.path.exists(tmpdirtest + '/.' + key))
+            with open(tmpdirtest + '/.' + key, 'r') as f:
+                actual = f.read()
+            expected = value
+            self.assertEqual(expected, actual)
 
 
 class TestFileDictManual(unittest.TestCase):
