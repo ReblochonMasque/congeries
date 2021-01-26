@@ -50,8 +50,13 @@ class FileDict(MutableMapping):
         print(fullname)
         return os.path.join(self.dirname, '.' + key)
 
-    def __getitem__(self, key: str):
-        pass
+    def __getitem__(self, key: str) -> str:
+        fullname = self._get_fullname(key)
+        try:
+            with open(fullname) as f:
+                return f.read()
+        except FileNotFoundError:
+            raise KeyError(key) from None
 
     def __setitem__(self, key: str, value):
         pass

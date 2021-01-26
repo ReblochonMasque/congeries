@@ -19,7 +19,13 @@ class TestFileDict(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdirtest:
             print('created temporary directory', tmpdirtest)
             self.assertIsInstance(FileDict(tmpdirtest), FileDict)
-        # self.assertIsInstance(FileDict('temptestfiledict'), FileDict)
+
+    def test_getitem_None(self):
+        with tempfile.TemporaryDirectory() as tmpdirtest:
+            fd = FileDict(tmpdirtest)
+            with self.assertRaises(KeyError):
+                fd['key is not there']
+
 
 
 class TestFileDictManual(unittest.TestCase):
