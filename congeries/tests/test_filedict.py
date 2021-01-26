@@ -265,6 +265,20 @@ class TestFileDict(unittest.TestCase):
             expected = "FileDict()"
             self.assertEqual(actual.getvalue(), expected)
 
+    def test_repr(self):
+        with tempfile.TemporaryDirectory() as tmpdirtest:
+            fd = FileDict(tmpdirtest)
+            data = [('a', 'key is a'), ('b', 'key is b')]
+            for k, v in data:
+                fd[k] = v
+
+            actual = io.StringIO()
+            with redirect_stdout(actual):
+                print(fd, end='')
+            expecteds = ["FileDict(('a', 'key is a'), ('b', 'key is b'))",
+                         "FileDict(('b', 'key is b'), ('a', 'key is a'))"]
+            self.assertIn(actual.getvalue(), expecteds)
+
 
 class TestFileDictManual(unittest.TestCase):
     """
