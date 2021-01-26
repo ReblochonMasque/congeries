@@ -1,8 +1,10 @@
+import io
 import os
 import tempfile
 import unittest
 
 from congeries.src import FileDict
+from contextlib import redirect_stdout
 
 
 class TestFileDict(unittest.TestCase):
@@ -252,6 +254,16 @@ class TestFileDict(unittest.TestCase):
             for (k, v), (dk, dv) in zip(sorted(fd.items()), sorted(data)):
                 self.assertEqual(k, dk)
                 self.assertEqual(v, dv)
+
+    def test_repr_empty(self):
+        with tempfile.TemporaryDirectory() as tmpdirtest:
+            fd = FileDict(tmpdirtest)
+
+            actual = io.StringIO()
+            with redirect_stdout(actual):
+                print(fd, end='')
+            expected = "FileDict()"
+            self.assertEqual(actual.getvalue(), expected)
 
 
 class TestFileDictManual(unittest.TestCase):
