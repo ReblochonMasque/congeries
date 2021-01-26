@@ -37,14 +37,14 @@ class TestFileDict(unittest.TestCase):
             with tempfile.NamedTemporaryFile(
                 mode='w+t',
                 buffering=-1,
-                prefix='.',
+                # prefix='.',
                 encoding=None,
                 dir=tmpdirtest,
                 delete=False,
             ) as tmpkey:
                 tmpkey.write('bob was here')
 
-            key = tmpkey.name.split('/')[-1][1:]  # remove path and dot
+            key = tmpkey.name.split('/')[-1]  # remove path
 
             actual = fd[key]
             expected = 'bob was here'
@@ -55,8 +55,8 @@ class TestFileDict(unittest.TestCase):
             fd = FileDict(tmpdirtest)
             key, value = 'abc', 'this is a new file'
             fd[key] = value
-            self.assertTrue(os.path.exists(tmpdirtest + '/.' + key))
-            with open(tmpdirtest + '/.' + key, 'r') as f:
+            self.assertTrue(os.path.exists(tmpdirtest + '/' + key))
+            with open(tmpdirtest + '/' + key, 'r') as f:
                 actual = f.read()
             expected = value
             self.assertEqual(expected, actual)
@@ -66,16 +66,16 @@ class TestFileDict(unittest.TestCase):
             fd = FileDict(tmpdirtest)
             key, value = 'abc', 'this is the original value'
             fd[key] = value
-            self.assertTrue(os.path.exists(tmpdirtest + '/.' + key))
-            with open(tmpdirtest + '/.' + key, 'r') as f:
+            self.assertTrue(os.path.exists(tmpdirtest + '/' + key))
+            with open(tmpdirtest + '/' + key, 'r') as f:
                 actual = f.read()
             expected = value
             self.assertEqual(expected, actual)
 
             new_value = "this is the new value"
             fd[key] = new_value
-            self.assertTrue(os.path.exists(tmpdirtest + '/.' + key))
-            with open(tmpdirtest + '/.' + key, 'r') as f:
+            self.assertTrue(os.path.exists(tmpdirtest + '/' + key))
+            with open(tmpdirtest + '/' + key, 'r') as f:
                 actual = f.read()
             expected = new_value
             self.assertEqual(expected, actual)
@@ -98,12 +98,12 @@ class TestFileDict(unittest.TestCase):
             ) as tmpkey:
                 tmpkey.write('bob was here')
 
-            key = tmpkey.name.split('/')[-1][1:]  # remove path and dot
-            self.assertTrue(os.path.exists(tmpdirtest + '/.' + key))
-            self.assertIn('.' + key, os.listdir(tmpdirtest))
+            key = tmpkey.name.split('/')[-1]  # remove path
+            self.assertTrue(os.path.exists(tmpdirtest + '/' + key))
+            self.assertIn(key, os.listdir(tmpdirtest))
             del fd[key]
-            self.assertFalse(os.path.exists(tmpdirtest + '/.' + key))
-            self.assertNotIn('.' + key, os.listdir(tmpdirtest))
+            self.assertFalse(os.path.exists(tmpdirtest + '/' + key))
+            self.assertNotIn(key, os.listdir(tmpdirtest))
 
     def test_delitem_1(self):
         """
@@ -116,7 +116,7 @@ class TestFileDict(unittest.TestCase):
             with tempfile.NamedTemporaryFile(
                     mode='w+t',
                     buffering=-1,
-                    prefix='.',
+                    # prefix='.',
                     encoding=None,
                     dir=tmpdirtest,
                     delete=False,
@@ -126,28 +126,28 @@ class TestFileDict(unittest.TestCase):
             with tempfile.NamedTemporaryFile(
                     mode='w+t',
                     buffering=-1,
-                    prefix='.',
+                    # prefix='.',
                     encoding=None,
                     dir=tmpdirtest,
                     delete=False,
             ) as tmpkey1:
                 tmpkey1.write('bob was also here')
 
-            key0 = tmpkey0.name.split('/')[-1][1:]  # remove path and dot
-            self.assertTrue(os.path.exists(tmpdirtest + '/.' + key0))
-            self.assertIn('.' + key0, os.listdir(tmpdirtest))
+            key0 = tmpkey0.name.split('/')[-1]  # remove path
+            self.assertTrue(os.path.exists(tmpdirtest + '/' + key0))
+            self.assertIn(key0, os.listdir(tmpdirtest))
 
-            key1 = tmpkey1.name.split('/')[-1][1:]  # remove path and dot
-            self.assertTrue(os.path.exists(tmpdirtest + '/.' + key1))
-            self.assertIn('.' + key1, os.listdir(tmpdirtest))
+            key1 = tmpkey1.name.split('/')[-1]  # remove path
+            self.assertTrue(os.path.exists(tmpdirtest + '/' + key1))
+            self.assertIn(key1, os.listdir(tmpdirtest))
 
             del fd[key1]
-            self.assertFalse(os.path.exists(tmpdirtest + '/.' + key1))
-            self.assertNotIn('.' + key1, os.listdir(tmpdirtest))
+            self.assertFalse(os.path.exists(tmpdirtest + '/' + key1))
+            self.assertNotIn(key1, os.listdir(tmpdirtest))
 
             del fd[key0]
-            self.assertFalse(os.path.exists(tmpdirtest + '/.' + key0))
-            self.assertNotIn('.' + key0, os.listdir(tmpdirtest))
+            self.assertFalse(os.path.exists(tmpdirtest + '/' + key0))
+            self.assertNotIn(key0, os.listdir(tmpdirtest))
 
     def test_len_0(self):
         """

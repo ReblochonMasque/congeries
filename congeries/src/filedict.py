@@ -44,7 +44,7 @@ class FileDict(MutableMapping):
         self.update(pairs, **kwargs)
 
     def _get_fullname(self, key: str) -> str:
-        return os.path.join(self.dirname, '.' + key)
+        return os.path.join(self.dirname, key)
 
     def __getitem__(self, key: str) -> str:
         fullname = self._get_fullname(key)
@@ -74,4 +74,11 @@ class FileDict(MutableMapping):
 
 
 if __name__ == '__main__':
-    pass
+    fd = FileDict('essai')
+    fd['a'] = '1234'
+    fd['b'] = '2345'
+    fd['c'] = '3456'
+    print(len(fd))
+
+    for k, v in fd.items():
+        print(f'{k=}: {v=}')
