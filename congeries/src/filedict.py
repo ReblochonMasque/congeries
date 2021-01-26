@@ -61,8 +61,12 @@ class FileDict(MutableMapping):
         with open(fullname, 'w') as f:   # overwrites value like in a regular dict
             f.write(value)
 
-    def __delitem__(self, key: str):
-        pass
+    def __delitem__(self, key) -> None:
+        fullname = self._get_fullname(key)
+        try:
+            os.remove(fullname)
+        except FileNotFoundError:
+            raise KeyError(key) from None
 
     def __iter__(self):
         pass
