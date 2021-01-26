@@ -61,6 +61,26 @@ class TestFileDict(unittest.TestCase):
             expected = value
             self.assertEqual(expected, actual)
 
+    def test_setitem_overwrite(self):
+        with tempfile.TemporaryDirectory() as tmpdirtest:
+            fd = FileDict(tmpdirtest)
+            key, value = 'abc', 'this is the original value'
+            fd[key] = value
+            self.assertTrue(os.path.exists(tmpdirtest + '/.' + key))
+            with open(tmpdirtest + '/.' + key, 'r') as f:
+                actual = f.read()
+            expected = value
+            self.assertEqual(expected, actual)
+
+            new_value = "this is the new value"
+            fd[key] = new_value
+            self.assertTrue(os.path.exists(tmpdirtest + '/.' + key))
+            with open(tmpdirtest + '/.' + key, 'r') as f:
+                actual = f.read()
+            expected = new_value
+            self.assertEqual(expected, actual)
+
+
 
 class TestFileDictManual(unittest.TestCase):
     """
