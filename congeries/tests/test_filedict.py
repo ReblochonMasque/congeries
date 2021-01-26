@@ -20,12 +20,14 @@ class TestFileDict(unittest.TestCase):
         fulldirpath = os.path.join(path, dirname)
         # making sure that the directory does not pre-exist
         self.assertFalse(os.path.isdir(fulldirpath))
-        # this creates the directory
-        self.assertIsInstance(FileDict('temptestfiledict'), FileDict)
-        # asserting the directory was created
-        self.assertTrue(os.path.isdir(fulldirpath))
-
-        os.rmdir(fulldirpath)
+        try:
+            # this creates the directory
+            self.assertIsInstance(FileDict('temptestfiledict'), FileDict)
+            # asserting the directory was created
+            self.assertTrue(os.path.isdir(fulldirpath))
+        finally:
+            if os.path.isdir(fulldirpath):
+                os.rmdir(fulldirpath)
         # verifies the directory was successfully removed
         self.assertFalse(os.path.isdir(fulldirpath))
 
