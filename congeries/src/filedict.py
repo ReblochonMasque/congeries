@@ -13,8 +13,6 @@ Build powerful new data structures with Python's abstract base classes
 How to detect if any element in a dictionary changes?
 https://stackoverflow.com/questions/26189090/how-to-detect-if-any-element-in-a-dictionary-changes
 
-
-
 """
 
 import os
@@ -72,9 +70,7 @@ class FileDict(MutableMapping):
         pass
 
     def __len__(self):
-        pass
-
-
+        return len(os.listdir(self.dirname))
 
 
 if __name__ == '__main__':
