@@ -9,6 +9,19 @@ from congeries.src import FileDict
 
 class TestFileDict(unittest.TestCase):
 
+    def test_type(self):
+        with tempfile.TemporaryDirectory() as tmpdirtest:
+            print('created temporary directory', tmpdirtest)
+            self.assertIsInstance(FileDict(tmpdirtest), FileDict)
+        # self.assertIsInstance(FileDict('temptestfiledict'), FileDict)
+
+
+class TestFileDictManual(unittest.TestCase):
+    """
+    conducts tests in user created temporary directories
+    May require removing the directories if the tests fail
+    """
+
     def test_type_in_non_existent_directory(self):
         """
         creates a FileDict in a new directory
@@ -59,12 +72,6 @@ class TestFileDict(unittest.TestCase):
                 os.rmdir(fulldirpath)
         # verifies the directory was successfully removed
         self.assertFalse(os.path.isdir(fulldirpath))
-
-    def test_type(self):
-        with tempfile.TemporaryDirectory() as tmpdirtest:
-            print('created temporary directory', tmpdirtest)
-            self.assertIsInstance(FileDict(tmpdirtest), FileDict)
-        # self.assertIsInstance(FileDict('temptestfiledict'), FileDict)
 
 
 if __name__ == '__main__':
