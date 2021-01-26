@@ -46,8 +46,6 @@ class FileDict(MutableMapping):
         self.update(pairs, **kwargs)
 
     def _get_fullname(self, key: str) -> str:
-        fullname = os.path.join(self.dirname, '.' + key)
-        print(fullname)
         return os.path.join(self.dirname, '.' + key)
 
     def __getitem__(self, key: str) -> str:
