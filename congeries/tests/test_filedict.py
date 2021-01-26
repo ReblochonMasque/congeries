@@ -26,6 +26,30 @@ class TestFileDict(unittest.TestCase):
             with self.assertRaises(KeyError):
                 fd['key is not there']
 
+    def test_getitem_yes(self):
+        """
+        creates a temp file in a temp directory
+        creates a FileDict in that directory
+        retrieves the file content using its name as key
+        """
+        with tempfile.TemporaryDirectory() as tmpdirtest:
+            fd = FileDict(tmpdirtest)
+            with tempfile.NamedTemporaryFile(
+                mode='w+t',
+                buffering=-1,
+                prefix='.',
+                encoding=None,
+                dir=tmpdirtest,
+                delete=False,
+            ) as tmpkey:
+                tmpkey.write('bob was here')
+
+            key = tmpkey.name.split('/')[-1][1:]  # remove path and dot
+
+            actual = fd[key]
+            expected = 'bob was here'
+            self.assertEqual(expected, actual)
+
 
 
 class TestFileDictManual(unittest.TestCase):
