@@ -74,11 +74,5 @@ class FileDict(MutableMapping):
 
 
 if __name__ == '__main__':
-    fd = FileDict('essai')
-    fd['a'] = '1234'
-    fd['b'] = '2345'
-    fd['c'] = '3456'
-    print(len(fd))
 
-    for k, v in fd.items():
-        print(f'{k=}: {v=}')
+    pass
