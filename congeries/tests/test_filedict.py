@@ -8,6 +8,12 @@ from congeries.src import FileDict
 
 
 class TestFileDict(unittest.TestCase):
+    """
+    conducts tests in temporary directories created with the
+    imported module tempfile.
+    Creation of directories and files, and their clean up are
+    automated
+    """
 
     def test_type(self):
         with tempfile.TemporaryDirectory() as tmpdirtest:
