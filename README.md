@@ -5,7 +5,8 @@ from _Latin_; from _congerere: to pile up_; from _gerere: to carry_.
 
 ## A repository of useful data structures  
 
-- LinkedList  
-- DoublyLinkedList  
 - CircularList  
-- PositionalList
+- DoublyLinkedList  
+- FileDict  
+- LinkedList  
+- PositionalList  
