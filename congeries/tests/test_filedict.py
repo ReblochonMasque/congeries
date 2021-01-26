@@ -80,6 +80,31 @@ class TestFileDict(unittest.TestCase):
             expected = new_value
             self.assertEqual(expected, actual)
 
+    def test_delitem_0(self):
+        """
+        creates a temp file in a temp directory
+        creates a FileDict in that directory
+        deletes the file
+        """
+        with tempfile.TemporaryDirectory() as tmpdirtest:
+            fd = FileDict(tmpdirtest)
+            with tempfile.NamedTemporaryFile(
+                    mode='w+t',
+                    buffering=-1,
+                    prefix='.',
+                    encoding=None,
+                    dir=tmpdirtest,
+                    delete=False,
+            ) as tmpkey:
+                tmpkey.write('bob was here')
+
+            key = tmpkey.name.split('/')[-1][1:]  # remove path and dot
+            self.assertTrue(os.path.exists(tmpdirtest + '/.' + key))
+            self.assertIn('.' + key, os.listdir(tmpdirtest))
+            del fd[key]
+            self.assertFalse(os.path.exists(tmpdirtest + '/.' + key))
+            self.assertNotIn('.' + key, os.listdir(tmpdirtest))
+
 
 class TestFileDictManual(unittest.TestCase):
     """
