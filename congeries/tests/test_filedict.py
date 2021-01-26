@@ -149,6 +149,36 @@ class TestFileDict(unittest.TestCase):
             self.assertFalse(os.path.exists(tmpdirtest + '/.' + key0))
             self.assertNotIn('.' + key0, os.listdir(tmpdirtest))
 
+    def test_len_2(self):
+        """
+        creates two temp file in a temp directory
+        creates a FileDict in that directory
+        deletes the two files
+        """
+        with tempfile.TemporaryDirectory() as tmpdirtest:
+            fd = FileDict(tmpdirtest)
+            with tempfile.NamedTemporaryFile(
+                    mode='w+t',
+                    buffering=-1,
+                    prefix='.',
+                    encoding=None,
+                    dir=tmpdirtest,
+                    delete=False,
+            ) as tmpkey0:
+                tmpkey0.write('bob was here')
+
+            with tempfile.NamedTemporaryFile(
+                    mode='w+t',
+                    buffering=-1,
+                    prefix='.',
+                    encoding=None,
+                    dir=tmpdirtest,
+                    delete=False,
+            ) as tmpkey1:
+                tmpkey1.write('bob was also here')
+
+            self.assertEqual(len(fd), 2)
+
     def test_delitem_no_key(self):
         """
         creates a temp file in a temp directory
