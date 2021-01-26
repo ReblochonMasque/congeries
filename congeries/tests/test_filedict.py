@@ -159,6 +159,17 @@ class TestFileDict(unittest.TestCase):
             fd = FileDict(tmpdirtest)
             self.assertEqual(len(fd), 0)
 
+    def test_len_1_a(self):
+        """
+        creates two temp file in a temp directory
+        creates a FileDict in that directory
+        deletes the two files
+        """
+        with tempfile.TemporaryDirectory() as tmpdirtest:
+            fd = FileDict(tmpdirtest)
+            fd['abc'] = "joe le taxi"
+            self.assertEqual(len(fd), 1)
+
     def test_len_1(self):
         """
         creates two temp file in a temp directory
@@ -178,6 +189,18 @@ class TestFileDict(unittest.TestCase):
                 tmpkey0.write('bob was here')
 
             self.assertEqual(len(fd), 1)
+
+    def test_len_2_a(self):
+        """
+        creates two temp file in a temp directory
+        creates a FileDict in that directory
+        deletes the two files
+        """
+        with tempfile.TemporaryDirectory() as tmpdirtest:
+            fd = FileDict(tmpdirtest)
+            fd['abc'] = "joe le taxi"
+            fd['def'] = "les sucettes a l'anis"
+            self.assertEqual(len(fd), 2)
 
     def test_len_2(self):
         """
