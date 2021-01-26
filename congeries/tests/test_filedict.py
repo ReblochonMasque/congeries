@@ -105,6 +105,50 @@ class TestFileDict(unittest.TestCase):
             self.assertFalse(os.path.exists(tmpdirtest + '/.' + key))
             self.assertNotIn('.' + key, os.listdir(tmpdirtest))
 
+    def test_delitem_1(self):
+        """
+        creates two temp file in a temp directory
+        creates a FileDict in that directory
+        deletes the two files
+        """
+        with tempfile.TemporaryDirectory() as tmpdirtest:
+            fd = FileDict(tmpdirtest)
+            with tempfile.NamedTemporaryFile(
+                    mode='w+t',
+                    buffering=-1,
+                    prefix='.',
+                    encoding=None,
+                    dir=tmpdirtest,
+                    delete=False,
+            ) as tmpkey0:
+                tmpkey0.write('bob was here')
+
+            with tempfile.NamedTemporaryFile(
+                    mode='w+t',
+                    buffering=-1,
+                    prefix='.',
+                    encoding=None,
+                    dir=tmpdirtest,
+                    delete=False,
+            ) as tmpkey1:
+                tmpkey1.write('bob was also here')
+
+            key0 = tmpkey0.name.split('/')[-1][1:]  # remove path and dot
+            self.assertTrue(os.path.exists(tmpdirtest + '/.' + key0))
+            self.assertIn('.' + key0, os.listdir(tmpdirtest))
+
+            key1 = tmpkey1.name.split('/')[-1][1:]  # remove path and dot
+            self.assertTrue(os.path.exists(tmpdirtest + '/.' + key1))
+            self.assertIn('.' + key1, os.listdir(tmpdirtest))
+
+            del fd[key1]
+            self.assertFalse(os.path.exists(tmpdirtest + '/.' + key1))
+            self.assertNotIn('.' + key1, os.listdir(tmpdirtest))
+
+            del fd[key0]
+            self.assertFalse(os.path.exists(tmpdirtest + '/.' + key0))
+            self.assertNotIn('.' + key0, os.listdir(tmpdirtest))
+
 
 class TestFileDictManual(unittest.TestCase):
     """
