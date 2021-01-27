@@ -204,6 +204,24 @@ class TestFileDotDict(unittest.TestCase):
         self.fdd['abc'] = "joe le taxi"
         self.assertEqual(len(self.fdd), 1)
 
+    def test_len_1(self):
+        """
+        creates a temp file in a temp directory
+        creates a FileDict in that directory
+        check the length
+       """
+        with tempfile.NamedTemporaryFile(
+            mode='w+t',
+            buffering=-1,
+            encoding=None,
+            prefix=self.prefix,
+            dir=self.tempdirname,
+            delete=False,
+        ) as tmpkey:
+            tmpkey.write('bob was here')
+
+        self.assertEqual(len(self.fdd), 1)
+
 
 if __name__ == '__main__':
     unittest.main()
