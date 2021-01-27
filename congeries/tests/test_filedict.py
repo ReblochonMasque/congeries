@@ -120,6 +120,10 @@ class TestFileDict(unittest.TestCase):
         self.assertEqual(expected, actual)
 
     def test_setitem_overwrite(self):
+        """
+        creates a value in the FileDict
+        overwrites this value
+        """
         key, value = 'abc', 'this is the original value'
         self.fdd[key] = value
         fullkey = self._make_path(key)
