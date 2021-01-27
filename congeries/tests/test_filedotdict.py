@@ -12,10 +12,12 @@ from congeries.src import FileDotDict
 
 class TestFileDotDict(unittest.TestCase):
 
+    prefix = '.'
+
     def setUp(self) -> None:
         tempdirname = 'somerandomtemp'
         self.fdd = FileDotDict(tempdirname)
-        self.tempdirname = '.' + tempdirname
+        self.tempdirname = self.prefix + tempdirname
 
     def tearDown(self) -> None:
         shutil.rmtree(self.tempdirname)
@@ -23,11 +25,11 @@ class TestFileDotDict(unittest.TestCase):
 
     def _make_path(self, key):
         """helper to add dot to fullkey"""
-        return self.tempdirname + '/.' + str(key)
+        return self.tempdirname + '/' + self.prefix + str(key)
 
     def _extract_key(self, tmpkey):
         """helper to remove path and dot"""
-        return tmpkey.name.split('/')[-1][1:]
+        return tmpkey.name.split('/')[-1][len(self.prefix):]
 
     def test_type(self):
         self.assertIsInstance(self.fdd, FileDotDict)
@@ -45,7 +47,7 @@ class TestFileDotDict(unittest.TestCase):
         with tempfile.NamedTemporaryFile(
             mode='w+t',
             buffering=-1,
-            prefix='.',
+            prefix=self.prefix,
             encoding=None,
             dir=self.tempdirname,
             delete=False,
@@ -126,7 +128,7 @@ class TestFileDotDict(unittest.TestCase):
             mode='w+t',
             buffering=-1,
             encoding=None,
-            prefix='.',
+            prefix=self.prefix,
             dir=self.tempdirname,
             delete=False,
         ) as tmpkey:
@@ -134,12 +136,12 @@ class TestFileDotDict(unittest.TestCase):
         key = self._extract_key(tmpkey)
         fullkey = self._make_path(key)
         print(f'{fullkey=}, {tmpkey.name=}')
-        dotkey = '.' + key
+        prefixed_key = self.prefix + key
         self.assertTrue(os.path.exists(fullkey))
-        self.assertIn(dotkey, os.listdir(self.tempdirname))
+        self.assertIn(prefixed_key, os.listdir(self.tempdirname))
         del self.fdd[key]
         self.assertFalse(os.path.exists(fullkey))
-        self.assertNotIn(dotkey, os.listdir(self.tempdirname))
+        self.assertNotIn(prefixed_key, os.listdir(self.tempdirname))
 
 
 if __name__ == '__main__':
