@@ -294,6 +294,13 @@ class TestFileDotDict(unittest.TestCase):
         expected = "FileDotDict()"
         self.assertEqual(actual.getvalue(), expected)
 
+    def test_repr_empty(self):
+        actual = io.StringIO()
+        with redirect_stdout(actual):
+            print(repr(self.fdd), end='')
+        expected = "FileDotDict()"
+        self.assertEqual(actual.getvalue(), expected)
+
 
 if __name__ == '__main__':
     unittest.main()
