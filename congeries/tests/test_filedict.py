@@ -23,8 +23,7 @@ class TestFileDict(unittest.TestCase):
         self.tmpdirtest.cleanup()
 
     def test_type(self):
-        with tempfile.TemporaryDirectory() as tmpdirtest:
-            self.assertIsInstance(FileDict(tmpdirtest), FileDict)
+        self.assertIsInstance(self.fd, FileDict)
 
     def test_getitem_None(self):
         with tempfile.TemporaryDirectory() as tmpdirtest:
