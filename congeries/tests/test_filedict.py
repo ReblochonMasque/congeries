@@ -251,15 +251,13 @@ class TestFileDict(unittest.TestCase):
             next(it)
 
     def test_iter_3(self):
-        with tempfile.TemporaryDirectory() as tmpdirtest:
-            fd = FileDict(tmpdirtest)
-            data = [('a', 'key is a'), ('b', 'key is b'), ('c', 'key is c'), ('wwwf', 'that hurts')]
-            for k, v in data:
-                fd[k] = v
+        data = [('a', 'key is a'), ('b', 'key is b'), ('c', 'key is c'), ('wwwf', 'that hurts')]
+        for k, v in data:
+            self.fd[k] = v
 
-            for (k, v), (dk, dv) in zip(sorted(fd.items()), sorted(data)):
-                self.assertEqual(k, dk)
-                self.assertEqual(v, dv)
+        for (k, v), (dk, dv) in zip(sorted(self.fd.items()), sorted(data)):
+            self.assertEqual(k, dk)
+            self.assertEqual(v, dv)
 
     def test_repr_empty(self):
         with tempfile.TemporaryDirectory() as tmpdirtest:
