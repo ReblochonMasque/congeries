@@ -270,6 +270,11 @@ class TestFileDotDict(unittest.TestCase):
         with self.assertRaises(KeyError):
             del self.fdd[key]
 
+    def test_iter_empty(self):
+        it = iter(self.fdd)
+        with self.assertRaises(StopIteration):
+            next(it)
+
 
 if __name__ == '__main__':
     unittest.main()
