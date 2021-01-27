@@ -20,6 +20,7 @@ class TestFileDict(unittest.TestCase):
     """
 
     prefix = ''
+    class_under_test = FileDict
 
     def setUp(self) -> None:
         """
@@ -359,6 +360,21 @@ class TestFileDict(unittest.TestCase):
                      f"{self.fdd.__class__.__qualname__}(('b', 'key is b'), ('a', 'key is a'))"]
         self.assertIn(actual.getvalue(), expecteds)
 
+    def test_creation_via_pairs_of_key_value(self):
+        """
+        asserts the creation of a FileDict via a sequence of (key, value) pairs
+        :return:
+        """
+        pairs = [('a', 'key is a'), ('b', 'key is b')]
+        fdictpairs = self.class_under_test(self.tempdirname[len(self.prefix):], pairs)
+
+        actual = io.StringIO()
+        with redirect_stdout(actual):
+            print(fdictpairs, end='')
+        expecteds = [f"{fdictpairs.__class__.__qualname__}(('a', 'key is a'), ('b', 'key is b'))",
+                     f"{fdictpairs.__class__.__qualname__}(('b', 'key is b'), ('a', 'key is a'))"]
+        self.assertIn(actual.getvalue(), expecteds)
+
 
 class TestFileDictManual(unittest.TestCase):
     """
@@ -433,6 +449,7 @@ class TestFileDotDict(TestFileDict):
     """
 
     prefix = '.'
+    class_under_test = FileDotDict
 
     def setUp(self) -> None:
         """
