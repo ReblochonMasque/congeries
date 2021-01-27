@@ -116,6 +116,31 @@ class TestFileDotDict(unittest.TestCase):
         expected = new_value
         self.assertEqual(expected, actual)
 
+    def test_delitem_0(self):
+        """
+        creates a temp file in a temp directory
+        creates a FileDict in that directory
+        deletes the file
+        """
+        with tempfile.NamedTemporaryFile(
+            mode='w+t',
+            buffering=-1,
+            encoding=None,
+            prefix='.',
+            dir=self.tempdirname,
+            delete=False,
+        ) as tmpkey:
+            tmpkey.write('bob was here')
+        key = self._extract_key(tmpkey)
+        fullkey = self._make_path(key)
+        print(f'{fullkey=}, {tmpkey.name=}')
+        dotkey = '.' + key
+        self.assertTrue(os.path.exists(fullkey))
+        self.assertIn(dotkey, os.listdir(self.tempdirname))
+        del self.fdd[key]
+        self.assertFalse(os.path.exists(fullkey))
+        self.assertNotIn(dotkey, os.listdir(self.tempdirname))
+
 
 if __name__ == '__main__':
     unittest.main()
