@@ -111,23 +111,21 @@ class TestFileDict(unittest.TestCase):
         creates a FileDict in that directory
         deletes the file
         """
-        with tempfile.TemporaryDirectory() as tmpdirtest:
-            fd = FileDict(tmpdirtest)
-            with tempfile.NamedTemporaryFile(
-                    mode='w+t',
-                    buffering=-1,
-                    encoding=None,
-                    dir=tmpdirtest,
-                    delete=False,
-            ) as tmpkey:
-                tmpkey.write('bob was here')
+        with tempfile.NamedTemporaryFile(
+                mode='w+t',
+                buffering=-1,
+                encoding=None,
+                dir=self.tmpdirtest.name,
+                delete=False,
+        ) as tmpkey:
+            tmpkey.write('bob was here')
 
-            key = tmpkey.name.split('/')[-1]  # remove path
-            self.assertTrue(os.path.exists(tmpdirtest + '/' + key))
-            self.assertIn(key, os.listdir(tmpdirtest))
-            del fd[key]
-            self.assertFalse(os.path.exists(tmpdirtest + '/' + key))
-            self.assertNotIn(key, os.listdir(tmpdirtest))
+        key = tmpkey.name.split('/')[-1]  # remove path
+        self.assertTrue(os.path.exists(self.tmpdirtest.name + '/' + key))
+        self.assertIn(key, os.listdir(self.tmpdirtest.name))
+        del self.fd[key]
+        self.assertFalse(os.path.exists(self.tmpdirtest.name + '/' + key))
+        self.assertNotIn(key, os.listdir(self.tmpdirtest.name))
 
     def test_delitem_1(self):
         """
