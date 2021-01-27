@@ -78,6 +78,16 @@ class TestFileDotDict(unittest.TestCase):
         expected = value
         self.assertEqual(expected, actual)
 
+    def test_setitem_num_value(self):
+        key, value = 'abc', 1234
+        self.fdd[key] = value
+        fullkey = self._make_path(key)
+        self.assertTrue(os.path.exists(fullkey))
+        with open(fullkey, 'r') as f:
+            actual = f.read()
+        expected = str(value)   # <- see __setitem__() is casting value to str
+        self.assertEqual(expected, actual)
+
 
 if __name__ == '__main__':
     unittest.main()
