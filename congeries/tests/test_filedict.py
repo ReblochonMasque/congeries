@@ -133,41 +133,39 @@ class TestFileDict(unittest.TestCase):
         creates a FileDict in that directory
         deletes the two files
         """
-        with tempfile.TemporaryDirectory() as tmpdirtest:
-            fd = FileDict(tmpdirtest)
-            with tempfile.NamedTemporaryFile(
-                    mode='w+t',
-                    buffering=-1,
-                    encoding=None,
-                    dir=tmpdirtest,
-                    delete=False,
-            ) as tmpkey0:
-                tmpkey0.write('bob was here')
+        with tempfile.NamedTemporaryFile(
+                mode='w+t',
+                buffering=-1,
+                encoding=None,
+                dir=self.tmpdirtest.name,
+                delete=False,
+        ) as tmpkey0:
+            tmpkey0.write('bob was here')
 
-            with tempfile.NamedTemporaryFile(
-                    mode='w+t',
-                    buffering=-1,
-                    encoding=None,
-                    dir=tmpdirtest,
-                    delete=False,
-            ) as tmpkey1:
-                tmpkey1.write('bob was also here')
+        with tempfile.NamedTemporaryFile(
+                mode='w+t',
+                buffering=-1,
+                encoding=None,
+                dir=self.tmpdirtest.name,
+                delete=False,
+        ) as tmpkey1:
+            tmpkey1.write('bob was also here')
 
-            key0 = tmpkey0.name.split('/')[-1]  # remove path
-            self.assertTrue(os.path.exists(tmpdirtest + '/' + key0))
-            self.assertIn(key0, os.listdir(tmpdirtest))
+        key0 = tmpkey0.name.split('/')[-1]  # remove path
+        self.assertTrue(os.path.exists(self.tmpdirtest.name + '/' + key0))
+        self.assertIn(key0, os.listdir(self.tmpdirtest.name))
 
-            key1 = tmpkey1.name.split('/')[-1]  # remove path
-            self.assertTrue(os.path.exists(tmpdirtest + '/' + key1))
-            self.assertIn(key1, os.listdir(tmpdirtest))
+        key1 = tmpkey1.name.split('/')[-1]  # remove path
+        self.assertTrue(os.path.exists(self.tmpdirtest.name + '/' + key1))
+        self.assertIn(key1, os.listdir(self.tmpdirtest.name))
 
-            del fd[key1]
-            self.assertFalse(os.path.exists(tmpdirtest + '/' + key1))
-            self.assertNotIn(key1, os.listdir(tmpdirtest))
+        del self.fd[key1]
+        self.assertFalse(os.path.exists(self.tmpdirtest.name + '/' + key1))
+        self.assertNotIn(key1, os.listdir(self.tmpdirtest.name))
 
-            del fd[key0]
-            self.assertFalse(os.path.exists(tmpdirtest + '/' + key0))
-            self.assertNotIn(key0, os.listdir(tmpdirtest))
+        del self.fd[key0]
+        self.assertFalse(os.path.exists(self.tmpdirtest.name + '/' + key0))
+        self.assertNotIn(key0, os.listdir(self.tmpdirtest.name))
 
     def test_len_0(self):
         """
