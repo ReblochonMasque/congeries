@@ -110,6 +110,9 @@ class TestFileDict(unittest.TestCase):
         self.assertEqual(expected, actual)
 
     def test_setitem_numkey_numvalue(self):
+        """
+        create entry using num key and num value
+        """
         key, value = 1, 1234
         self.fdd[key] = value
         fullkey = self._make_path(key)
