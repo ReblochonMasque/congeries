@@ -79,7 +79,10 @@ class TestFileDict(unittest.TestCase):
         expected = 'bob was here'
         self.assertEqual(expected, actual)
 
-    def test_setitem_0(self):
+    def test_setitem_1(self):
+        """
+        create entry using key and value
+        """
         key, value = 'abc', 'this is a new file'
         self.fdd[key] = value
         fullkey = self._make_path(key)
