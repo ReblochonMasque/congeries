@@ -14,6 +14,10 @@ from contextlib import redirect_stdout
 
 
 class TestFileDict(unittest.TestCase):
+    """
+    tests for `FileDict` must also pass for `FileDotDict`,
+    its subclass below, and vice-versa
+    """
 
     prefix = ''
 
