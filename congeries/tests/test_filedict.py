@@ -26,10 +26,8 @@ class TestFileDict(unittest.TestCase):
         self.assertIsInstance(self.fd, FileDict)
 
     def test_getitem_None(self):
-        with tempfile.TemporaryDirectory() as tmpdirtest:
-            fd = FileDict(tmpdirtest)
-            with self.assertRaises(KeyError):
-                fd['key is not there']
+        with self.assertRaises(KeyError):
+            self.fd['key is not there']
 
     def test_getitem_yes(self):
         """
