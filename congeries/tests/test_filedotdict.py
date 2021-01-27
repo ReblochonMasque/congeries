@@ -23,7 +23,7 @@ class TestFileDotDict(unittest.TestCase):
 
     def _make_path(self, key):
         """helper to add dot to fullkey"""
-        return self.tempdirname + '/.' + key
+        return self.tempdirname + '/.' + str(key)
 
     def _extract_key(self, tmpkey):
         """helper to remove path and dot"""
@@ -68,8 +68,15 @@ class TestFileDotDict(unittest.TestCase):
         expected = value
         self.assertEqual(expected, actual)
 
-    # def test_assign(self):
-    #     self.fdd['abc'] = 'def'
+    def test_setitem_num_key(self):
+        key, value = 1, 'this is a new file'
+        self.fdd[key] = value
+        fullkey = self._make_path(key)
+        self.assertTrue(os.path.exists(fullkey))
+        with open(fullkey, 'r') as f:
+            actual = f.read()
+        expected = value
+        self.assertEqual(expected, actual)
 
 
 if __name__ == '__main__':
