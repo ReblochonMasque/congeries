@@ -246,11 +246,9 @@ class TestFileDict(unittest.TestCase):
             del self.fd[key]
 
     def test_iter_empty(self):
-        with tempfile.TemporaryDirectory() as tmpdirtest:
-            fd = FileDict(tmpdirtest)
-            it = iter(fd)
-            with self.assertRaises(StopIteration):
-                next(it)
+        it = iter(self.fd)
+        with self.assertRaises(StopIteration):
+            next(it)
 
     def test_iter_3(self):
         with tempfile.TemporaryDirectory() as tmpdirtest:
