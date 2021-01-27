@@ -412,14 +412,6 @@ class TestFileDotDict(TestFileDict):
         shutil.rmtree(self.tempdirname)
         pass
 
-    def _make_path(self, key):
-        """helper to add dot to fullkey"""
-        return self.tempdirname + '/' + self.prefix + str(key)
-
-    def _extract_key(self, tmpkey):
-        """helper to remove path and dot"""
-        return tmpkey.name.split('/')[-1][len(self.prefix):]
-
 
 if __name__ == '__main__':
     unittest.main()
