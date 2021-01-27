@@ -98,6 +98,24 @@ class TestFileDotDict(unittest.TestCase):
         expected = str(value)   # <- see __setitem__() is casting value to str
         self.assertEqual(expected, actual)
 
+    def test_setitem_overwrite(self):
+        key, value = 'abc', 'this is the original value'
+        self.fdd[key] = value
+        fullkey = self._make_path(key)
+        self.assertTrue(os.path.exists(fullkey))
+        with open(fullkey, 'r') as f:
+            actual = f.read()
+        expected = value
+        self.assertEqual(expected, actual)
+
+        new_value = "this is the new value"
+        self.fdd[key] = new_value
+        self.assertTrue(os.path.exists(fullkey))
+        with open(fullkey, 'r') as f:
+            actual = f.read()
+        expected = new_value
+        self.assertEqual(expected, actual)
+
 
 if __name__ == '__main__':
     unittest.main()
