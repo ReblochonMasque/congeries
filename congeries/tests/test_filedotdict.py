@@ -23,6 +23,10 @@ class TestFileDotDict(unittest.TestCase):
     def test_type(self):
         self.assertIsInstance(self.fdd, FileDotDict)
 
+    def test_getitem_None(self):
+        with self.assertRaises(KeyError):
+            self.fdd['key is not there']
+
     # def test_assign(self):
     #     self.fdd['abc'] = 'def'
 
