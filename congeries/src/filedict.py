@@ -82,8 +82,11 @@ class FileDotDict(FileDict):
     """
 
     def __init__(self, dirname: str, pairs=(), **kwargs) -> None:
-        dirname_ = '.' + dirname
-        super().__init__(dirname_, pairs, **kwargs)
+        super().__init__('.' + dirname, pairs, **kwargs)
+
+    def _get_fullname(self, key: str) -> str:
+        key = '.' + str(key)
+        return os.path.join(self.dirname, key)
 
 
 if __name__ == '__main__':
