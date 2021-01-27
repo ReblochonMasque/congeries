@@ -22,6 +22,12 @@ class TestFileDict(unittest.TestCase):
     prefix = ''
 
     def setUp(self) -> None:
+        """
+        creates a self removing temporary directory where tests are conducted
+        creates a FileDict data structure that writes into this directory
+
+        :return: None
+        """
         self.tmpdirtest = tempfile.TemporaryDirectory()
         self.fdd = FileDict(self.tmpdirtest.name)
         self.tempdirname = self.prefix + self.tmpdirtest.name
