@@ -273,7 +273,7 @@ class TestFileDict(unittest.TestCase):
         expected = "FileDict()"
         self.assertEqual(actual.getvalue(), expected)
 
-    def test_repr(self):
+    def test_str(self):
         data = [('a', 'key is a'), ('b', 'key is b')]
         for k, v in data:
             self.fd[k] = v
@@ -281,6 +281,18 @@ class TestFileDict(unittest.TestCase):
         actual = io.StringIO()
         with redirect_stdout(actual):
             print(self.fd, end='')
+        expecteds = ["FileDict(('a', 'key is a'), ('b', 'key is b'))",
+                     "FileDict(('b', 'key is b'), ('a', 'key is a'))"]
+        self.assertIn(actual.getvalue(), expecteds)
+
+    def test_repr(self):
+        data = [('a', 'key is a'), ('b', 'key is b')]
+        for k, v in data:
+            self.fd[k] = v
+
+        actual = io.StringIO()
+        with redirect_stdout(actual):
+            print(repr(self.fd), end='')
         expecteds = ["FileDict(('a', 'key is a'), ('b', 'key is b'))",
                      "FileDict(('b', 'key is b'), ('a', 'key is a'))"]
         self.assertIn(actual.getvalue(), expecteds)
