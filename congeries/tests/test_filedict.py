@@ -186,22 +186,20 @@ class TestFileDict(unittest.TestCase):
 
     def test_len_1(self):
         """
-        creates two temp file in a temp directory
+        creates a temp file in a temp directory
         creates a FileDict in that directory
         deletes the two files
         """
-        with tempfile.TemporaryDirectory() as tmpdirtest:
-            fd = FileDict(tmpdirtest)
-            with tempfile.NamedTemporaryFile(
-                    mode='w+t',
-                    buffering=-1,
-                    encoding=None,
-                    dir=tmpdirtest,
-                    delete=False,
-            ) as tmpkey0:
-                tmpkey0.write('bob was here')
+        with tempfile.NamedTemporaryFile(
+                mode='w+t',
+                buffering=-1,
+                encoding=None,
+                dir=self.tmpdirtest.name,
+                delete=False,
+        ) as tmpkey:
+            tmpkey.write('bob was here')
 
-            self.assertEqual(len(fd), 1)
+        self.assertEqual(len(self.fd), 1)
 
     def test_len_2_a(self):
         """
