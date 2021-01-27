@@ -19,12 +19,14 @@ class TestFileDotDict(unittest.TestCase):
 
     def tearDown(self) -> None:
         shutil.rmtree(self.tempdirname)
-
-    def _make_path(self, key):
         pass
 
+    def _make_path(self, key):
+        """helper to add dot to fullkey"""
+        return self.tempdirname + '/.' + key
+
     def _extract_key(self, tmpkey):
-        """remove path and dot"""
+        """helper to remove path and dot"""
         return tmpkey.name.split('/')[-1][1:]
 
     def test_type(self):
@@ -54,6 +56,16 @@ class TestFileDotDict(unittest.TestCase):
 
         actual = self.fdd[key]
         expected = 'bob was here'
+        self.assertEqual(expected, actual)
+
+    def test_setitem_0(self):
+        key, value = 'abc', 'this is a new file'
+        self.fdd[key] = value
+        fullkey = self._make_path(key)
+        self.assertTrue(os.path.exists(fullkey))
+        with open(fullkey, 'r') as f:
+            actual = f.read()
+        expected = value
         self.assertEqual(expected, actual)
 
     # def test_assign(self):
