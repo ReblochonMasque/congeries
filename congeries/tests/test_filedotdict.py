@@ -260,6 +260,16 @@ class TestFileDotDict(unittest.TestCase):
 
         self.assertEqual(len(self.fdd), 2)
 
+    def test_delitem_no_key(self):
+        """
+        creates a temp file in a temp directory
+        creates a FileDict in that directory
+        deletes the file
+        """
+        key = 'abc'
+        with self.assertRaises(KeyError):
+            del self.fdd[key]
+
 
 if __name__ == '__main__':
     unittest.main()
