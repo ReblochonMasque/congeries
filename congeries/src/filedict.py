@@ -37,14 +37,16 @@ class FileDict(MutableMapping):
 
     """
 
+    prefix = ''
+
     def __init__(self, dirname: str, pairs=(), **kwargs) -> None:
-        self.dirname = dirname
+        self.dirname = self.prefix + dirname
         with suppress(FileExistsError):
-            os.mkdir(dirname)
+            os.mkdir(self.dirname)
         self.update(pairs, **kwargs)
 
     def _get_fullname(self, key: str) -> str:
-        key = str(key)
+        key = self.prefix + str(key)
         return os.path.join(self.dirname, key)
 
     def __getitem__(self, key: str) -> str:
@@ -68,7 +70,8 @@ class FileDict(MutableMapping):
             raise KeyError(key) from None
 
     def __iter__(self):
-        return iter(os.listdir(self.dirname))
+        for key in iter(os.listdir(self.dirname)):
+            yield key[len(self.prefix):]
 
     def __len__(self):
         return len(os.listdir(self.dirname))
@@ -81,12 +84,7 @@ class FileDotDict(FileDict):
     """A FileDict that hides its files behind a dot
     """
 
-    def __init__(self, dirname: str, pairs=(), **kwargs) -> None:
-        super().__init__('.' + dirname, pairs, **kwargs)
-
-    def _get_fullname(self, key: str) -> str:
-        key = '.' + str(key)
-        return os.path.join(self.dirname, key)
+    prefix = '.'
 
 
 if __name__ == '__main__':

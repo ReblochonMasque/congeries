@@ -275,6 +275,15 @@ class TestFileDotDict(unittest.TestCase):
         with self.assertRaises(StopIteration):
             next(it)
 
+    def test_iter_3(self):
+        data = [('a', 'key is a'), ('b', 'key is b'), ('c', 'key is c'), ('wwwf', 'that hurts')]
+        for k, v in data:
+            self.fdd[k] = v
+
+        for (k, v), (dk, dv) in zip(sorted(self.fdd.items()), sorted(data)):
+            self.assertEqual(k, dk)
+            self.assertEqual(v, dv)
+
 
 if __name__ == '__main__':
     unittest.main()
