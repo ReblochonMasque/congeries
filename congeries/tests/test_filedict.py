@@ -55,7 +55,7 @@ class TestFileDict(unittest.TestCase):
         """
         asserts the type of the FileDict created
         """
-        self.assertIsInstance(self.fdd, FileDict)
+        self.assertIsInstance(self.fdd, self.class_under_test)
 
     def test_getitem_None(self):
         """
@@ -363,7 +363,6 @@ class TestFileDict(unittest.TestCase):
     def test_creation_via_pairs_of_key_value(self):
         """
         asserts the creation of a FileDict via a sequence of (key, value) pairs
-        :return:
         """
         pairs = [('a', 'key is a'), ('b', 'key is b')]
         fdictpairs = self.class_under_test(self.tempdirname[len(self.prefix):], pairs)
@@ -373,6 +372,20 @@ class TestFileDict(unittest.TestCase):
             print(fdictpairs, end='')
         expecteds = [f"{fdictpairs.__class__.__qualname__}(('a', 'key is a'), ('b', 'key is b'))",
                      f"{fdictpairs.__class__.__qualname__}(('b', 'key is b'), ('a', 'key is a'))"]
+        self.assertIn(actual.getvalue(), expecteds)
+
+    def test_creation_via_kwargs(self):
+        """
+        asserts the creation of a FileDict via a sequence of (key, value) pairs
+        """
+        kwargs = {'a': 'key is a', 'b': 'key is b'}
+        fdictkwargs = self.class_under_test(self.tempdirname[len(self.prefix):], kwargs)
+
+        actual = io.StringIO()
+        with redirect_stdout(actual):
+            print(fdictkwargs, end='')
+        expecteds = [f"{fdictkwargs.__class__.__qualname__}(('a', 'key is a'), ('b', 'key is b'))",
+                     f"{fdictkwargs.__class__.__qualname__}(('b', 'key is b'), ('a', 'key is a'))"]
         self.assertIn(actual.getvalue(), expecteds)
 
 
@@ -465,13 +478,6 @@ class TestFileDotDict(TestFileDict):
 
     def tearDown(self) -> None:
         shutil.rmtree(self.tempdirname)
-
-    def test_type(self):
-        """
-        asserts the type of the FileDict created
-        overrides `test_type` in order to be more specific
-        """
-        self.assertIsInstance(self.fdd, FileDotDict)
 
 
 if __name__ == '__main__':
