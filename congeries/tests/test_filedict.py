@@ -169,9 +169,7 @@ class TestFileDict(unittest.TestCase):
 
     def test_len_0(self):
         """
-        creates two temp file in a temp directory
-        creates a FileDict in that directory
-        deletes the two files
+        checks the length of an empty FileDict
         """
         self.assertEqual(len(self.fd), 0)
 
