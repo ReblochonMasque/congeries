@@ -189,6 +189,12 @@ class TestFileDotDict(unittest.TestCase):
         self.assertFalse(os.path.exists(fullkey0))
         self.assertNotIn(prefixed_key0, os.listdir(self.tempdirname))
 
+    def test_len_0(self):
+        """
+        checks the length of an empty FileDict
+        """
+        self.assertEqual(len(self.fdd), 0)
+
 
 if __name__ == '__main__':
     unittest.main()
