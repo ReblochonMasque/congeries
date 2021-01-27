@@ -301,6 +301,18 @@ class TestFileDotDict(unittest.TestCase):
         expected = "FileDotDict()"
         self.assertEqual(actual.getvalue(), expected)
 
+    def test_str(self):
+        data = [('a', 'key is a'), ('b', 'key is b')]
+        for k, v in data:
+            self.fdd[k] = v
+
+        actual = io.StringIO()
+        with redirect_stdout(actual):
+            print(self.fdd, end='')
+        expecteds = ["FileDotDict(('a', 'key is a'), ('b', 'key is b'))",
+                     "FileDotDict(('b', 'key is b'), ('a', 'key is a'))"]
+        self.assertIn(actual.getvalue(), expecteds)
+
 
 if __name__ == '__main__':
     unittest.main()
