@@ -241,11 +241,9 @@ class TestFileDict(unittest.TestCase):
         creates a FileDict in that directory
         deletes the file
         """
-        with tempfile.TemporaryDirectory() as tmpdirtest:
-            fd = FileDict(tmpdirtest)
-            key = 'abc'
-            with self.assertRaises(KeyError):
-                del fd['abc']
+        key = 'abc'
+        with self.assertRaises(KeyError):
+            del self.fd[key]
 
     def test_iter_empty(self):
         with tempfile.TemporaryDirectory() as tmpdirtest:
