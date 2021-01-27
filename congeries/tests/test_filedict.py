@@ -213,29 +213,27 @@ class TestFileDict(unittest.TestCase):
         """
         creates two temp file in a temp directory
         creates a FileDict in that directory
-        deletes the two files
+        check the length
         """
-        with tempfile.TemporaryDirectory() as tmpdirtest:
-            fd = FileDict(tmpdirtest)
-            with tempfile.NamedTemporaryFile(
-                    mode='w+t',
-                    buffering=-1,
-                    encoding=None,
-                    dir=tmpdirtest,
-                    delete=False,
-            ) as tmpkey0:
-                tmpkey0.write('bob was here')
+        with tempfile.NamedTemporaryFile(
+                mode='w+t',
+                buffering=-1,
+                encoding=None,
+                dir=self.tmpdirtest.name,
+                delete=False,
+        ) as tmpkey0:
+            tmpkey0.write('bob was here')
 
-            with tempfile.NamedTemporaryFile(
-                    mode='w+t',
-                    buffering=-1,
-                    encoding=None,
-                    dir=tmpdirtest,
-                    delete=False,
-            ) as tmpkey1:
-                tmpkey1.write('bob was also here')
+        with tempfile.NamedTemporaryFile(
+                mode='w+t',
+                buffering=-1,
+                encoding=None,
+                dir=self.tmpdirtest.name,
+                delete=False,
+        ) as tmpkey1:
+            tmpkey1.write('bob was also here')
 
-            self.assertEqual(len(fd), 2)
+        self.assertEqual(len(self.fd), 2)
 
     def test_delitem_no_key(self):
         """
