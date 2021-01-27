@@ -177,9 +177,9 @@ class TestFileDict(unittest.TestCase):
 
     def test_len_1_a(self):
         """
-        creates two temp file in a temp directory
-        creates a FileDict in that directory
-        deletes the two files
+        creates a FileDict in a directory
+        adds a value to dict
+        check the length
         """
         self.fd['abc'] = "joe le taxi"
         self.assertEqual(len(self.fd), 1)
