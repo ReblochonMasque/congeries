@@ -417,13 +417,19 @@ class TestFileDotDict(TestFileDict):
     prefix = '.'
 
     def setUp(self) -> None:
+        """
+        creates a temporary directory where tests are conducted; this
+        directory must be "manually" removed in teardown
+        creates a FileDict data structure that writes into this directory
+
+        :return: None
+        """
         tempdirname = 'somerandomtemp'
         self.fdd = FileDotDict(tempdirname)
         self.tempdirname = self.prefix + tempdirname
 
     def tearDown(self) -> None:
         shutil.rmtree(self.tempdirname)
-        pass
 
 
 if __name__ == '__main__':
