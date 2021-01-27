@@ -51,15 +51,13 @@ class TestFileDict(unittest.TestCase):
         self.assertEqual(expected, actual)
 
     def test_setitem_0(self):
-        with tempfile.TemporaryDirectory() as tmpdirtest:
-            fd = FileDict(tmpdirtest)
-            key, value = 'abc', 'this is a new file'
-            fd[key] = value
-            self.assertTrue(os.path.exists(tmpdirtest + '/' + key))
-            with open(tmpdirtest + '/' + key, 'r') as f:
-                actual = f.read()
-            expected = value
-            self.assertEqual(expected, actual)
+        key, value = 'abc', 'this is a new file'
+        self.fd[key] = value
+        self.assertTrue(os.path.exists(self.tmpdirtest.name + '/' + key))
+        with open(self.tmpdirtest.name + '/' + key, 'r') as f:
+            actual = f.read()
+        expected = value
+        self.assertEqual(expected, actual)
 
     def test_setitem_num_key(self):
         with tempfile.TemporaryDirectory() as tmpdirtest:
