@@ -217,8 +217,8 @@ class TestFileDict(unittest.TestCase):
     def test_len_1_a(self):
         """
         creates a FileDict in a directory
-        adds a value to dict
-        check the length
+        adds two values to the dict
+        check the length of FileDict via __len__
         """
         self.fdd['abc'] = "joe le taxi"
         self.assertEqual(len(self.fdd), 1)
@@ -226,8 +226,7 @@ class TestFileDict(unittest.TestCase):
     def test_len_1(self):
         """
         creates a temp file in a temp directory
-        creates a FileDict in that directory
-        check the length
+        check the length of FileDict via __len__
        """
         with tempfile.NamedTemporaryFile(
             mode='w+t',
@@ -245,7 +244,7 @@ class TestFileDict(unittest.TestCase):
         """
         creates a FileDict in a directory
         adds two values to the dict
-        check the length
+        check the length of FileDict via __len__
         """
         self.fdd['abc'] = "joe le taxi"
         self.fdd['def'] = "les sucettes a l'anis"
@@ -254,8 +253,7 @@ class TestFileDict(unittest.TestCase):
     def test_len_2(self):
         """
         creates two temp file in a temp directory
-        creates a FileDict in that directory
-        check the length via __len__
+        check the length of FileDict via __len__
         """
         with tempfile.NamedTemporaryFile(
             mode='w+t',
