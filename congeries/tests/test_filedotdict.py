@@ -133,15 +133,61 @@ class TestFileDotDict(unittest.TestCase):
             delete=False,
         ) as tmpkey:
             tmpkey.write('bob was here')
+
         key = self._extract_key(tmpkey)
         fullkey = self._make_path(key)
-        print(f'{fullkey=}, {tmpkey.name=}')
         prefixed_key = self.prefix + key
         self.assertTrue(os.path.exists(fullkey))
         self.assertIn(prefixed_key, os.listdir(self.tempdirname))
         del self.fdd[key]
         self.assertFalse(os.path.exists(fullkey))
         self.assertNotIn(prefixed_key, os.listdir(self.tempdirname))
+
+    def test_delitem_1(self):
+        """
+        creates two temp file in a temp directory
+        creates a FileDict in that directory
+        deletes the two files
+        """
+        with tempfile.NamedTemporaryFile(
+            mode='w+t',
+            buffering=-1,
+            encoding=None,
+            prefix=self.prefix,
+            dir=self.tempdirname,
+            delete=False,
+        ) as tmpkey0:
+            tmpkey0.write('bob was here')
+
+        with tempfile.NamedTemporaryFile(
+            mode='w+t',
+            buffering=-1,
+            encoding=None,
+            prefix=self.prefix,
+            dir=self.tempdirname,
+            delete=False,
+        ) as tmpkey1:
+            tmpkey1.write('bob was also here')
+
+        key0 = self._extract_key(tmpkey0)
+        fullkey0 = self._make_path(key0)
+        prefixed_key0 = self.prefix + key0
+        self.assertTrue(os.path.exists(fullkey0))
+        self.assertIn(prefixed_key0, os.listdir(self.tempdirname))
+
+        key1 = self._extract_key(tmpkey1)
+        fullkey1 = self._make_path(key1)
+        prefixed_key1 = self.prefix + key1
+        self.assertTrue(os.path.exists(fullkey1))
+        self.assertIn(prefixed_key1, os.listdir(self.tempdirname))
+
+        del self.fdd[key1]
+        self.assertFalse(os.path.exists(fullkey1))
+        self.assertNotIn(prefixed_key1, os.listdir(self.tempdirname))
+
+        del self.fdd[key0]
+        self.assertFalse(os.path.exists(fullkey0))
+        self.assertNotIn(prefixed_key0, os.listdir(self.tempdirname))
 
 
 if __name__ == '__main__':
