@@ -260,14 +260,11 @@ class TestFileDict(unittest.TestCase):
             self.assertEqual(v, dv)
 
     def test_repr_empty(self):
-        with tempfile.TemporaryDirectory() as tmpdirtest:
-            fd = FileDict(tmpdirtest)
-
-            actual = io.StringIO()
-            with redirect_stdout(actual):
-                print(fd, end='')
-            expected = "FileDict()"
-            self.assertEqual(actual.getvalue(), expected)
+        actual = io.StringIO()
+        with redirect_stdout(actual):
+            print(repr(self.fd), end='')
+        expected = "FileDict()"
+        self.assertEqual(actual.getvalue(), expected)
 
     def test_repr(self):
         with tempfile.TemporaryDirectory() as tmpdirtest:
