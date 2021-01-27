@@ -259,6 +259,13 @@ class TestFileDict(unittest.TestCase):
             self.assertEqual(k, dk)
             self.assertEqual(v, dv)
 
+    def test_str_empty(self):
+        actual = io.StringIO()
+        with redirect_stdout(actual):
+            print(self.fd, end='')
+        expected = "FileDict()"
+        self.assertEqual(actual.getvalue(), expected)
+
     def test_repr_empty(self):
         actual = io.StringIO()
         with redirect_stdout(actual):
