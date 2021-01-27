@@ -188,8 +188,8 @@ class TestFileDict(unittest.TestCase):
         """
         creates a temp file in a temp directory
         creates a FileDict in that directory
-        deletes the two files
-        """
+        check the length
+       """
         with tempfile.NamedTemporaryFile(
                 mode='w+t',
                 buffering=-1,
