@@ -15,6 +15,13 @@ class TestFileDict(unittest.TestCase):
     automated
     """
 
+    def setUp(self) -> None:
+        self.tmpdirtest = tempfile.TemporaryDirectory()
+        self.fd = FileDict(self.tmpdirtest.name)
+
+    def tearDown(self) -> None:
+        self.tmpdirtest.cleanup()
+
     def test_type(self):
         with tempfile.TemporaryDirectory() as tmpdirtest:
             self.assertIsInstance(FileDict(tmpdirtest), FileDict)
