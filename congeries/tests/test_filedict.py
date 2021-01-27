@@ -31,26 +31,24 @@ class TestFileDict(unittest.TestCase):
 
     def test_getitem_yes(self):
         """
-        creates a temp file in a temp directory
-        creates a FileDict in that directory
+        uses a FileDict in a temp directory
+        creates a temp file in that directory
         retrieves the file content using its name as key
         """
-        with tempfile.TemporaryDirectory() as tmpdirtest:
-            fd = FileDict(tmpdirtest)
-            with tempfile.NamedTemporaryFile(
-                mode='w+t',
-                buffering=-1,
-                encoding=None,
-                dir=tmpdirtest,
-                delete=False,
-            ) as tmpkey:
-                tmpkey.write('bob was here')
+        with tempfile.NamedTemporaryFile(
+            mode='w+t',
+            buffering=-1,
+            encoding=None,
+            dir=self.tmpdirtest.name,
+            delete=False,
+        ) as tmpkey:
+            tmpkey.write('bob was here')
 
-            key = tmpkey.name.split('/')[-1]  # remove path
+        key = tmpkey.name.split('/')[-1]  # remove path
 
-            actual = fd[key]
-            expected = 'bob was here'
-            self.assertEqual(expected, actual)
+        actual = self.fd[key]
+        expected = 'bob was here'
+        self.assertEqual(expected, actual)
 
     def test_setitem_0(self):
         with tempfile.TemporaryDirectory() as tmpdirtest:
