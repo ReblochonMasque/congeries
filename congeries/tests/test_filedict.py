@@ -29,8 +29,12 @@ class TestFileDict(unittest.TestCase):
     def tearDown(self) -> None:
         self.tmpdirtest.cleanup()
 
-    def _make_path(self, key):
-        """helper to add dot to fullkey"""
+    def _make_path(self, key) -> str:
+        """helper to add dot to fullkey
+
+        uses the key and path to build the proper path to the file
+        :returns: a str representing the proper path
+        """
         return self.tempdirname + '/' + self.prefix + str(key)
 
     def _extract_key(self, tmpkey) -> str:
