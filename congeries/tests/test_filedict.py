@@ -384,6 +384,18 @@ class TestFileDictManual(unittest.TestCase):
 
 
 class TestFileDotDict(TestFileDict):
+    """
+    this subclass of TestFileDict runs exactly the same tests,
+    with the prefix being a dot for the directory and the files.
+
+    tests for `FileDotDict` must also pass for `FileDict`, and
+    vice-versa
+
+    The setup/teardown of the temporary directory differs because
+    there did not seem to exist a simple way to add a dot in a
+    tempdir with the library tempfile
+
+    """
 
     prefix = '.'
 
