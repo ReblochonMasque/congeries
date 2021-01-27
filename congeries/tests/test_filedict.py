@@ -449,6 +449,13 @@ class TestFileDotDict(TestFileDict):
     def tearDown(self) -> None:
         shutil.rmtree(self.tempdirname)
 
+    def test_type(self):
+        """
+        asserts the type of the FileDict created
+        overrides `test_type` in order to be more specific
+        """
+        self.assertIsInstance(self.fdd, FileDotDict)
+
 
 if __name__ == '__main__':
     unittest.main()
