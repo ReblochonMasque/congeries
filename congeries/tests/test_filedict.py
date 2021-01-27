@@ -17,7 +17,6 @@ class TestFileDict(unittest.TestCase):
 
     def test_type(self):
         with tempfile.TemporaryDirectory() as tmpdirtest:
-            print('created temporary directory', tmpdirtest)
             self.assertIsInstance(FileDict(tmpdirtest), FileDict)
 
     def test_getitem_None(self):
