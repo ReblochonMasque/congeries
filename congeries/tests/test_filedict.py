@@ -33,8 +33,11 @@ class TestFileDict(unittest.TestCase):
         """helper to add dot to fullkey"""
         return self.tempdirname + '/' + self.prefix + str(key)
 
-    def _extract_key(self, tmpkey):
-        """helper to remove path and dot"""
+    def _extract_key(self, tmpkey) -> str:
+        """helper to remove path and prefix from tmpkey
+
+        :returns: a str representing the proper key
+        """
         return tmpkey.name.split('/')[-1][len(self.prefix):]
 
     def test_type(self):
