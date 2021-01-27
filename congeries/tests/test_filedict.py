@@ -203,15 +203,13 @@ class TestFileDict(unittest.TestCase):
 
     def test_len_2_a(self):
         """
-        creates two temp file in a temp directory
-        creates a FileDict in that directory
-        deletes the two files
+        creates a FileDict in a directory
+        adds two values to the dict
+        check the length
         """
-        with tempfile.TemporaryDirectory() as tmpdirtest:
-            fd = FileDict(tmpdirtest)
-            fd['abc'] = "joe le taxi"
-            fd['def'] = "les sucettes a l'anis"
-            self.assertEqual(len(fd), 2)
+        self.fd['abc'] = "joe le taxi"
+        self.fd['def'] = "les sucettes a l'anis"
+        self.assertEqual(len(self.fd), 2)
 
     def test_len_2(self):
         """
