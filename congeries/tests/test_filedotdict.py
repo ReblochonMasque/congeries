@@ -20,8 +20,11 @@ class TestFileDotDict(unittest.TestCase):
     def tearDown(self) -> None:
         shutil.rmtree(self.tempdirname)
 
-    def test_assign(self):
-        self.fdd['abc'] = 'def'
+    def test_type(self):
+        self.assertIsInstance(self.fdd, FileDotDict)
+
+    # def test_assign(self):
+    #     self.fdd['abc'] = 'def'
 
 
 if __name__ == '__main__':
