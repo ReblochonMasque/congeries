@@ -255,7 +255,7 @@ class TestFileDict(unittest.TestCase):
         """
         creates two temp file in a temp directory
         creates a FileDict in that directory
-        check the length
+        check the length via __len__
         """
         with tempfile.NamedTemporaryFile(
             mode='w+t',
@@ -281,9 +281,8 @@ class TestFileDict(unittest.TestCase):
 
     def test_delitem_no_key(self):
         """
-        creates a temp file in a temp directory
-        creates a FileDict in that directory
-        deletes the file
+        attempts to delete a non existent file via `__delitem__`
+        catches the KeyError raised
         """
         key = 'abc'
         with self.assertRaises(KeyError):
