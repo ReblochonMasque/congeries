@@ -222,6 +222,16 @@ class TestFileDotDict(unittest.TestCase):
 
         self.assertEqual(len(self.fdd), 1)
 
+    def test_len_2_a(self):
+        """
+        creates a FileDict in a directory
+        adds two values to the dict
+        check the length
+        """
+        self.fdd['abc'] = "joe le taxi"
+        self.fdd['def'] = "les sucettes a l'anis"
+        self.assertEqual(len(self.fdd), 2)
+
 
 if __name__ == '__main__':
     unittest.main()
