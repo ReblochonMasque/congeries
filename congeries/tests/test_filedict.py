@@ -181,10 +181,8 @@ class TestFileDict(unittest.TestCase):
         creates a FileDict in that directory
         deletes the two files
         """
-        with tempfile.TemporaryDirectory() as tmpdirtest:
-            fd = FileDict(tmpdirtest)
-            fd['abc'] = "joe le taxi"
-            self.assertEqual(len(fd), 1)
+        self.fd['abc'] = "joe le taxi"
+        self.assertEqual(len(self.fd), 1)
 
     def test_len_1(self):
         """
