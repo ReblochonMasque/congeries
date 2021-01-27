@@ -51,6 +51,9 @@ class TestFileDict(unittest.TestCase):
         return tmpkey.name.split('/')[-1][len(self.prefix):]
 
     def test_type(self):
+        """
+        asserts the type of the FileDict created
+        """
         self.assertIsInstance(self.fdd, FileDict)
 
     def test_getitem_None(self):
