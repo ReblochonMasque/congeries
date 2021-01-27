@@ -137,11 +137,10 @@ class TestFileDict(unittest.TestCase):
         expected = new_value
         self.assertEqual(expected, actual)
 
-    def test_delitem_0(self):
+    def test_delitem_1(self):
         """
-        creates a temp file in a temp directory
-        creates a FileDict in that directory
-        deletes the file
+        creates a file in a temp directory
+        deletes the file via __delitem__
         """
         with tempfile.NamedTemporaryFile(
             mode='w+t',
@@ -162,11 +161,10 @@ class TestFileDict(unittest.TestCase):
         self.assertFalse(os.path.exists(fullkey))
         self.assertNotIn(prefixed_key, os.listdir(self.tempdirname))
 
-    def test_delitem_1(self):
+    def test_delitem_2(self):
         """
         creates two temp file in a temp directory
-        creates a FileDict in that directory
-        deletes the two files
+        deletes the two files via __delitem__
         """
         with tempfile.NamedTemporaryFile(
             mode='w+t',
