@@ -54,6 +54,10 @@ class TestFileDict(unittest.TestCase):
         self.assertIsInstance(self.fdd, FileDict)
 
     def test_getitem_None(self):
+        """
+        attempts to retrieve a key-value pair from an empty FileDict
+        catches the KeyError raised
+        """
         with self.assertRaises(KeyError):
             _ = self.fdd['key is not there']
 
