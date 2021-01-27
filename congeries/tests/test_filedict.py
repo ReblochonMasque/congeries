@@ -9,7 +9,7 @@ import shutil
 import tempfile
 import unittest
 
-from congeries.src import FileDict
+from congeries.src import FileDict, FileDotDict
 from contextlib import redirect_stdout
 
 
@@ -290,14 +290,14 @@ class TestFileDict(unittest.TestCase):
         actual = io.StringIO()
         with redirect_stdout(actual):
             print(self.fdd, end='')
-        expected = "FileDict()"
+        expected = f"{self.fdd.__class__.__qualname__}()"
         self.assertEqual(actual.getvalue(), expected)
 
     def test_repr_empty(self):
         actual = io.StringIO()
         with redirect_stdout(actual):
             print(repr(self.fdd), end='')
-        expected = "FileDict()"
+        expected = f"{self.fdd.__class__.__qualname__}()"
         self.assertEqual(actual.getvalue(), expected)
 
     def test_str(self):
@@ -308,8 +308,8 @@ class TestFileDict(unittest.TestCase):
         actual = io.StringIO()
         with redirect_stdout(actual):
             print(self.fdd, end='')
-        expecteds = ["FileDict(('a', 'key is a'), ('b', 'key is b'))",
-                     "FileDict(('b', 'key is b'), ('a', 'key is a'))"]
+        expecteds = [f"{self.fdd.__class__.__qualname__}(('a', 'key is a'), ('b', 'key is b'))",
+                     f"{self.fdd.__class__.__qualname__}(('b', 'key is b'), ('a', 'key is a'))"]
         self.assertIn(actual.getvalue(), expecteds)
 
     def test_repr(self):
@@ -320,8 +320,8 @@ class TestFileDict(unittest.TestCase):
         actual = io.StringIO()
         with redirect_stdout(actual):
             print(repr(self.fdd), end='')
-        expecteds = ["FileDict(('a', 'key is a'), ('b', 'key is b'))",
-                     "FileDict(('b', 'key is b'), ('a', 'key is a'))"]
+        expecteds = [f"{self.fdd.__class__.__qualname__}(('a', 'key is a'), ('b', 'key is b'))",
+                     f"{self.fdd.__class__.__qualname__}(('b', 'key is b'), ('a', 'key is a'))"]
         self.assertIn(actual.getvalue(), expecteds)
 
 
@@ -381,6 +381,28 @@ class TestFileDictManual(unittest.TestCase):
                 os.rmdir(fulldirpath)
         # verifies the directory was successfully removed
         self.assertFalse(os.path.isdir(fulldirpath))
+
+
+class TestFileDotDict(TestFileDict):
+
+    prefix = '.'
+
+    def setUp(self) -> None:
+        tempdirname = 'somerandomtemp'
+        self.fdd = FileDotDict(tempdirname)
+        self.tempdirname = self.prefix + tempdirname
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.tempdirname)
+        pass
+
+    def _make_path(self, key):
+        """helper to add dot to fullkey"""
+        return self.tempdirname + '/' + self.prefix + str(key)
+
+    def _extract_key(self, tmpkey):
+        """helper to remove path and dot"""
+        return tmpkey.name.split('/')[-1][len(self.prefix):]
 
 
 if __name__ == '__main__':
