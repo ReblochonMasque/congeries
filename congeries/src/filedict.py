@@ -77,6 +77,11 @@ class FileDict(MutableMapping):
         return f'{self.__class__.__name__}{tuple(self.items())}'
 
 
+class FileDotDict(FileDict):
+    """A FileDict that hides its files behind a dot
+    """
+
+
 if __name__ == '__main__':
 
     pass
