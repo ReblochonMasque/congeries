@@ -65,11 +65,22 @@ class TestFileDict(unittest.TestCase):
             fd = FileDict(tmpdirtest)
             key, value = 1, 'this is a new file'
             fd[key] = value
-            strkey = str(key)   # <- see _get_fullname() is casting to str
+            strkey = str(key)   # <- see _get_fullname() is casting key to str
             self.assertTrue(os.path.exists(tmpdirtest + '/' + strkey))
             with open(tmpdirtest + '/' + strkey, 'r') as f:
                 actual = f.read()
             expected = value
+            self.assertEqual(expected, actual)
+
+    def test_setitem_num_value(self):
+        with tempfile.TemporaryDirectory() as tmpdirtest:
+            fd = FileDict(tmpdirtest)
+            key, value = 'abc', 1234
+            fd[key] = value
+            self.assertTrue(os.path.exists(tmpdirtest + '/' + key))
+            with open(tmpdirtest + '/' + key, 'r') as f:
+                actual = f.read()
+            expected = str(value)   # <- see __setitem__() is casting value to str
             self.assertEqual(expected, actual)
 
     def test_setitem_overwrite(self):

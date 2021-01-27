@@ -58,7 +58,7 @@ class FileDict(MutableMapping):
     def __setitem__(self, key, value) -> None:
         fullname = self._get_fullname(key)
         with open(fullname, 'w') as f:   # overwrites value like in a regular dict
-            f.write(value)
+            f.write(str(value))
 
     def __delitem__(self, key) -> None:
         fullname = self._get_fullname(key)
