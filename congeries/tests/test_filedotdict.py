@@ -2,12 +2,15 @@
 test suite for FileDotDict
 
 """
+
+import io
 import os
 import shutil
 import tempfile
 import unittest
 
 from congeries.src import FileDotDict
+from contextlib import redirect_stdout
 
 
 class TestFileDotDict(unittest.TestCase):
@@ -283,6 +286,13 @@ class TestFileDotDict(unittest.TestCase):
         for (k, v), (dk, dv) in zip(sorted(self.fdd.items()), sorted(data)):
             self.assertEqual(k, dk)
             self.assertEqual(v, dv)
+
+    def test_str_empty(self):
+        actual = io.StringIO()
+        with redirect_stdout(actual):
+            print(self.fdd, end='')
+        expected = "FileDotDict()"
+        self.assertEqual(actual.getvalue(), expected)
 
 
 if __name__ == '__main__':
