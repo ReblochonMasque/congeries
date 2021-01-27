@@ -2,7 +2,7 @@ import futils
 from congeries.src.circularlists import CircularList
 from congeries.src.deque import Deque
 from congeries.src.doublylinkedlists import DoublyLinkedList
-from congeries.src.filedict import FileDict
+from congeries.src.filedict import FileDict, FileDotDict
 from congeries.src.positionallist import PositionalList
 
 
@@ -11,6 +11,7 @@ __all__ = [
     'Deque',
     'DoublyLinkedList',
     'FileDict',
+    'FileDotDict',
     'PositionalList',
 ]
 

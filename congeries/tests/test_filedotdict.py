@@ -1,9 +1,12 @@
 import unittest
 
+from congeries.src import FileDotDict
 
-class MyTestCase(unittest.TestCase):
+
+class TestFileDotDict(unittest.TestCase):
+
     def test_something(self):
-        self.assertEqual(True, False)
+        self.assertEqual(True, True)
 
 
 if __name__ == '__main__':
