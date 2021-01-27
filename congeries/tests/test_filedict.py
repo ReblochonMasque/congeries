@@ -389,6 +389,39 @@ class TestFileDict(unittest.TestCase):
         self.assertIn(actual.getvalue(), expecteds)
 
 
+class TestFileDotDict(TestFileDict):
+    """
+    this subclass of TestFileDict runs exactly the same tests,
+    with the prefix being a dot for the directory and the files.
+
+    tests for `FileDotDict` must also pass for `FileDict`, and
+    vice-versa
+
+    The setup/teardown of the temporary directory differs because
+    there did not seem to exist a simple way to add a dot in a
+    tempdir with the library tempfile
+
+    """
+
+    prefix = '.'
+    class_under_test = FileDotDict
+
+    def setUp(self) -> None:
+        """
+        creates a temporary directory where tests are conducted; this
+        directory must be "manually" removed in teardown
+        creates a FileDict data structure that writes into this directory
+
+        :return: None
+        """
+        tempdirname = 'somerandomtemp'
+        self.fdd = FileDotDict(tempdirname)
+        self.tempdirname = self.prefix + tempdirname
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.tempdirname)
+
+
 class TestFileDictManual(unittest.TestCase):
     """
     conducts tests in user created temporary directories
@@ -445,39 +478,6 @@ class TestFileDictManual(unittest.TestCase):
                 os.rmdir(fulldirpath)
         # verifies the directory was successfully removed
         self.assertFalse(os.path.isdir(fulldirpath))
-
-
-class TestFileDotDict(TestFileDict):
-    """
-    this subclass of TestFileDict runs exactly the same tests,
-    with the prefix being a dot for the directory and the files.
-
-    tests for `FileDotDict` must also pass for `FileDict`, and
-    vice-versa
-
-    The setup/teardown of the temporary directory differs because
-    there did not seem to exist a simple way to add a dot in a
-    tempdir with the library tempfile
-
-    """
-
-    prefix = '.'
-    class_under_test = FileDotDict
-
-    def setUp(self) -> None:
-        """
-        creates a temporary directory where tests are conducted; this
-        directory must be "manually" removed in teardown
-        creates a FileDict data structure that writes into this directory
-
-        :return: None
-        """
-        tempdirname = 'somerandomtemp'
-        self.fdd = FileDotDict(tempdirname)
-        self.tempdirname = self.prefix + tempdirname
-
-    def tearDown(self) -> None:
-        shutil.rmtree(self.tempdirname)
 
 
 if __name__ == '__main__':
