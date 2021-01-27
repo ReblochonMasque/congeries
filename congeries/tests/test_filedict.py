@@ -42,7 +42,7 @@ class TestFileDict(unittest.TestCase):
 
     def test_getitem_None(self):
         with self.assertRaises(KeyError):
-            self.fdd['key is not there']
+            _ = self.fdd['key is not there']
 
     def test_getitem_yes(self):
         """
