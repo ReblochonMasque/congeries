@@ -17,18 +17,4 @@ https://stackoverflow.com/questions/26189090/how-to-detect-if-any-element-in-a-d
 
 import os
 
-from congeries import FileDict
 
-
-class FileDotDict(FileDict):
-    """A FileDict that hides its files behind a dot
-    """
-
-    def __init__(self, dirname: str, pairs=(), **kwargs) -> None:
-        dirname_ = '.' + dirname
-        super().__init__(dirname_, pairs, **kwargs)
-
-
-if __name__ == '__main__':
-
-    pass
