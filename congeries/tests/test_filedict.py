@@ -543,6 +543,10 @@ class TestUpdate(unittest.TestCase):
         shutil.rmtree(tempdirname)
 
     def test_fd_update_fd_not_any_startswith_dot(self):
+        """updates a FileDict with a FileDict
+        verifies the directory contains no dotted files
+        """
+        # creates a new local temp FileDict
         tempdirname = 'tempdict'
         fd = FileDict(tempdirname)
         tempdirname = FileDict.prefix + tempdirname
