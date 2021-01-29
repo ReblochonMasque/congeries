@@ -437,8 +437,8 @@ class TestUpdate(unittest.TestCase):
         self.data_pairs_0 = [('a', 'abstract'), ('b', 'binary'), ('c', 'collection'), ('d', 'dependency')]
         self.data_pairs_1 = [('a', 'absolute'), ('c', 'collection'), ('g', 'graph'), ('t', 'tree')]
 
-        self._0_update_1 = ''
-        self._1_update_0 = ''
+        self.expected_0_update_1 = {'a': 'absolute', 'b': 'binary', 'c': 'collection', 'd': 'dependency', 'g': 'graph', 't': 'tree'}
+        self.expected_1_update_0 = {'a': 'abstract', 'c': 'collection', 'g': 'graph', 't': 'tree', 'b': 'binary', 'd': 'dependency'}
 
     def tearDown(self) -> None:
         shutil.rmtree(self.tempdirname)
