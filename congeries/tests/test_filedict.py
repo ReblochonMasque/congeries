@@ -496,6 +496,18 @@ class TestUpdate(unittest.TestCase):
 
         shutil.rmtree(tempfdddirname)
 
+    def test_fd_update_fd(self):
+        tempdirname = 'tempdict'
+        fd = FileDict(tempdirname)
+        tempdirname = FileDict.prefix + tempdirname
+
+        self._populate(self.fd, self.data_pairs_0)
+        self._populate(fd, self.data_pairs_1)
+        self.fd.update(fd)
+        self.assertEqual(self.fd, self.expected_0_update_1)
+
+        shutil.rmtree(tempdirname)
+
 
 class TestFileDictManual(unittest.TestCase):
     """
