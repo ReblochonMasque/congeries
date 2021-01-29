@@ -473,6 +473,8 @@ class TestUpdate(unittest.TestCase):
             d[k] = v
 
     def test_fdd_update_fd(self):
+        """updates a FileDotDict with a FileDict
+        """
         self._populate(self.fdd, self.data_pairs_0)
         self._populate(self.fd, self.data_pairs_1)
         self.fdd.update(self.fd)
