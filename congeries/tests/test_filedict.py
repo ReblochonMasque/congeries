@@ -390,7 +390,8 @@ class TestFileDict(unittest.TestCase):
 
 
 class TestFileDotDict(TestFileDict):
-    """
+    """calls and executes all tests in TestFileDict, using a FileDotDict
+
     this subclass of TestFileDict runs exactly the same tests,
     with the prefix being a dot for the directory and the files.
 
