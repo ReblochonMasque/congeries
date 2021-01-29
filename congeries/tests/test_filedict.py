@@ -423,6 +423,13 @@ class TestFileDotDict(TestFileDict):
 
 
 class TestUpdate(unittest.TestCase):
+    """tests the update method of FileDict and FileDotDict
+
+    updates a FileDotDict with a FileDict
+    updates a FileDict with a FileDotDict
+    updates a FileDotDict with a FileDotDict
+    updates a FileDict with a FileDict
+    """
 
     def setUp(self):
 
