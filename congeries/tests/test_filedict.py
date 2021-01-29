@@ -508,6 +508,18 @@ class TestUpdate(unittest.TestCase):
 
         shutil.rmtree(tempdirname)
 
+    def test_fd_update_fd_not_any_startswith_dot(self):
+        tempdirname = 'tempdict'
+        fd = FileDict(tempdirname)
+        tempdirname = FileDict.prefix + tempdirname
+
+        self._populate(self.fd, self.data_pairs_0)
+        self._populate(fd, self.data_pairs_1)
+        self.fd.update(fd)
+        self.assertTrue(not any(elt.startswith('.') for elt in os.listdir(self.tempdirname)))
+
+        shutil.rmtree(tempdirname)
+
 
 class TestFileDictManual(unittest.TestCase):
     """
