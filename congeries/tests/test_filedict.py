@@ -460,6 +460,12 @@ class TestUpdate(unittest.TestCase):
         self.fdd.update(self.fd)
         self.assertTrue(all(elt.startswith('.') for elt in os.listdir(self.tempfdddirname)))
 
+    def test_fd_update_fdd(self):
+        self._populate(self.fdd, self.data_pairs_0)
+        self._populate(self.fd, self.data_pairs_1)
+        self.fd.update(self.fdd)
+        self.assertEqual(self.fd, self.expected_1_update_0)
+
 
 class TestFileDictManual(unittest.TestCase):
     """
