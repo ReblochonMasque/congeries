@@ -484,6 +484,18 @@ class TestUpdate(unittest.TestCase):
 
         shutil.rmtree(tempfdddirname)
 
+    def test_fdd_update_fdd_all_startswith_dot(self):
+        tempfdddirname = 'tempdotdict'
+        fdd = FileDotDict(tempfdddirname)
+        tempfdddirname = FileDotDict.prefix + tempfdddirname
+
+        self._populate(self.fdd, self.data_pairs_0)
+        self._populate(fdd, self.data_pairs_1)
+        self.fdd.update(fdd)
+        self.assertTrue(all(elt.startswith('.') for elt in os.listdir(self.tempfdddirname)))
+
+        shutil.rmtree(tempfdddirname)
+
 
 class TestFileDictManual(unittest.TestCase):
     """
