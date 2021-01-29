@@ -503,7 +503,7 @@ class TestUpdate(unittest.TestCase):
     def test_fdd_update_fdd(self):
         """updates a FileDotDict with a FileDotDict
         """
-        # creates a new local temp fdd
+        # creates a new local temp FileDotDict
         tempfdddirname = 'tempdotdict'
         fdd = FileDotDict(tempfdddirname)
         tempfdddirname = FileDotDict.prefix + tempfdddirname
@@ -528,6 +528,9 @@ class TestUpdate(unittest.TestCase):
         shutil.rmtree(tempfdddirname)
 
     def test_fd_update_fd(self):
+        """updates a FileDict with a FileDict
+        """
+        # creates a new local temp FileDict
         tempdirname = 'tempdict'
         fd = FileDict(tempdirname)
         tempdirname = FileDict.prefix + tempdirname
