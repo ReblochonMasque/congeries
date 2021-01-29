@@ -495,6 +495,9 @@ class TestUpdate(unittest.TestCase):
         self.assertEqual(self.fd, self.expected_1_update_0)
 
     def test_fd_update_fdd_not_any_startswith_dot(self):
+        """updates a FileDict with a FileDotDict
+        verifies the directory contains no dotted files
+        """
         self._populate(self.fdd, self.data_pairs_0)
         self._populate(self.fd, self.data_pairs_1)
         self.fd.update(self.fdd)
