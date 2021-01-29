@@ -434,9 +434,23 @@ class TestUpdate(unittest.TestCase):
         self.fd = FileDict(tempdirname)
         self.tempdirname = FileDict.prefix + tempdirname
 
+        self.data_pairs_0 = [('a', 'abstract'), ('b', 'binary'), ('c', 'collection'), ('d', 'dependency')]
+        self.data_pairs_1 = [('a', 'absolute'), ('c', 'collection'), ('g', 'graph'), ('t', 'tree')]
+
+        self._0_update_1 = ''
+        self._1_update_0 = ''
+
     def tearDown(self) -> None:
         shutil.rmtree(self.tempdirname)
         shutil.rmtree(self.tempfdddirname)
+
+    def _populate(self, d, pairs):
+        for k, v in pairs:
+            d[k] = v
+
+    # def test_fdd_update_fd(self):
+    #     pass
+
 
 
 class TestFileDictManual(unittest.TestCase):
