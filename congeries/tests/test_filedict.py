@@ -422,6 +422,23 @@ class TestFileDotDict(TestFileDict):
         shutil.rmtree(self.tempdirname)
 
 
+class TestUpdate(unittest.TestCase):
+
+    def setUp(self):
+
+        tempfdddirname = 'tempfiledotdict'
+        self.fdd = FileDotDict(tempfdddirname)
+        self.tempfdddirname = FileDotDict.prefix + tempfdddirname
+
+        tempdirname = 'tempdirname'
+        self.fd = FileDict(tempdirname)
+        self.tempdirname = FileDict.prefix + tempdirname
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.tempdirname)
+        shutil.rmtree(self.tempfdddirname)
+
+
 class TestFileDictManual(unittest.TestCase):
     """
     conducts tests in user created temporary directories
