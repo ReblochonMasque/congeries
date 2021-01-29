@@ -487,6 +487,8 @@ class TestUpdate(unittest.TestCase):
         self.assertTrue(all(elt.startswith('.') for elt in os.listdir(self.tempfdddirname)))
 
     def test_fd_update_fdd(self):
+        """updates a FileDict with a FileDotDict
+        """
         self._populate(self.fdd, self.data_pairs_0)
         self._populate(self.fd, self.data_pairs_1)
         self.fd.update(self.fdd)
