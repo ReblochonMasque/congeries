@@ -411,7 +411,6 @@ class TestFileDotDict(TestFileDict):
         creates a temporary directory where tests are conducted; this
         directory must be "manually" removed in teardown
         creates a FileDict data structure that writes into this directory
-
         :return: None
         """
         tempdirname = 'somerandomtemp'
@@ -434,17 +433,34 @@ class TestUpdate(unittest.TestCase):
         self.fd = FileDict(tempdirname)
         self.tempdirname = FileDict.prefix + tempdirname
 
-        self.data_pairs_0 = [('a', 'abstract'), ('b', 'binary'), ('c', 'collection'), ('d', 'dependency')]
-        self.data_pairs_1 = [('a', 'absolute'), ('c', 'collection'), ('g', 'graph'), ('t', 'tree')]
+        self.data_pairs_0 = [('a', 'abstract'),
+                             ('b', 'binary'),
+                             ('c', 'collection'),
+                             ('d', 'dependency')]
+        self.data_pairs_1 = [('a', 'absolute'),
+                             ('c', 'collection'),
+                             ('g', 'graph'),
+                             ('t', 'tree')]
 
-        self.expected_0_update_1 = {'a': 'absolute', 'b': 'binary', 'c': 'collection', 'd': 'dependency', 'g': 'graph', 't': 'tree'}
-        self.expected_1_update_0 = {'a': 'abstract', 'c': 'collection', 'g': 'graph', 't': 'tree', 'b': 'binary', 'd': 'dependency'}
+        self.expected_0_update_1 = {'a': 'absolute',
+                                    'b': 'binary',
+                                    'c': 'collection',
+                                    'd': 'dependency',
+                                    'g': 'graph',
+                                    't': 'tree'}
+        self.expected_1_update_0 = {'a': 'abstract',
+                                    'c': 'collection',
+                                    'g': 'graph',
+                                    't': 'tree',
+                                    'b': 'binary',
+                                    'd': 'dependency'}
 
     def tearDown(self) -> None:
         shutil.rmtree(self.tempdirname)
         shutil.rmtree(self.tempfdddirname)
 
-    def _populate(self, d, pairs):
+    @staticmethod
+    def _populate(d, pairs):
         for k, v in pairs:
             d[k] = v
 
