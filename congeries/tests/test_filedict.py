@@ -472,6 +472,18 @@ class TestUpdate(unittest.TestCase):
         self.fd.update(self.fdd)
         self.assertTrue(not any(elt.startswith('.') for elt in os.listdir(self.tempdirname)))
 
+    def test_fdd_update_fdd(self):
+        tempfdddirname = 'tempdotdict'
+        fdd = FileDotDict(tempfdddirname)
+        tempfdddirname = FileDotDict.prefix + tempfdddirname
+
+        self._populate(self.fdd, self.data_pairs_0)
+        self._populate(fdd, self.data_pairs_1)
+        self.fdd.update(fdd)
+        self.assertEqual(self.fdd, self.expected_0_update_1)
+
+        shutil.rmtree(tempfdddirname)
+
 
 class TestFileDictManual(unittest.TestCase):
     """
