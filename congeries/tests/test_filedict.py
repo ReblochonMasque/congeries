@@ -501,6 +501,9 @@ class TestUpdate(unittest.TestCase):
         self.assertTrue(not any(elt.startswith('.') for elt in os.listdir(self.tempdirname)))
 
     def test_fdd_update_fdd(self):
+        """updates a FileDotDict with a FileDotDict
+        """
+        # creates a new local temp fdd
         tempfdddirname = 'tempdotdict'
         fdd = FileDotDict(tempfdddirname)
         tempfdddirname = FileDotDict.prefix + tempfdddirname
