@@ -453,7 +453,12 @@ class TestUpdate(unittest.TestCase):
         self._populate(self.fd, self.data_pairs_1)
         self.fdd.update(self.fd)
         self.assertEqual(self.fdd, self.expected_0_update_1)
-        # self.assertTrue(all(elt.startswith('.') for elt in os.listdir(self.tempfdddirname)))
+
+    def test_fdd_update_fd_all_startswith_dot(self):
+        self._populate(self.fdd, self.data_pairs_0)
+        self._populate(self.fd, self.data_pairs_1)
+        self.fdd.update(self.fd)
+        self.assertTrue(all(elt.startswith('.') for elt in os.listdir(self.tempfdddirname)))
 
 
 class TestFileDictManual(unittest.TestCase):
