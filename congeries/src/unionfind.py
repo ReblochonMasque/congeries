@@ -52,7 +52,12 @@ decrements the number of components by 1
 
 
 class UnionFind:
-    pass
+
+    def __init__(self, n: int) -> None:
+        """
+
+        :param n: int, the number of sites
+        """
 
 
 if __name__ == '__main__':
