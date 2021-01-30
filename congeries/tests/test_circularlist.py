@@ -5,7 +5,7 @@ from congeries.src import CircularList
 from contextlib import redirect_stdout
 
 
-class Test_CircularList(unittest.TestCase):
+class TestCircularList(unittest.TestCase):
 
     def test_type(self):
         self.assertIsInstance(CircularList(), CircularList)
