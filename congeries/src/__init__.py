@@ -8,6 +8,8 @@ from congeries.src.positionallist import PositionalList
 from congeries.src.unionfind import QuickFind
 from congeries.src.unionfind import QuickUnion
 from congeries.src.unionfind import WeightedQuickUnion
+from congeries.src.unionfind import  WeightedQuickUnionPathCompression
+
 
 
 __all__ = [
@@ -20,6 +22,7 @@ __all__ = [
     'QuickFind',
     'QuickUnion',
     'WeightedQuickUnion',
+    'WeightedQuickUnionPathCompression',
 ]
 
 

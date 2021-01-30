@@ -170,6 +170,11 @@ class WeightedQuickUnion(QuickUnion):
             self.sz[proot] += self.id[qroot]
 
 
+class WeightedQuickUnionPathCompression(WeightedQuickUnion):
+    pass
+
+
+
 if __name__ == '__main__':
 
     pass
