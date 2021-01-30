@@ -5,8 +5,9 @@ from congeries.src import UnionFind
 
 class TestUnionFind(unittest.TestCase):
 
-    def test_something(self):
-        self.assertEqual(True, True)
+    def test_type(self):
+        uf = UnionFind(10)
+        self.assertIsInstance(uf, UnionFind)
 
 
 if __name__ == '__main__':
