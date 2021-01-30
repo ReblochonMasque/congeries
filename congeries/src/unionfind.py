@@ -98,6 +98,14 @@ class UnionFind(ABC):
 
 
 class QuickFind(UnionFind):
+    """
+    maintain the invariant that `p` and `q` are connected if and only if `id[p]`
+    is equal to `id[q]`. i/e all sites in a component must have the same value
+    in `id[]`. This method is called quick-ﬁnd because `find(p)` returns `id[p]`,
+    which immediately implies that `connected(p, q)` reduces to the test
+    `id[p] == id[q]` and returns true if and only if `p` and `q` are in the same
+    component
+    """
     pass
 
 
