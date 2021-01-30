@@ -5,7 +5,7 @@ import unittest
 from congeries.src.deque import Deque
 
 
-class Test_Deque(unittest.TestCase):
+class TestDeque(unittest.TestCase):
 
     def test_something(self):
         self.assertIsInstance(Deque(), Deque)
