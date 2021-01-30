@@ -135,6 +135,10 @@ class QuickFind(UnionFind):
                 self.id[idx] = qid
 
 
+class QuickUnion(UnionFind):
+    pass
+
+
 if __name__ == '__main__':
 
     pass
