@@ -136,7 +136,11 @@ class QuickFind(UnionFind):
 
 
 class QuickUnion(UnionFind):
-    pass
+    def _find(self, p: int) -> int:
+        pass
+
+    def union(p: int, q: int) -> None:
+        pass
 
 
 if __name__ == '__main__':
