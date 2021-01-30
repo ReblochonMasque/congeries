@@ -52,9 +52,12 @@ decrements the number of components by 1
 
 
 class UnionFind:
+    """
+    Determines if sites are connected, and if not, connects them.
+    """
 
     def __init__(self, n: int) -> None:
-        """
+        """initializes an array (list) where each value is equal to its index
 
         :param n: int, the number of sites
         """
