@@ -61,8 +61,8 @@ class UnionFind:
 
         :param n: int, the number of sites
         """
-        self.n = n
-        self.sites = [idx for idx in range(self.n)]
+        self.components_count = n
+        self.sites = [idx for idx in range(n)]
 
 
 if __name__ == '__main__':
