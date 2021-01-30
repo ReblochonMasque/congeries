@@ -50,8 +50,10 @@ decrements the number of components by 1
 
 """
 
+from abc import ABC
 
-class UnionFind:
+
+class UnionFind(ABC):
     """
     Determines if sites are connected, and if not, connects them.
     """
