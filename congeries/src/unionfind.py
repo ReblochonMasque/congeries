@@ -79,8 +79,21 @@ class UnionFind(ABC):
     def find(self, p: int) -> int:
         """return component identifier for p (0 -> n-1)
 
+        component identifier is the same integer for every site in
+        each connected component
         :param p: int, site p
         :return: int, component identifier for p
+        """
+
+    @abstractmethod
+    def union(p: int, q: int) -> None:
+        """add connection between sites p and q
+
+        maintains the invariant that the component identifier is the same
+        integer for every site in each connected component
+        :param p: int, site p
+        :param q: int, site q
+        :return: None
         """
 
 
