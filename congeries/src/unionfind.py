@@ -106,8 +106,15 @@ class QuickFind(UnionFind):
     `id[p] == id[q]` and returns true if and only if `p` and `q` are in the same
     component
     """
-    pass
 
+    def find(self, p: int) -> int:
+        """return component identifier for p (0 -> n-1)
+
+        the component identifier is simply id[p]
+        :param p: int, site p
+        :return: int, component identifier for p
+        """
+        return self.id[p]
 
 
 if __name__ == '__main__':
