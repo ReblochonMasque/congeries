@@ -91,6 +91,27 @@ class TestQuickUnion(unittest.TestCase):
         uf = QuickUnion(10)
         self.assertEqual(uf.components_count, 10)
 
+    def test_union(self):
+        uf = QuickUnion(10)
+        union_seq = [(4, 3), (3, 8), (6, 5), (9, 4), (2, 1), (8, 9),
+                     (5, 0), (7, 2), (6, 1), (1, 0), (6, 7)]
+        expected_ids = [
+            [0, 1, 2, 3, 3, 5, 6, 7, 8, 9],
+            [0, 1, 2, 8, 3, 5, 6, 7, 8, 9],
+            [0, 1, 2, 8, 3, 5, 5, 7, 8, 9],
+            [0, 1, 2, 8, 3, 5, 5, 7, 8, 8],
+            [0, 1, 1, 8, 3, 5, 5, 7, 8, 8],
+            [0, 1, 1, 8, 3, 5, 5, 7, 8, 8],
+            [0, 1, 1, 8, 3, 0, 5, 7, 8, 8],
+            [0, 1, 1, 8, 3, 0, 5, 1, 8, 8],
+            [1, 1, 1, 8, 3, 0, 5, 1, 8, 8],
+            [1, 1, 1, 8, 3, 0, 5, 1, 8, 8],
+            [1, 1, 1, 8, 3, 0, 5, 1, 8, 8],
+        ]
+        for (p, q), expected in zip(union_seq, expected_ids):
+            uf.union(p, q)
+            self.assertEqual(uf.id, expected)
+
     def test_components_count_7(self):
         uf = QuickUnion(10)
         union_seq = [(4, 3), (3, 8), (6, 5)]
