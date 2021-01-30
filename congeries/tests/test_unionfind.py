@@ -212,11 +212,11 @@ class TestWeightedQuickUnionPathCompression(unittest.TestCase):
         self.assertIsInstance(uf, QuickUnion)
 
     # def test_components_count_10(self):
-    #     uf = WeightedQuickUnion(10)
+    #     uf = WeightedQuickUnionPathCompression(10)
     #     self.assertEqual(uf.components_count, 10)
     #
     # def test_union(self):
-    #     uf = WeightedQuickUnion(10)
+    #     uf = WeightedQuickUnionPathCompression(10)
     #     union_seq = [(4, 3), (3, 8), (6, 5), (9, 4), (2, 1), (8, 9),
     #                  (5, 0), (7, 2), (6, 1), (1, 0), (6, 7)]
     #     expected_ids = [
@@ -229,36 +229,36 @@ class TestWeightedQuickUnionPathCompression(unittest.TestCase):
     #         [6, 2, 2, 4, 4, 6, 6, 7, 4, 4],
     #         [6, 2, 2, 4, 4, 6, 6, 2, 4, 4],
     #         [6, 2, 6, 4, 4, 6, 6, 2, 4, 4],
-    #         [6, 2, 6, 4, 4, 6, 6, 2, 4, 4],
-    #         [6, 2, 6, 4, 4, 6, 6, 2, 4, 4],
+    #         [6, 6, 6, 4, 4, 6, 6, 2, 4, 4],
+    #         [6, 6, 6, 4, 4, 6, 6, 6, 4, 4],
     #     ]
     #     for (p, q), expected in zip(union_seq, expected_ids):
     #         uf.union(p, q)
     #         self.assertEqual(uf.id, expected)
     #
     # def test_components_count_7(self):
-    #     uf = WeightedQuickUnion(10)
+    #     uf = WeightedQuickUnionPathCompression(10)
     #     union_seq = [(4, 3), (3, 8), (6, 5)]
     #     for p, q in union_seq:
     #         uf.union(p, q)
     #     self.assertEqual(uf.components_count, 7)
     #
     # def test_components_count_5(self):
-    #     uf = WeightedQuickUnion(10)
+    #     uf = WeightedQuickUnionPathCompression(10)
     #     union_seq = [(4, 3), (3, 8), (6, 5), (9, 4), (2, 1)]
     #     for p, q in union_seq:
     #         uf.union(p, q)
     #     self.assertEqual(uf.components_count, 5)
     #
     # def test_components_count_also_5(self):
-    #     uf = WeightedQuickUnion(10)
+    #     uf = WeightedQuickUnionPathCompression(10)
     #     union_seq = [(4, 3), (3, 8), (6, 5), (9, 4), (2, 1), (8, 9)]
     #     for p, q in union_seq:
     #         uf.union(p, q)
     #     self.assertEqual(uf.components_count, 5)
     #
     # def test_components_count_2(self):
-    #     uf = WeightedQuickUnion(10)
+    #     uf = WeightedQuickUnionPathCompression(10)
     #     union_seq = [(4, 3), (3, 8), (6, 5), (9, 4), (2, 1), (8, 9),
     #                  (5, 0), (7, 2), (6, 1), (1, 0), (6, 7)]
     #     for p, q in union_seq:
