@@ -41,7 +41,7 @@ connections that connect that pair
 
     UnionFind(n: int) -> None:           Initialize n sites with integet names 0 -> n-1
     union(p: int, q: int) -> None:       add connection between sites p and q
-    find(p: int) -> int:                 return component identifier for p (0 -> n-1)
+    _find(p: int) -> int:                 return component identifier for p (0 -> n-1)
     connected(p: int, q: int) -> bool:   return True if p & q are in the same component
     count() -> int:                      return the number of components
 
@@ -73,10 +73,10 @@ class UnionFind(ABC):
         :param q: int, site q
         :return: True if p & q are connected, False otherwise
         """
-        return self.find(p) == self.find(q)
+        return self._find(p) == self._find(q)
 
     @abstractmethod
-    def find(self, p: int) -> int:
+    def _find(self, p: int) -> int:
         """return component identifier for p (0 -> n-1)
 
         component identifier is the same integer for every site in
@@ -101,13 +101,13 @@ class QuickFind(UnionFind):
     """
     maintain the invariant that `p` and `q` are connected if and only if `id[p]`
     is equal to `id[q]`. i/e all sites in a component must have the same value
-    in `id[]`. This method is called quick-ﬁnd because `find(p)` returns `id[p]`,
+    in `id[]`. This method is called quick-ﬁnd because `_find(p)` returns `id[p]`,
     which immediately implies that `connected(p, q)` reduces to the test
     `id[p] == id[q]` and returns true if and only if `p` and `q` are in the same
     component
     """
 
-    def find(self, p: int) -> int:
+    def _find(self, p: int) -> int:
         """return component identifier for p (0 -> n-1)
 
         the component identifier is simply id[p]
@@ -126,7 +126,7 @@ class QuickFind(UnionFind):
         :param q: int, site q
         :return: None
         """
-        if (pid := self.find(p)) == (qid := self.find(q)):
+        if (pid := self._find(p)) == (qid := self._find(q)):
             # p and q already in the same component
             return
         self.components_count -= 1
