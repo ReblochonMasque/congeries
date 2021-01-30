@@ -86,7 +86,7 @@ class UnionFind(ABC):
         """
 
     @abstractmethod
-    def union(p: int, q: int) -> None:
+    def union(self, p: int, q: int) -> None:
         """add connection between sites p and q
 
         maintains the invariant that the component identifier is the same
@@ -136,10 +136,15 @@ class QuickFind(UnionFind):
 
 
 class QuickUnion(UnionFind):
+    """
+    speeds up the union() operation
+    """
     def _find(self, p: int) -> int:
-        pass
+        while p != self.id[p]:
+            p = self.id[p]
+        return p
 
-    def union(p: int, q: int) -> None:
+    def union(self, p: int, q: int) -> None:
         pass
 
 
