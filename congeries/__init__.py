@@ -8,7 +8,7 @@ __all__ = [
     'FileDict',
     'FileDotDict',
     'PositionalList',
-    'QuickFind',
+    'QuickFindUF',
     'QuickUnion',
     'WeightedQuickUnion',
     'WeightedQuickUnionPathCompression',

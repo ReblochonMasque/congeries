@@ -97,7 +97,7 @@ class UnionFind(ABC):
         """
 
 
-class QuickFind(UnionFind):
+class QuickFindUF(UnionFind):
     """
     maintain the invariant that `p` and `q` are connected if and only if `id[p]`
     is equal to `id[q]`. i/e all sites in a component must have the same value
