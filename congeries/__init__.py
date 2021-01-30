@@ -6,7 +6,8 @@ __all__ = [
     'Deque',
     'DoublyLinkedList',
     'FileDict',
-    'FileDotDict'
+    'FileDotDict',
     'PositionalList',
     'QuickFind',
+    'QuickUnion',
 ]

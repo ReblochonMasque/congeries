@@ -1,6 +1,7 @@
 import unittest
 
 from congeries.src import QuickFind
+from congeries.src import QuickUnion
 
 
 class TestQuickFind(unittest.TestCase):
@@ -78,6 +79,13 @@ class TestQuickFind(unittest.TestCase):
         for p, q in union_seq:
             uf.union(p, q)
         self.assertEqual(uf.components_count, 2)
+
+
+class TestQuickUnion(unittest.TestCase):
+
+    def test_type(self):
+        uf = QuickUnion(10)
+        self.assertIsInstance(uf, QuickUnion)
 
 
 if __name__ == '__main__':
