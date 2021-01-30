@@ -173,13 +173,13 @@ class TestWeightedQuickUnion(unittest.TestCase):
     #     for (p, q), expected in zip(union_seq, expected_ids):
     #         uf.union(p, q)
     #         self.assertEqual(uf.id, expected)
-    #
-    # def test_components_count_7(self):
-    #     uf = QuickUnion(10)
-    #     union_seq = [(4, 3), (3, 8), (6, 5)]
-    #     for p, q in union_seq:
-    #         uf.union(p, q)
-    #     self.assertEqual(uf.components_count, 7)
+
+    def test_components_count_7(self):
+        uf = WeightedQuickUnion(10)
+        union_seq = [(4, 3), (3, 8), (6, 5)]
+        for p, q in union_seq:
+            uf.union(p, q)
+        self.assertEqual(uf.components_count, 7)
     #
     # def test_components_count_5(self):
     #     uf = QuickUnion(10)
