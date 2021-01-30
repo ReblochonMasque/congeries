@@ -147,6 +147,7 @@ class QuickUnion(UnionFind):
     def union(self, p: int, q: int) -> None:
         proot, qroot = self._find(p), self._find(q)
         if proot != qroot:
+            self.components_count -= 1
             self.id[proot] = qroot
 
 
