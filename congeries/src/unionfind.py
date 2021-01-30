@@ -172,6 +172,13 @@ class WeightedQuickUnion(QuickUnion):
 
 class WeightedQuickUnionPathCompression(WeightedQuickUnion):
 
+    def _find(self, p: int) -> int:
+        while p != self.id[p]:
+            # make every other node in path point to its grandparent
+            self.id[p] = self.id[self.id[p]]
+            p = self.id[p]
+        return p
+
     def union(self, p: int, q: int) -> None:
         proot, qroot = self._find(p), self._find(q)
         if proot == qroot:
