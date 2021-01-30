@@ -243,13 +243,13 @@ class TestWeightedQuickUnionPathCompression(unittest.TestCase):
             uf.union(p, q)
         self.assertEqual(uf.components_count, 7)
 
-    # def test_components_count_5(self):
-    #     uf = WeightedQuickUnionPathCompression(10)
-    #     union_seq = [(4, 3), (3, 8), (6, 5), (9, 4), (2, 1)]
-    #     for p, q in union_seq:
-    #         uf.union(p, q)
-    #     self.assertEqual(uf.components_count, 5)
-    #
+    def test_components_count_5(self):
+        uf = WeightedQuickUnionPathCompression(10)
+        union_seq = [(4, 3), (3, 8), (6, 5), (9, 4), (2, 1)]
+        for p, q in union_seq:
+            uf.union(p, q)
+        self.assertEqual(uf.components_count, 5)
+
     # def test_components_count_also_5(self):
     #     uf = WeightedQuickUnionPathCompression(10)
     #     union_seq = [(4, 3), (3, 8), (6, 5), (9, 4), (2, 1), (8, 9)]
