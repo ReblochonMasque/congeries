@@ -116,6 +116,16 @@ class QuickFind(UnionFind):
         """
         return self.id[p]
 
+    def union(p: int, q: int) -> None:
+        """add connection between sites p and q
+
+        maintains the invariant that the component identifier is the same
+        integer for every site in each connected component
+        :param p: int, site p
+        :param q: int, site q
+        :return: None
+        """
+
 
 if __name__ == '__main__':
 
