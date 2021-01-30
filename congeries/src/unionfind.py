@@ -36,6 +36,18 @@ any given pair p q is connected, and not that it be able to demonstrate a set of
 connections that connect that pair
 
 
+:API:
+=====
+
+    UnionFind(n: int) -> None:           Initialize n sites with integet names 0 -> n-1
+    union(p: int, q: int) -> None:       add connection between sites p and q
+    find(p: int) -> int:                 return component identifier for p (0 -> n-1)
+    connected(p: int, q: int) -> bool:   return True if p & q are in the same component
+    count() -> int:                      return the number of components
+
+we start with n components and each `union()` that merges two different components
+decrements the number of components by 1
+
 """
 
 
