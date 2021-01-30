@@ -145,7 +145,9 @@ class QuickUnion(UnionFind):
         return p
 
     def union(self, p: int, q: int) -> None:
-        pass
+        proot, qroot = self._find(p), self._find(q)
+        if proot != qroot:
+            self.id[proot] = qroot
 
 
 if __name__ == '__main__':
