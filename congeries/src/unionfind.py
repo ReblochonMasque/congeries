@@ -50,7 +50,7 @@ decrements the number of components by 1
 
 """
 
-from abc import ABC
+from abc import ABC, abstractmethod
 
 
 class UnionFind(ABC):
@@ -74,6 +74,14 @@ class UnionFind(ABC):
         :return: True if p & q are connected, False otherwise
         """
         return self.find(p) == self.find(q)
+
+    @abstractmethod
+    def find(self, p: int) -> int:
+        """return component identifier for p (0 -> n-1)
+
+        :param p: int, site p
+        :return: int, component identifier for p
+        """
 
 
 if __name__ == '__main__':
