@@ -116,15 +116,22 @@ class QuickFind(UnionFind):
         """
         return self.id[p]
 
-    def union(p: int, q: int) -> None:
+    def union(self, p: int, q: int) -> None:
         """add connection between sites p and q
 
         maintains the invariant that the component identifier is the same
         integer for every site in each connected component
+        Ensures that all connected sites share the same id
         :param p: int, site p
         :param q: int, site q
         :return: None
         """
+        if (pid := self.find(p)) == (qid := self.find(q)):
+            # p and q already in the same component
+            return
+        for idx, id_idx in enumerate(self.id):
+            if id_idx == pid:
+                self.id[idx] = qid
 
 
 if __name__ == '__main__':
