@@ -66,6 +66,15 @@ class UnionFind(ABC):
         self.components_count = n
         self.id = [idx for idx in range(n)]
 
+    def connected(self, p: int, q: int) -> bool:
+        """return True if p & q are in the same component
+
+        :param p: int, site p
+        :param q: int, site q
+        :return: True if p & q are connected, False otherwise
+        """
+        return self.find(p) == self.find(q)
+
 
 if __name__ == '__main__':
 
