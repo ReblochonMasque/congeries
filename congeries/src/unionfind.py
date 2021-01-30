@@ -171,8 +171,18 @@ class WeightedQuickUnion(QuickUnion):
 
 
 class WeightedQuickUnionPathCompression(WeightedQuickUnion):
-    pass
 
+    def union(self, p: int, q: int) -> None:
+        proot, qroot = self._find(p), self._find(q)
+        if proot == qroot:
+            return
+        self.components_count -= 1
+        if self.sz[proot] < self.sz[qroot]:
+            self.id[proot] = qroot
+            self.sz[qroot] += self.id[proot]
+        else:
+            self.id[qroot] = proot
+            self.sz[proot] += self.id[qroot]
 
 
 if __name__ == '__main__':
