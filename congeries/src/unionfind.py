@@ -129,6 +129,7 @@ class QuickFind(UnionFind):
         if (pid := self.find(p)) == (qid := self.find(q)):
             # p and q already in the same component
             return
+        self.components_count -= 1
         for idx, id_idx in enumerate(self.id):
             if id_idx == pid:
                 self.id[idx] = qid
