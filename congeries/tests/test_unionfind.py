@@ -211,10 +211,10 @@ class TestWeightedQuickUnionPathCompression(unittest.TestCase):
         uf = WeightedQuickUnionPathCompression(10)
         self.assertIsInstance(uf, QuickUnion)
 
-    # def test_components_count_10(self):
-    #     uf = WeightedQuickUnionPathCompression(10)
-    #     self.assertEqual(uf.components_count, 10)
-    #
+    def test_components_count_10(self):
+        uf = WeightedQuickUnionPathCompression(10)
+        self.assertEqual(uf.components_count, 10)
+
     # def test_union(self):
     #     uf = WeightedQuickUnionPathCompression(10)
     #     union_seq = [(4, 3), (3, 8), (6, 5), (9, 4), (2, 1), (8, 9),
