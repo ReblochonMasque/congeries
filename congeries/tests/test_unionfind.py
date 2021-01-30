@@ -92,14 +92,18 @@ class TestQuickUnion(unittest.TestCase):
         self.assertEqual(uf.components_count, 10)
 
     def test_components_count_7(self):
-        """
-        [0, 1, 2, 8, 8, 5, 5, 7, 8, 9]
-        """
         uf = QuickUnion(10)
         union_seq = [(4, 3), (3, 8), (6, 5)]
         for p, q in union_seq:
             uf.union(p, q)
         self.assertEqual(uf.components_count, 7)
+
+    def test_components_count_5(self):
+        uf = QuickUnion(10)
+        union_seq = [(4, 3), (3, 8), (6, 5), (9, 4), (2, 1)]
+        for p, q in union_seq:
+            uf.union(p, q)
+        self.assertEqual(uf.components_count, 5)
 
 
 if __name__ == '__main__':
