@@ -7,6 +7,7 @@ from congeries.src.filedict import FileDotDict
 from congeries.src.positionallist import PositionalList
 from congeries.src.unionfind import QuickFind
 from congeries.src.unionfind import QuickUnion
+from congeries.src.unionfind import WeightedQuickUnion
 
 
 __all__ = [
@@ -18,6 +19,7 @@ __all__ = [
     'PositionalList',
     'QuickFind',
     'QuickUnion',
+    'WeightedQuickUnion',
 ]
 
 
