@@ -34,6 +34,10 @@ class TestUnionFind(unittest.TestCase):
             uf.union(p, q)
             self.assertEqual(uf.id, expected)
 
+    def test_components_count_10(self):
+        uf = QuickFind(10)
+        self.assertEqual(uf.components_count, 10)
+
 
 if __name__ == '__main__':
     unittest.main()
