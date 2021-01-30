@@ -9,7 +9,7 @@ __all__ = [
     'FileDotDict',
     'PositionalList',
     'QuickFindUF',
-    'QuickUnion',
-    'WeightedQuickUnion',
-    'WeightedQuickUnionPathCompression',
+    'QuickUnionUF',
+    'WeightedQuickUnionUF',
+    'WeightedQuickUnionPathCompressionUF',
 ]

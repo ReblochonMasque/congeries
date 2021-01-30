@@ -6,9 +6,9 @@ from congeries.src.filedict import FileDict
 from congeries.src.filedict import FileDotDict
 from congeries.src.positionallist import PositionalList
 from congeries.src.unionfind import QuickFindUF
-from congeries.src.unionfind import QuickUnion
-from congeries.src.unionfind import WeightedQuickUnion
-from congeries.src.unionfind import  WeightedQuickUnionPathCompression
+from congeries.src.unionfind import QuickUnionUF
+from congeries.src.unionfind import WeightedQuickUnionUF
+from congeries.src.unionfind import  WeightedQuickUnionPathCompressionUF
 
 
 
@@ -20,9 +20,9 @@ __all__ = [
     'FileDotDict',
     'PositionalList',
     'QuickFindUF',
-    'QuickUnion',
-    'WeightedQuickUnion',
-    'WeightedQuickUnionPathCompression',
+    'QuickUnionUF',
+    'WeightedQuickUnionUF',
+    'WeightedQuickUnionPathCompressionUF',
 ]
 
 

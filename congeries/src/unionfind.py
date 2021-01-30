@@ -135,7 +135,7 @@ class QuickFindUF(UnionFind):
                 self.id[idx] = qid
 
 
-class QuickUnion(UnionFind):
+class QuickUnionUF(UnionFind):
     """
     speeds up the union() operation
     """
@@ -151,7 +151,7 @@ class QuickUnion(UnionFind):
             self.id[proot] = qroot
 
 
-class WeightedQuickUnion(QuickUnion):
+class WeightedQuickUnionUF(QuickUnionUF):
 
     def __init__(self, n: int) -> None:
         super().__init__(n)
@@ -170,7 +170,7 @@ class WeightedQuickUnion(QuickUnion):
             self.sz[proot] += self.id[qroot]
 
 
-class WeightedQuickUnionPathCompression(WeightedQuickUnion):
+class WeightedQuickUnionPathCompressionUF(WeightedQuickUnionUF):
 
     def _find(self, p: int) -> int:
         while p != self.id[p]:
