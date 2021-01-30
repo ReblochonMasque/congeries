@@ -5,6 +5,7 @@ __all__ = [
     'CircularList',
     'Deque',
     'DoublyLinkedList',
+    'ElephantFileDict',
     'FileDict',
     'FileDotDict',
     'PositionalList',
