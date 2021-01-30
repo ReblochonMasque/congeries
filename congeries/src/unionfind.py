@@ -10,7 +10,7 @@ We assume that “is connected to” is an equivalence relation, which means tha
 - Symmetric : If p is connected to q, then q is connected to p.
 - Transitive : If p is connected to q and q is connected to r, then p is connected to r.
 
-Our goal is to write a program to ﬁlter out extraneous pairs (pairs where both objects
+Our goal is to write a program to filter out extraneous pairs (pairs where both objects
 are in the same equivalence class) from the sequence. In other words, when the program
 reads a pair p q from the input, it should write the pair to the output only if the pairs
 it has seen to that point do not imply that p is connected to q. If the previous pairs do
@@ -29,6 +29,11 @@ not, we unite p’s set and q’s set, putting them in the same set.
 we will use networking terminology, and refer to the objects as sites, the pairs as
 connections, and the equivalence classes as connected components, or just components.
 
+we assume that we have N sites with integer names, from 0 to N-1
+
+the specification requires only that our program be able to determine whether or not
+any given pair p q is connected, and not that it be able to demonstrate a set of
+connections that connect that pair
 
 
 """
