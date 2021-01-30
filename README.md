@@ -7,7 +7,7 @@ from _Latin_; from _congerere: to pile up_; from _gerere: to carry_.
 
 - CircularList  
 - DoublyLinkedList  
-- FileDict
-- FileDotDict  
+- FileDict, FileDotDict  
 - LinkedList  
 - PositionalList  
+- UnionFind: QickFindUF, QuickUnionUF, WeightedQuickUnionUF, WeightedQuickUnionPathCompressionUF
