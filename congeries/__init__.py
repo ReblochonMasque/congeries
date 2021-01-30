@@ -8,5 +8,5 @@ __all__ = [
     'FileDict',
     'FileDotDict'
     'PositionalList',
-    'UnionFind',
+    'QuickFind',
 ]

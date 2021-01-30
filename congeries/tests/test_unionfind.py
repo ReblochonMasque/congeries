@@ -1,6 +1,6 @@
 import unittest
 
-from congeries.src import UnionFind
+from congeries.src import QuickFind
 
 #
 # class TestUnionFind(unittest.TestCase):
