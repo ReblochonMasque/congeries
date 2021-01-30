@@ -3,7 +3,7 @@ import unittest
 from congeries.src import QuickFind
 
 
-class TestUnionFind(unittest.TestCase):
+class TestQuickFind(unittest.TestCase):
 
     def test_type(self):
         uf = QuickFind(10)
