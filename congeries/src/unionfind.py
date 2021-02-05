@@ -39,9 +39,9 @@ connections that connect that pair
 :API:
 =====
 
-    UnionFind(n: int) -> None:           Initialize n sites with integet names 0 -> n-1
+    UnionFind(n: int) -> None:           Initialize n sites with integer names 0 -> n-1
     union(p: int, q: int) -> None:       add connection between sites p and q
-    _find(p: int) -> int:                 return component identifier for p (0 -> n-1)
+    _find(p: int) -> int:                return component identifier for p (0 -> n-1)
     connected(p: int, q: int) -> bool:   return True if p & q are in the same component
     count() -> int:                      return the number of components
 
