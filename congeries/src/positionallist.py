@@ -208,7 +208,7 @@ class PositionalList(DoublyLinkedList):
         return old_value
 
     def sort(self) -> None:
-        """sorts the PositionalList in non-decreasing order
+        """sorts the PositionalList in-place in non-decreasing order
 
         implements insertion sort
         elements must be comparable
