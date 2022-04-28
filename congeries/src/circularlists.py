@@ -112,7 +112,7 @@ class CircularList(DLLBase):
 
         :param it: an iterable
         :return: an object of class cls, subclass of CircularList populated with the items
-        of the iteranble passed as a parameter
+        of the iterable passed as a parameter
         """
         new_seq: cls = cls()
         for item in it:
