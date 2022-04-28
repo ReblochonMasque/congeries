@@ -11,7 +11,6 @@ from congeries.src.unionfind import WeightedQuickUnionUF
 from congeries.src.unionfind import  WeightedQuickUnionPathCompressionUF
 
 
-
 __all__ = [
     'CircularList',
     'Deque',
